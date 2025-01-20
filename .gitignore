@@ -1,3 +1,9 @@
+# Ignore the .env file
+.env
+
+# Ignore any backup or temporary files of .env
+.env.*
+
 # Compiled class file
 *.class
 
