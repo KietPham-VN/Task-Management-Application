@@ -39,7 +39,6 @@ import java.security.SecureRandom;
  * }
  * }</pre>
  *
- * @author (Điền tên/nhóm lập trình viên thực hiện)
  */
 public class PasswordUtils
 {

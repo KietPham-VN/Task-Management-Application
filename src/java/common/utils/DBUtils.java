@@ -34,7 +34,6 @@ import java.util.logging.Logger;
  * <li>DB_PASSWORD</li>
  * </ul>
  *
- * @author (Điền tên hoặc nhóm thực hiện)
  */
 class DBUtils
 {

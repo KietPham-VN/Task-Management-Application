@@ -1,13 +1,13 @@
 package common.enums;
 
-public enum AccountRole
+public enum AccountRoles
 {
     PROJECT_MANAGER("PROJECT_MANAGER"),
     TEAM_MEMBER("TEAM_MEMBER");
 
     private final String roleName;
 
-    AccountRole(String roleName)
+    AccountRoles(String roleName)
     {
         this.roleName = roleName;
     }
