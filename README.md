@@ -1,6 +1,6 @@
 # Task Management Application
 
-**Task Management Application** là một ứng dụng web cho phép người dùng quản lý công việc cá nhân một cách hiệu quả thông qua các tính năng như tạo, chỉnh sửa, xóa và theo dõi tiến độ của công việc. Dự án được xây dựng dựa trên công nghệ Spring Boot, cung cấp một môi trường linh hoạt và dễ mở rộng cho các yêu cầu quản lý công việc.
+**Task Management Application** là một ứng dụng web cho phép người dùng quản lý công việc cá nhân một cách hiệu quả thông qua các tính năng như tạo, chỉnh sửa, xóa và theo dõi tiến độ của công việc. Dự án cung cấp một môi trường linh hoạt và dễ mở rộng cho các yêu cầu quản lý công việc.
 
 ---
 
