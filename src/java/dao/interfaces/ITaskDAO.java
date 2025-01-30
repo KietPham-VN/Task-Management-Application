@@ -1,6 +1,6 @@
 package dao.interfaces;
 
-public interface IUserDAO
+public interface ITaskDAO
 {
 
 }
