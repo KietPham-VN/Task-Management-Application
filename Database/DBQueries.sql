@@ -7,73 +7,73 @@ GO
 use [TaskManagementDB]
 GO
 
-CREATE TABLE users (
+CREATE TABLE Users (
     id INT IDENTITY(1,1) PRIMARY KEY ,
     name VARCHAR(255) NOT NULL,
     email VARCHAR(255) UNIQUE NOT NULL,
-    password_hash TEXT NOT NULL,
+    passwordHash TEXT NOT NULL,
     role VARCHAR(50) CHECK (role IN ('Project Manager', 'Team Member')) NOT NULL,
-    created_at TIMESTAMP DEFAULT GETDATE()
+    createdAt TIMESTAMP DEFAULT GETDATE()
 );
 GO
-CREATE TABLE projects (
+CREATE TABLE Projects (
     id INT IDENTITY(1,1) PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     description TEXT,
-    created_by INT REFERENCES users(id) ON DELETE SET NULL,
-    created_at TIMESTAMP DEFAULT GETDATE()
+    createdBy INT REFERENCES Users(id) ON DELETE SET NULL,
+    createdAt TIMESTAMP DEFAULT GETDATE()
 );
 GO
 
-CREATE TABLE project_members (
+CREATE TABLE ProjectMembers (
     id INT IDENTITY(1,1) PRIMARY KEY,
-    project_id INT REFERENCES projects(id) ON DELETE CASCADE,
-    user_id INT REFERENCES users(id) ON DELETE CASCADE,
-    UNIQUE (project_id, user_id)
+    projectId INT REFERENCES Projects(id) ON DELETE CASCADE,
+    userId INT REFERENCES Users(id) ON DELETE CASCADE,
+    UNIQUE (projectId, userId)
 );
 GO
 
-CREATE TABLE tasks (
+CREATE TABLE Tasks (
     id INT IDENTITY(1,1) PRIMARY KEY,
-    project_id INT REFERENCES projects(id) ON DELETE CASCADE,
+    projectId INT REFERENCES projects(id) ON DELETE CASCADE,
     name VARCHAR(255) NOT NULL,
     description TEXT,
-    assigned_to INT REFERENCES users(id) ON DELETE SET NULL,
+    assignedTo INT REFERENCES users(id) ON DELETE SET NULL,
     status VARCHAR(50) CHECK (status IN ('Pending', 'In Progress', 'Completed')) DEFAULT 'Pending',
     priority VARCHAR(50) CHECK (priority IN ('Low', 'Medium', 'High')) DEFAULT 'Medium',
-    due_date DATE,
-    created_at TIMESTAMP DEFAULT GETDATE()
+    dueDate DATE,
+    createdAt TIMESTAMP DEFAULT GETDATE()
 );
 GO
 
-CREATE TABLE task_updates (
+CREATE TABLE TaskUpdates (
     id INT IDENTITY(1,1) PRIMARY KEY,
-    task_id INT REFERENCES tasks(id) ON DELETE CASCADE,
-    updated_by INT REFERENCES users(id) ON DELETE CASCADE,
-    status VARCHAR(50) CHECK (status IN ('Pending', 'In Progress', 'Completed')),
-    update_notes TEXT,
-    updated_at TIMESTAMP DEFAULT GETDATE()
+    taskId INT REFERENCES tasks(id) ON DELETE CASCADE,
+    updatedBy INT REFERENCES users(id) ON DELETE CASCADE,
+    updateNotes TEXT,
+    updatedAt TIMESTAMP DEFAULT GETDATE()
 );
 GO
 
-CREATE TABLE activity_logs (
+CREATE TABLE Comments (
     id INT IDENTITY(1,1) PRIMARY KEY,
-    user_id INT REFERENCES users(id) ON DELETE CASCADE,
-    action TEXT NOT NULL,
-    created_at TIMESTAMP DEFAULT GETDATE()
+	commentTxt TEXT,
+    createdAt TIMESTAMP DEFAULT GETDATE(),
+    userId INT REFERENCES users(id) ON DELETE CASCADE,
+	taskId INT REFERENCES TaskUpdates(id) ON DELETE CASCADE
 );
 GO
 
-CREATE TABLE labels (
+CREATE TABLE Labels (
     id INT IDENTITY(1,1) PRIMARY KEY,
     name VARCHAR(255) UNIQUE NOT NULL,
     color VARCHAR(7) NOT NULL CHECK (color LIKE '^#(?:[0-9a-fA-F]{3}){1,2}$')
 );
 GO
 
-CREATE TABLE task_labels (
-    task_id INT REFERENCES tasks(id) ON DELETE CASCADE,
-    label_id INT REFERENCES labels(id) ON DELETE CASCADE,
-    PRIMARY KEY (task_id, label_id)
+CREATE TABLE TaskLabels (
+    taskId INT REFERENCES tasks(id) ON DELETE CASCADE,
+    labelId INT REFERENCES labels(id) ON DELETE CASCADE,
+    PRIMARY KEY (taskId, labelId)
 );
 GO
