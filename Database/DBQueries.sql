@@ -1,4 +1,6 @@
-use [master]
+use master
+ALTER DATABASE TaskManagementDB SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
+DROP DATABASE TaskManagementDB ;
 GO
 
 CREATE DATABASE TaskManagementDB
@@ -13,7 +15,7 @@ CREATE TABLE Users (
     email VARCHAR(255) UNIQUE NOT NULL,
     passwordHash TEXT NOT NULL,
     role VARCHAR(50) CHECK (role IN ('Project Manager', 'Team Member')) NOT NULL,
-    createdAt TIMESTAMP DEFAULT GETDATE()
+    createdAt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 GO
 CREATE TABLE Projects (
@@ -21,7 +23,7 @@ CREATE TABLE Projects (
     name VARCHAR(255) NOT NULL,
     description TEXT,
     createdBy INT REFERENCES Users(id) ON DELETE SET NULL,
-    createdAt TIMESTAMP DEFAULT GETDATE()
+    createdAt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 GO
 
@@ -42,25 +44,25 @@ CREATE TABLE Tasks (
     status VARCHAR(50) CHECK (status IN ('Pending', 'In Progress', 'Completed')) DEFAULT 'Pending',
     priority VARCHAR(50) CHECK (priority IN ('Low', 'Medium', 'High')) DEFAULT 'Medium',
     dueDate DATE,
-    createdAt TIMESTAMP DEFAULT GETDATE()
+    createdAt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 GO
 
 CREATE TABLE TaskUpdates (
     id INT IDENTITY(1,1) PRIMARY KEY,
     taskId INT REFERENCES tasks(id) ON DELETE CASCADE,
-    updatedBy INT REFERENCES users(id) ON DELETE CASCADE,
+    updatedBy INT REFERENCES users(id),
     updateNotes TEXT,
-    updatedAt TIMESTAMP DEFAULT GETDATE()
+    updatedAt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 GO
 
 CREATE TABLE Comments (
     id INT IDENTITY(1,1) PRIMARY KEY,
 	commentTxt TEXT,
-    createdAt TIMESTAMP DEFAULT GETDATE(),
+    createdAt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     userId INT REFERENCES users(id) ON DELETE CASCADE,
-	taskId INT REFERENCES TaskUpdates(id) ON DELETE CASCADE
+	taskUpdateId INT REFERENCES TaskUpdates(id) ON DELETE CASCADE
 );
 GO
 
@@ -76,4 +78,17 @@ CREATE TABLE TaskLabels (
     labelId INT REFERENCES labels(id) ON DELETE CASCADE,
     PRIMARY KEY (taskId, labelId)
 );
+GO
+
+CREATE TRIGGER trg_DeleteTaskUpdatesBeforeUser
+ON Users
+INSTEAD OF DELETE
+AS
+BEGIN
+    DELETE FROM TaskUpdates
+    WHERE updatedBy IN (SELECT id FROM deleted);
+
+    DELETE FROM Users
+    WHERE id IN (SELECT id FROM deleted);
+END;
 GO
