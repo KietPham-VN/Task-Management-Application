@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package exceptions;
-import java.util.List;
+import java.util.HashMap;
 /**
  *
  * @author vothimaihoa
@@ -12,21 +12,21 @@ import java.util.List;
 
 
 public class ValidationException extends Exception {
-    private List<ValidationError> errors;
+    private HashMap<String,String> errors = new HashMap<>();
 
-    public ValidationException(List<ValidationError> errors) {
+    public ValidationException(HashMap<String,String> errors) {
         this.errors = errors;
     }
 
-    public List<ValidationError> getErrors() {
+    public HashMap<String,String> getErrors() {
         return errors;
     }
 
     @Override
     public String getMessage() {
         StringBuilder message = new StringBuilder("Validation failed: ");
-        for (ValidationError error : errors) {
-            message.append("\n").append(error.getField()).append(": ").append(error.getMessage());
+        for (String errorField : errors.keySet()) {
+            message.append("\n").append(errorField).append(": ").append(errors.get(errorField));
         }
         return message.toString();
     }

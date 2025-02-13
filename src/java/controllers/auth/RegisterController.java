@@ -38,19 +38,6 @@ public class RegisterController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet RegisterController</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet RegisterController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -92,12 +79,12 @@ public class RegisterController extends HttpServlet {
             if (!isOk) {
                 throw new InvalidDataException("Cannot save product to database!");
             } else {
-                response.sendRedirect(REGISTER_PAGE);
+                response.sendRedirect(HOME);
             }
         }
         catch (ValidationException ex) {
-            request.setAttribute("err", ex.getErrors());
-            request.getRequestDispatcher(HOME).forward(request, response);
+            request.setAttribute("validation-error", ex.getErrors());
+            request.getRequestDispatcher(REGISTER_PAGE).forward(request, response);
         }
     }
 
