@@ -35,7 +35,7 @@ import java.util.logging.Logger;
  * </ul>
  *
  */
-class DBUtils
+public class DBUtils
 {
 
     /**

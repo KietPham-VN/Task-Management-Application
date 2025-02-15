@@ -9,6 +9,7 @@
             <file>file:/C:/Users/NGHIA/Project/Java%20stuffs/Task-Management-Application/src/java/common/utils/PasswordUtils.java</file>
             <file>file:/C:/Users/NGHIA/Project/Java%20stuffs/Task-Management-Application/src/java/entities/User.java</file>
             <file>file:/C:/Users/NGHIA/Project/Java%20stuffs/Task-Management-Application/src/java/dao/interfaces/ITaskDAO.java</file>
+            <file>file:/C:/Users/NGHIA/Project/Java%20stuffs/Task-Management-Application/src/java/exceptions/InvalidDataException.java</file>
             <file>file:/C:/Users/NGHIA/Project/Java%20stuffs/Task-Management-Application/web/views/register.jsp</file>
             <file>file:/C:/Users/NGHIA/Project/Java%20stuffs/Task-Management-Application/src/java/dao/interfaces/IUserDAO.java</file>
             <file>file:/C:/Users/NGHIA/Project/Java%20stuffs/Task-Management-Application/src/java/dao/implementations/TaskDAO.java</file>

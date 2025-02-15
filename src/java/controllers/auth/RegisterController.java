@@ -11,7 +11,7 @@ import entities.User;
 import exceptions.InvalidDataException;
 import exceptions.ValidationException;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.HashMap;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -53,6 +53,7 @@ public class RegisterController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        request.getRequestDispatcher(REGISTER_PAGE).forward(request, response);
     }
 
     /**
@@ -71,6 +72,13 @@ public class RegisterController extends HttpServlet {
         String email = request.getParameter("email");
         String role = request.getParameter("role");
         
+        // Save user input to persist in form
+        HashMap<String, String> formData = new HashMap<>();
+        formData.put("name", name);
+        formData.put("email", email);
+        formData.put("password", password);
+        formData.put("role", role);
+        
         try {
             UserDTO.validateRegister(name, email, password, role);
             // call DAO
@@ -83,7 +91,13 @@ public class RegisterController extends HttpServlet {
             }
         }
         catch (ValidationException ex) {
+            request.setAttribute("formData", formData);
             request.setAttribute("validation-error", ex.getErrors());
+            request.getRequestDispatcher(REGISTER_PAGE).forward(request, response);
+        }
+        catch(InvalidDataException ex){
+            request.setAttribute("formData", formData);
+            request.setAttribute("invalid-data-exception",ex);
             request.getRequestDispatcher(REGISTER_PAGE).forward(request, response);
         }
     }

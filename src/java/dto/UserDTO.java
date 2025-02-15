@@ -12,9 +12,8 @@ public class UserDTO
 
         if(name==null||name.trim().isEmpty()) errors.put("name","Name cannot be empty");
         
-        Pattern emailPattern = Pattern.compile("/^\\S+@\\S+\\.\\S+$/");
+        Pattern emailPattern = Pattern.compile("^\\S+@\\S+\\.\\S+$");
         Matcher emailMatcher = emailPattern.matcher(email);
-        if(!emailMatcher.find()) errors.put("email","Email is not valid");
         
         Pattern passwordPattern = Pattern.compile("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$");
         Matcher passwordMatcher = passwordPattern.matcher(password);

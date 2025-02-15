@@ -5,6 +5,7 @@ import entities.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import common.utils.DBUtils;
 
 public class UserDAO implements IUserDAO
 {
@@ -24,8 +25,10 @@ public class UserDAO implements IUserDAO
             
             con.close();
         } catch (ClassNotFoundException ex) {
+            System.out.println(ex);
             System.out.println("DBUtils not found!");
         } catch (SQLException ex) {
+            System.out.println(ex);
             System.out.println("SQL Exception in inserting new product. Details: ");
             ex.printStackTrace();
         }
