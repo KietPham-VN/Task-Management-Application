@@ -3,10 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/LearningMaterial/FPTU/SPRING25/Task-Management-Application/src/java/controllers/MainController.java</file>
-            <file>file:/D:/LearningMaterial/FPTU/SPRING25/Task-Management-Application/src/java/controllers/project_manager/CreateProjectController.java</file>
-            <file>file:/D:/LearningMaterial/FPTU/SPRING25/Task-Management-Application/src/java/controllers/team_member/ViewTasksController.java</file>
-            <file>file:/D:/LearningMaterial/FPTU/SPRING25/Task-Management-Application/web/views/index.jsp</file>
+            <file>file:/D:/LearningMaterial/FPTU/SPRING25/Task-Management-Application/src/java/services/implementations/UserServices.java</file>
+            <file>file:/D:/LearningMaterial/FPTU/SPRING25/Task-Management-Application/src/java/common/constants/Queries.java</file>
         </group>
     </open-files>
 </project-private>
