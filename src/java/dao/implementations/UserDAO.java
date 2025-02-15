@@ -21,15 +21,15 @@ public class UserDAO implements IUserDAO
         {
             ps.setString(1, username);
             ResultSet rs = ps.executeQuery();
+            
             if (rs != null && rs.next())
             {
-                // Khởi tạo đối tượng User trước khi sử dụng
                 user = new User();
-
+                
                 String hashedPassword = rs.getString(1);
-                System.out.println(hashedPassword);
                 String storedSalt = rs.getString(2);
                 String role = rs.getString(3);
+                
                 user.setEmail(username);
                 user.setPasswordHash(hashedPassword);
                 user.setSalt(storedSalt);
@@ -37,7 +37,6 @@ public class UserDAO implements IUserDAO
             }
         } catch (ClassNotFoundException | SQLException ex)
         {
-            ex.printStackTrace();
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return user;
