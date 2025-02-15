@@ -42,13 +42,12 @@ public class LoginController extends HttpServlet
             HttpSession session = request.getSession();
             session.setAttribute("user", user);
             session.setMaxInactiveInterval(1800);
-//            request.getRequestDispatcher("MainController?action=list").forward(request, response);
         } else
         {
             request.setAttribute("error", "Wrong email or password");
             request.getRequestDispatcher(Pages.LOGIN).forward(request, response);
         }
-        
+
     }
 
     @Override

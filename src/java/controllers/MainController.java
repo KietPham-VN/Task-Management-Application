@@ -24,7 +24,6 @@ public class MainController extends HttpServlet
         HttpSession session = request.getSession(false);
         if ((session == null || session.getAttribute("user") == null) && !"login".equals(action))
         {
-
             request.getRequestDispatcher(Pages.LOGIN).forward(request, response);
             return;
         }
