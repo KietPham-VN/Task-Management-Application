@@ -5,8 +5,7 @@
  */
 package controllers.auth;
 
-import dao.implementations.UserDAO;
-import dto.UserDTO;
+import common.constants.Pages;
 import entities.User;
 import exceptions.InvalidDataException;
 import exceptions.ValidationException;
@@ -17,6 +16,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import services.implementations.UserServices;
+import services.interfaces.IUserServices;
 
 /**
  *
@@ -24,8 +26,6 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "RegisterController", urlPatterns = {"/register"})
 public class RegisterController extends HttpServlet {
-    private String REGISTER_PAGE = "views/register.jsp";
-    private String HOME = "views/index.jsp";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -53,7 +53,7 @@ public class RegisterController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        request.getRequestDispatcher(REGISTER_PAGE).forward(request, response);
+        request.getRequestDispatcher(Pages.REGISTER).forward(request, response);
     }
 
     /**
@@ -79,26 +79,29 @@ public class RegisterController extends HttpServlet {
         formData.put("password", password);
         formData.put("role", role);
         
+        IUserServices userService = new UserServices();
+
+        
         try {
-            UserDTO.validateRegister(name, email, password, role);
-            // call DAO
-            User newUser = new User(name,email,password,role);
-            boolean isOk = UserDAO.register(newUser);
-            if (!isOk) {
+            User newRegisteredUser = userService.register(name, email, password, role);
+            if (newRegisteredUser==null) {
                 throw new InvalidDataException("Cannot save product to database!");
             } else {
-                response.sendRedirect(HOME);
+                HttpSession session = request.getSession();
+                session.setAttribute("user", newRegisteredUser);
+                session.setMaxInactiveInterval(1800);
+                response.sendRedirect(Pages.HOME);
             }
         }
         catch (ValidationException ex) {
             request.setAttribute("formData", formData);
             request.setAttribute("validation-error", ex.getErrors());
-            request.getRequestDispatcher(REGISTER_PAGE).forward(request, response);
+            request.getRequestDispatcher(Pages.REGISTER).forward(request, response);
         }
         catch(InvalidDataException ex){
             request.setAttribute("formData", formData);
             request.setAttribute("invalid-data-exception",ex);
-            request.getRequestDispatcher(REGISTER_PAGE).forward(request, response);
+            request.getRequestDispatcher(Pages.REGISTER).forward(request, response);
         }
     }
 

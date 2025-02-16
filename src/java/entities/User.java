@@ -18,6 +18,17 @@ public class User
         return _id;
     }
 
+    public User(String _name, String _email, String _passwordHash, String _role, String _salt) {
+        this._name = _name;
+        this._email = _email;
+        this._passwordHash = _passwordHash;
+        this._salt = _salt;
+        this._role = _role;
+    }
+
+    public User() {
+    }
+
     public void setId(int _id)
     {
         this._id = _id;

@@ -13,17 +13,18 @@ import java.util.logging.Logger;
 
 public class UserDAO implements IUserDAO
 {
+    @Override
     public boolean register(User newUser){
         boolean status = false;
-        String sqlQuery = "INSERT INTO Users(name,email,passwordHash,role) VALUES(?,?,?,?)";
         
         try {
             Connection con = DBUtils.getConnection();
-            PreparedStatement ps = con.prepareStatement(sqlQuery);
+            PreparedStatement ps = con.prepareStatement(Queries.REGISTER);
             ps.setString(1, newUser.getName());
             ps.setString(2, newUser.getEmail());
             ps.setString(3, newUser.getPasswordHash());
             ps.setString(4, newUser.getRole());
+            ps.setString(5, newUser.getSalt());
             int rows = ps.executeUpdate();
             status = rows>0;
             

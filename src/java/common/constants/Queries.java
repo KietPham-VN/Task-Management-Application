@@ -4,7 +4,7 @@ public class Queries
 {
     // login
     public static final String LOGIN
-            = "SELECT [hashed_password], [salt], [role] "
+            = "SELECT [passwordHash], [salt], [role] "
             + "FROM [Users] "
             + "WHERE email = ?";
        
@@ -14,4 +14,6 @@ public class Queries
             = "SELECT id, name, role, createdAt "
             + "FROM User "
             + "WHERE email = ? AND passwordHash = ?";
+    
+    public static final String REGISTER = "INSERT INTO Users(name,email,passwordHash,role,salt) VALUES(?,?,?,?,?)";
 }
