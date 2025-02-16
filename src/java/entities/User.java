@@ -1,66 +1,86 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package entities;
 
 import java.sql.Date;
 
-/**
- *
- * @author anhki
- */
 public class User
 {
-    private int id;
-    private String name;
-    private String email;
-    private String passwordHash;
-    private String role;
-    private Date timeStamp;
 
-    public User(int id, String name, String email, String passwordHash, String role, Date timeStamp) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
-        this.passwordHash = passwordHash;
-        this.role = role;
-        this.timeStamp = timeStamp;
-    }
-    
-    public User(String name, String email, String passwordHash, String role) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
-        this.passwordHash = passwordHash;
-        this.role = role;
-        this.timeStamp = timeStamp;
+    private int _id;
+    private String _name;
+    private String _email;
+    private String _passwordHash;
+    private String _salt;
+    private String _role;
+    private Date _timeStamp;
+
+    public int getId()
+    {
+        return _id;
     }
 
-    public int getId() {
-        return id;
+    public void setId(int _id)
+    {
+        this._id = _id;
     }
 
-    public String getName() {
-        return name;
+    public String getName()
+    {
+        return _name;
     }
 
-    public String getEmail() {
-        return email;
+    public void setName(String _name)
+    {
+        this._name = _name;
     }
 
-    public String getPasswordHash() {
-        return passwordHash;
+    public String getEmail()
+    {
+        return _email;
     }
 
-    public String getRole() {
-        return role;
+    public void setEmail(String _email)
+    {
+        this._email = _email;
     }
 
-    public Date getTimeStamp() {
-        return timeStamp;
+    public String getPasswordHash()
+    {
+        return _passwordHash;
     }
-    
-    
+
+    public void setPasswordHash(String _passwordHash)
+    {
+        this._passwordHash = _passwordHash;
+    }
+
+    public String getSalt()
+    {
+        return _salt;
+    }
+
+    public void setSalt(String _salt)
+    {
+        this._salt = _salt;
+    }
+
+    public String getRole()
+    {
+        return _role;
+    }
+
+    public void setRole(String _role)
+    {
+        this._role = _role;
+    }
+
+    public Date getTimeStamp()
+    {
+        return _timeStamp;
+    }
+
+    public void setTimeStamp(Date _timeStamp)
+    {
+        this._timeStamp = _timeStamp;
+    }
+
 }

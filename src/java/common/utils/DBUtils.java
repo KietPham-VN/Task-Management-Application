@@ -1,6 +1,7 @@
 package common.utils;
 
 import io.github.cdimascio.dotenv.Dotenv;
+import java.nio.file.Paths;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -46,15 +47,10 @@ public class DBUtils
     /**
      * Đối tượng Dotenv để tải các biến môi trường từ file .env.
      */
-    private static final Dotenv DOT_ENV = Dotenv.load();
+    private static final Dotenv DOT_ENV = Dotenv.configure()
+            .directory(Paths.get("D:/LearningMaterial/FPTU/SPRING25/Task-Management-Application").toAbsolutePath().toString())
+            .load();
 
-    /**
-     * Constructor private để ngăn tạo instance. Đây là class dạng tiện ích
-     * (utility class).
-     */
-    private DBUtils()
-    {
-    }
 
     /**
      * Trả về một đối tượng {@link Connection} kết nối đến database.
@@ -81,7 +77,6 @@ public class DBUtils
         String url = DOT_ENV.get("DB_URL");
         String username = DOT_ENV.get("DB_USERNAME");
         String password = DOT_ENV.get("DB_PASSWORD");
-
         Class.forName(driver);
         Connection conn = DriverManager.getConnection(url, username, password);
         LOGGER.info("Database connection successfully established.");
