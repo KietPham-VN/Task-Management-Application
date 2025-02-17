@@ -1,6 +1,7 @@
 # Ignore the .env file
 .env
 /build
+/nbproject/private/
 # Ignore any backup or temporary files of .env
 .env.*
 
