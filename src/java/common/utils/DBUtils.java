@@ -42,7 +42,7 @@ public class DBUtils
     /**
      * Logger cho lớp DBUtils.
      */
-    private static final Logger LOGGER = Logger.getLogger(DBUtils.class.getName());
+   // private static final Logger LOGGER = Logger.getLogger(DBUtils.class.getName());
 
     /**
      * Đối tượng Dotenv để tải các biến môi trường từ file .env.
@@ -78,8 +78,8 @@ public class DBUtils
         String username = DOT_ENV.get("DB_USERNAME");
         String password = DOT_ENV.get("DB_PASSWORD");
         Class.forName(driver);
-        Connection conn = DriverManager.getConnection(url, username, password);
-        LOGGER.info("Database connection successfully established.");
+        Connection conn = DriverManager.getConnection("jdbc:sqlserver://127.0.0.1:1433;databaseName=TaskManagementDB;user=sa;password=12345;");
+        //LOGGER.info("Database connection successfully established.");
         return conn;
     }
 }

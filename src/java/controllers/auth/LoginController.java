@@ -1,4 +1,4 @@
-package controllers.auth;
+ package controllers.auth;
 
 import common.constants.Pages;
 import entities.User;
