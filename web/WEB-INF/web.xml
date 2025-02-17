@@ -4,9 +4,17 @@
         <servlet-name>Maincontroller</servlet-name>
         <servlet-class>controllers.MainController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CreateProjectController</servlet-name>
+        <servlet-class>controllers.project_manager.CreateProjectController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Maincontroller</servlet-name>
         <url-pattern>/Maincontroller</url-pattern>
+    </servlet-mapping>    
+    <servlet-mapping>
+        <servlet-name>CreateProjectController</servlet-name>
+        <url-pattern>/CreateProject</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -1,4 +1,4 @@
-package controllers.auth;
+ package controllers.auth;
 
 import java.io.IOException;
 import javax.servlet.ServletException;

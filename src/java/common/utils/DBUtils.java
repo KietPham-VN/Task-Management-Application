@@ -35,18 +35,18 @@ import java.util.logging.Logger;
  * </ul>
  *
  */
-class DBUtils
+public class DBUtils
 {
 
     /**
      * Logger cho lớp DBUtils.
      */
-    private static final Logger LOGGER = Logger.getLogger(DBUtils.class.getName());
+   // private static final Logger LOGGER = Logger.getLogger(DBUtils.class.getName());
 
     /**
      * Đối tượng Dotenv để tải các biến môi trường từ file .env.
      */
-    private static final Dotenv DOT_ENV = Dotenv.load();
+    //private static final Dotenv DOT_ENV = Dotenv.load();
 
     /**
      * Constructor private để ngăn tạo instance. Đây là class dạng tiện ích
@@ -77,14 +77,18 @@ class DBUtils
      */
     public static Connection getConnection() throws ClassNotFoundException, SQLException
     {
-        String driver = DOT_ENV.get("DB_DRIVER");
-        String url = DOT_ENV.get("DB_URL");
-        String username = DOT_ENV.get("DB_USERNAME");
-        String password = DOT_ENV.get("DB_PASSWORD");
+//        String driver = DOT_ENV.get("DB_DRIVER");
+//        String url = DOT_ENV.get("DB_URL");
+//        String username = DOT_ENV.get("DB_USERNAME");
+//        String password = DOT_ENV.get("DB_PASSWORD");
+        String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
+        //String url = DOT_ENV.get("DB_URL");
+        //String username = DOT_ENV.get("DB_USERNAME");
+        //String password = DOT_ENV.get("DB_PASSWORD");
 
         Class.forName(driver);
-        Connection conn = DriverManager.getConnection(url, username, password);
-        LOGGER.info("Database connection successfully established.");
+        Connection conn = DriverManager.getConnection("jdbc:sqlserver://127.0.0.1:1433;databaseName=TaskManagementDB;user=sa;password=12345;");
+        //LOGGER.info("Database connection successfully established.");
         return conn;
     }
 }
