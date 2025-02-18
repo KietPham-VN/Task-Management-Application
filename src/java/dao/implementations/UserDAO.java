@@ -52,8 +52,9 @@ public class UserDAO implements IUserDAO
     public User getUserByEmail(String username)
     {
         User user = null;
-        try (PreparedStatement ps = DBUtils.getConnection().prepareStatement(Queries.LOGIN))
+        try 
         {
+            PreparedStatement ps = DBUtils.getConnection().prepareStatement(Queries.LOGIN);
             ps.setString(1, username);
             ResultSet rs = ps.executeQuery();
 
@@ -94,6 +95,7 @@ public class UserDAO implements IUserDAO
             {
                 user = new User();
                 user.setId(rs.getInt("id"));
+                user.setId(rs.getInt("id"));
                 user.setName(rs.getString("username"));
                 user.setEmail(rs.getString("email"));
                 user.setRole(rs.getString("role"));
@@ -101,6 +103,9 @@ public class UserDAO implements IUserDAO
         } catch (ClassNotFoundException | SQLException e)
         {
             System.out.println("Cannot add to database" + e);
+        }
+        return user;
+    }
         }
         return user;
     }
