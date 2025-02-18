@@ -2,8 +2,8 @@ package common.enums;
 
 public enum AccountRoles
 {
-    PROJECT_MANAGER("PROJECT_MANAGER"),
-    TEAM_MEMBER("TEAM_MEMBER");
+    PROJECT_MANAGER("Project Manager"),
+    TEAM_MEMBER("Team Member");
 
     private final String roleName;
 

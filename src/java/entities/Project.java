@@ -1,27 +1,30 @@
-
 package entities;
 
 import java.sql.Date;
-
+import java.sql.Timestamp;
 
 public class Project
 {
+
     private int projectId;
     private String name;
     private String description;
-    private User createBy;
-    private Date createAt;
+    private int createBy;
+    private Timestamp createAt;
 
-    public Project() {
+    public Project()
+    {
     }
 
-    public Project(String name, String description, User createBy) {
+    public Project(String name, String description, int createBy)
+    {
         this.name = name;
         this.description = description;
         this.createBy = createBy;
     }
 
-    public Project(int projectId, String name, String description, User createBy, Date createAt) {
+    public Project(int projectId, String name, String description, int createBy, Timestamp createAt)
+    {
         this.projectId = projectId;
         this.name = name;
         this.description = description;
@@ -29,45 +32,54 @@ public class Project
         this.createAt = createAt;
     }
 
-    public int getProjectId() {
+    public int getProjectId()
+    {
         return projectId;
     }
 
-    public void setProjectId(int projectId) {
+    public void setProjectId(int projectId)
+    {
         this.projectId = projectId;
     }
 
-    public String getName() {
+    public String getName()
+    {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(String name)
+    {
         this.name = name;
     }
 
-    public String getDescription() {
+    public String getDescription()
+    {
         return description;
     }
 
-    public void setDescription(String description) {
+    public void setDescription(String description)
+    {
         this.description = description;
     }
 
-    public User getCreateBy() {
+    public int getCreateBy()
+    {
         return createBy;
     }
 
-    public void setCreateBy(User createBy) {
+    public void setCreateBy(int createBy)
+    {
         this.createBy = createBy;
     }
 
-    public Date getCreateAt() {
+    public Timestamp getCreateAt()
+    {
         return createAt;
     }
 
-    public void setCreateAt(Date createAt) {
+    public void setCreateAt(Timestamp createAt)
+    {
         this.createAt = createAt;
     }
-    
-    
+
 }
