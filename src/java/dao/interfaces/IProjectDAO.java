@@ -4,7 +4,7 @@ import dto.ProjectDTO;
 
 public interface IProjectDAO
 {
-    boolean add(ProjectDTO o);
-    boolean update(ProjectDTO o);
-    
+    boolean add(ProjectDTO projectDto);
+    boolean update(ProjectDTO projectDto);
+    boolean delete(ProjectDTO projectDto);
 }

@@ -1,5 +1,6 @@
 package controllers.project_manager;
 
+import common.constants.Pages;
 import dao.implementations.ProjectDAO;
 import dao.implementations.UserDAO;
 import dto.ProjectDTO;
@@ -82,21 +83,21 @@ public class CreateProjectController extends HttpServlet {
             User createdBy = new UserDAO().getUserByName(userCreated);
             //kiem tra xem co user khong
             if (createdBy == null) {
-                request.setAttribute("error", "User không tồn tại.");
-                request.getRequestDispatcher("/views/createProject.jsp").forward(request, response);
+                request.setAttribute("error", "User not exist");
+                request.getRequestDispatcher(Pages.CREATE_PROJECT).forward(request, response);
                 return;
             }
             ProjectDTO prj = new ProjectDTO(projectName, description, createdBy);
             boolean add = new ProjectDAO().add(prj);
             if (add) {
-                response.sendRedirect("index.jsp");
+                response.sendRedirect(Pages.HOME);
             } else {
-                request.getRequestDispatcher("/views/createProject.jsp").forward(request, response);
+                request.getRequestDispatcher(Pages.CREATE_PROJECT).forward(request, response);
             }
         } catch (Exception e) {
             System.out.println("Cannot add to database: " + e.getMessage());
-            request.setAttribute("error", "Có lỗi khi tạo dự án.");
-            request.getRequestDispatcher("/views/createProject.jsp").forward(request, response);
+            request.setAttribute("error", "Failed create project");
+            request.getRequestDispatcher(Pages.CREATE_PROJECT).forward(request, response);
         }
     }
 

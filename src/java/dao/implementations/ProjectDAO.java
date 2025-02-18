@@ -4,6 +4,7 @@ import common.constants.Queries;
 import common.utils.DBUtils;
 import dao.interfaces.IProjectDAO;
 import dto.ProjectDTO;
+import entities.Project;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,15 +16,15 @@ public class ProjectDAO implements IProjectDAO {
     ResultSet rs = null;
 
     @Override
-    public boolean add(ProjectDTO o) {
+    public boolean add(ProjectDTO projectDto) {
         boolean sucess = false;
-        String query = Queries.createProject();
+        String query = Queries.CREATE_PROJECT;
         try {
             conn = DBUtils.getConnection();
             ps = conn.prepareStatement(query);
-            ps.setString(1, o.getName());
-            ps.setString(2, o.getDescription());
-            ps.setInt(3, o.getCreatedBy().getUserId());
+            ps.setString(1, projectDto.getName());
+            ps.setString(2, projectDto.getDescription());
+            ps.setInt(3, projectDto.getCreatedBy().getId());
             int exe = ps.executeUpdate();
             if (exe > 0) {
                 sucess = true;
@@ -36,8 +37,29 @@ public class ProjectDAO implements IProjectDAO {
     }
 
     @Override
-    public boolean update(ProjectDTO o) {
+    public boolean update(ProjectDTO projectDto) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    @Override
+    public boolean delete(ProjectDTO projectDto) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    public Project getProjectByName(String name) {
+        Project project = null;
+        String query = Queries.GET_PROJECT_BY_NAME;
+        try {
+            conn = DBUtils.getConnection();
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                project = new Project();
+                project.setProjectId(rs.getInt("id"));
+                project.setName(rs.getString("name"));
+            }
+        } catch (Exception e) {
+        }
+        return project;
+    }
 }
