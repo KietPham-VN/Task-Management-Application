@@ -11,7 +11,6 @@ public class Queries
         String query = "SELECT id, name, email, role FROM dbo.Users WHERE name=?";
         return query;
     }
-}
     // login
     public static final String LOGIN
             = "SELECT [passwordHash], [salt], [role] "

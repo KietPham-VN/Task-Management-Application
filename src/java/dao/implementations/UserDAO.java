@@ -1,12 +1,10 @@
 package dao.implementations;
 
 import common.constants.Queries;
-import common.utils.DBUtils;
 import dao.interfaces.IUserDAO;
 import entities.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import common.utils.DBUtils;
 import java.sql.ResultSet;
@@ -49,8 +47,9 @@ public class UserDAO implements IUserDAO
     public User findUserByEmail(String username)
     {
         User user = null;
-        try (PreparedStatement ps = DBUtils.getConnection().prepareStatement(Queries.LOGIN))
+        try 
         {
+            PreparedStatement ps = DBUtils.getConnection().prepareStatement(Queries.LOGIN);
             ps.setString(1, username);
             ResultSet rs = ps.executeQuery();
             
@@ -73,7 +72,7 @@ public class UserDAO implements IUserDAO
         }
         return user;
     }
-  public User getUserByName(String name) {
+    public User getUserByName(String name) {
         User user = null;
         String query = Queries.getUserByName();
 
@@ -84,11 +83,14 @@ public class UserDAO implements IUserDAO
             rs = ps.executeQuery();
             while (rs.next()) {
                 user = new User();
-                user.setUserId(rs.getInt("id"));
+                user.setId(rs.getInt("id"));
                 user.setName(rs.getString("username"));
                 user.setEmail(rs.getString("email"));
                 user.setRole(rs.getString("role"));
             }
         } catch (Exception e) {
             System.out.println("Cannot add to database" + e);
+        }
+        return user;
+    }
 }

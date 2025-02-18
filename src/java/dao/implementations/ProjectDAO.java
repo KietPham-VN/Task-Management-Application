@@ -23,7 +23,7 @@ public class ProjectDAO implements IProjectDAO {
             ps = conn.prepareStatement(query);
             ps.setString(1, o.getName());
             ps.setString(2, o.getDescription());
-            ps.setInt(3, o.getCreatedBy().getUserId());
+            ps.setInt(3, o.getCreatedBy().getId());
             int exe = ps.executeUpdate();
             if (exe > 0) {
                 sucess = true;
