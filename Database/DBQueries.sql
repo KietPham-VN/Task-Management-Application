@@ -70,7 +70,7 @@ GO
 CREATE TABLE Labels (
     id INT IDENTITY(1,1) PRIMARY KEY,
     name VARCHAR(255) UNIQUE NOT NULL,
-    color VARCHAR(7) NOT NULL CHECK (color LIKE '^#(?:[0-9a-fA-F]{3}){1,2}$')
+    color VARCHAR(7) NOT NULL
 );
 GO
 
