@@ -90,7 +90,7 @@ public class CreateProjectController extends HttpServlet {
             String projectName = request.getParameter("name");
             String description = request.getParameter("desc");
             
-            ProjectDTO prj = new ProjectDTO(projectName, description, user.getUserName);
+            ProjectDTO prj = new ProjectDTO(projectName, description, user.getId());
             boolean add = new ProjectDAO().add(prj);
             if (add) {
                 response.sendRedirect(Pages.HOME);

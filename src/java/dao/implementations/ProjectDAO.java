@@ -24,7 +24,7 @@ public class ProjectDAO implements IProjectDAO {
             ps = conn.prepareStatement(query);
             ps.setString(1, projectDto.getName());
             ps.setString(2, projectDto.getDescription());
-            ps.setInt(3, projectDto.getCreatedBy().getId());
+            ps.setInt(3, projectDto.getCreatedBy());
             int exe = ps.executeUpdate();
             if (exe > 0) {
                 sucess = true;

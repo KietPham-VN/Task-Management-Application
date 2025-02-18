@@ -49,6 +49,7 @@ public class UserDAO implements IUserDAO {
         User user = null;
         try {
             ps = DBUtils.getConnection().prepareStatement(Queries.LOGIN);
+
             ps.setString(1, username);
             rs = ps.executeQuery();
 
@@ -70,7 +71,6 @@ public class UserDAO implements IUserDAO {
         return user;
     }
 
-    @Override
     public User getUserByName(String name) {
         User user = null;
         String query = Queries.GET_USER_BY_NAME;
