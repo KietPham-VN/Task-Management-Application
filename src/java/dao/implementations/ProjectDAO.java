@@ -38,12 +38,8 @@ public class ProjectDAO implements IProjectDAO {
 
     @Override
     public boolean update(ProjectDTO projectDto) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean delete(ProjectDTO projectDto) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        boolean success = false;
+        return success;
     }
     
     public Project getProjectByName(String name) {

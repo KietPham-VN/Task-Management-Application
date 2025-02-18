@@ -6,5 +6,4 @@ public interface IProjectDAO
 {
     boolean add(ProjectDTO projectDto);
     boolean update(ProjectDTO projectDto);
-    boolean delete(ProjectDTO projectDto);
 }

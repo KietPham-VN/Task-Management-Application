@@ -4,6 +4,11 @@ public class Queries {
 
     //create new project
     public static final String CREATE_PROJECT = "INSERT INTO dbo.Projects (name, description, createdBy) VALUES (?, ?, ?)";
+    //update project
+    public static final String UPDATE_PROJECT = 
+            "UPDATE dbo.Projects"
+            + "SET name = ?, description = ?"
+            + "WHERE name = ?";
     //create new task
     public static final String CREATE_TASK
             = "INSERT INTO dbo.Tasks (projectId, name, description, assignedTo, status, priority, dueDate) VALUES (?, ?, ?, ?, ?, ?, ?)";

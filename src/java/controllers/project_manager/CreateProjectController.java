@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -61,7 +62,7 @@ public class CreateProjectController extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/views/createProject.jsp").forward(request, response);
+        request.getRequestDispatcher(Pages.CREATE_PROJECT).forward(request, response);
     }
 
     /**
@@ -75,19 +76,21 @@ public class CreateProjectController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
+            //lay user tu session
+            HttpSession session = request.getSession(false);
+            User user = (session != null) ? (User) session.getAttribute("user") : null;
+
+            //kiem tra xem co user khong
+            if (user == null) {
+                request.setAttribute("error", "User not exist");
+                request.getRequestDispatcher(Pages.LOGIN).forward(request, response);
+                return;
+            }
             //lay data tu user nhap vao
             String projectName = request.getParameter("name");
             String description = request.getParameter("desc");
-            String userCreated = request.getParameter("createdBy");
-
-            User createdBy = new UserDAO().getUserByName(userCreated);
-            //kiem tra xem co user khong
-            if (createdBy == null) {
-                request.setAttribute("error", "User not exist");
-                request.getRequestDispatcher(Pages.CREATE_PROJECT).forward(request, response);
-                return;
-            }
-            ProjectDTO prj = new ProjectDTO(projectName, description, createdBy);
+            
+            ProjectDTO prj = new ProjectDTO(projectName, description, user.getUserName);
             boolean add = new ProjectDAO().add(prj);
             if (add) {
                 response.sendRedirect(Pages.HOME);
