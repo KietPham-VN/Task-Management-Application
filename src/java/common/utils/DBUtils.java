@@ -10,14 +10,10 @@ import java.sql.SQLException;
 public class DBUtils
 {
 
-    private static final Dotenv DOT_ENV 
-        = Dotenv
-            .configure()
-            .directory(Paths
-                    .get("D:/LearningMaterial/FPTU/FCODE/Task-Management-Application")
-                    .toAbsolutePath()
-                    .toString())
-            .load();
+    private static final Dotenv DOT_ENV
+            = Dotenv.configure()
+                    .directory(Paths.get("D:/LearningMaterial/FPTU/FCODE/Task-Management-Application").toAbsolutePath().toString())
+                    .load();
 
     public static Connection getConnection() throws ClassNotFoundException, SQLException
     {
