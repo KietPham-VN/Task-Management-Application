@@ -3,29 +3,28 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controllers.auth;
+package controllers.project_manager;
 
 import common.constants.Pages;
+import common.utils.Functions;
+import dao.implementations.ProjectDAO;
+import entities.Project;
 import entities.User;
-import exceptions.InvalidDataException;
-import exceptions.ValidationException;
 import java.io.IOException;
-import java.util.HashMap;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import services.implementations.UserServices;
-import services.interfaces.IUserServices;
 
 /**
  *
  * @author NGHIA
  */
-@WebServlet(name = "RegisterController", urlPatterns = {"/RegisterController"})
-public class RegisterController extends HttpServlet {
+@WebServlet(name = "ProjectManagerDashBoard", urlPatterns = {"/ProjectManagerDashBoard"})
+public class ProjectManagerDashBoard extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,6 +37,7 @@ public class RegisterController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -52,8 +52,21 @@ public class RegisterController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
-        request.getRequestDispatcher(Pages.REGISTER).forward(request, response);
+        if(!Functions.AuthenticatePath(request, "Project Manager")) response.sendRedirect("LoginController");
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        
+        try{
+            ProjectDAO projectDAO = new ProjectDAO();
+            ArrayList<Project> projectList = projectDAO.getListOfProject(user.getId());
+            
+            request.setAttribute("projects", projectList);
+            request.getRequestDispatcher(Pages.PROJECT_MANAGER_DASH_BOARD).forward(request,response);
+        }
+        catch(Exception e){
+            System.out.println(e);
+            request.getRequestDispatcher(Pages.LOGIN);
+        }
     }
 
     /**
@@ -67,42 +80,7 @@ public class RegisterController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String name = request.getParameter("name");
-        String password = request.getParameter("password");
-        String email = request.getParameter("email");
-        String role = request.getParameter("role");
-        
-        // Save user input to persist in form
-        HashMap<String, String> formData = new HashMap<>();
-        formData.put("name", name);
-        formData.put("email", email);
-        formData.put("password", password);
-        formData.put("role", role);
-        
-        IUserServices userService = new UserServices();
-
-        
-        try {
-            User newRegisteredUser = userService.register(name, email, password, role);
-            if (newRegisteredUser==null) {
-                throw new InvalidDataException("Cannot save product to database!");
-            } else {
-                HttpSession session = request.getSession();
-                session.setAttribute("user", newRegisteredUser);
-                session.setMaxInactiveInterval(1800);
-                response.sendRedirect("");
-            }
-        }
-        catch (ValidationException ex) {
-            request.setAttribute("formData", formData);
-            request.setAttribute("validation-error", ex.getErrors());
-            request.getRequestDispatcher(Pages.REGISTER).forward(request, response);
-        }
-        catch(InvalidDataException ex){
-            request.setAttribute("formData", formData);
-            request.setAttribute("invalid-data-exception",ex);
-            request.getRequestDispatcher(Pages.REGISTER).forward(request, response);
-        }
+        processRequest(request, response);
     }
 
     /**

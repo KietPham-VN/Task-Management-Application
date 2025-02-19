@@ -25,4 +25,10 @@ public class Queries
             + "WHERE email = ? AND passwordHash = ?";
     
     public static final String REGISTER = "INSERT INTO Users(name,email,passwordHash,role,salt) VALUES(?,?,?,?,?)";
+    
+    public static final String GET_PROJECT_LIST = "SELECT id, name, description, createdBy, createdAt"
+            + "FROM Projects"
+            + "WHERE createdBy = ?";
+    
+    public static final String GET_TASK_LIST = "SELECT ";
 }

@@ -1,6 +1,7 @@
 package controllers;
 
 import common.constants.Pages;
+import common.utils.Functions;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,7 +12,7 @@ import javax.servlet.http.HttpSession;
 
 @WebServlet(name = "MainController", urlPatterns =
 {
-    "/MainController"
+    "/"
 })
 public class MainController extends HttpServlet
 {
@@ -22,11 +23,16 @@ public class MainController extends HttpServlet
         String action = request.getParameter("action");
         String url = Pages.LOGIN;
         HttpSession session = request.getSession(false);
-        if ((session == null || session.getAttribute("user") == null) && !"login".equals(action))
-        {
-            request.getRequestDispatcher(Pages.LOGIN).forward(request, response);
+        
+        if(Functions.AuthenticatePath(request, "Project Manager")){
+            request.getRequestDispatcher(Pages.PROJECT_MANAGER_DASH_BOARD).forward(request,response);
             return;
         }
+        
+        if(Functions.AuthenticatePath(request, "Team Member")){
+            //Routed to team member
+        }
+        
         switch (action)
         {
             case "login":
@@ -37,6 +43,11 @@ public class MainController extends HttpServlet
             case "logout":
             {
                 url = "LogoutController";
+                break;
+            }
+            case "register":
+            {
+                url="RegisterController";
                 break;
             }
             default:

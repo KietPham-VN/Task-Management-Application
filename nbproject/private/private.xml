@@ -3,41 +3,35 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/F_CODE/CrewBE/BE3/Task-Management-Application/src/java/dao/interfaces/IProjectDAO.java</file>
-            <file>file:/D:/F_CODE/CrewBE/BE3/Task-Management-Application/src/java/entities/User.java</file>
-            <file>file:/D:/F_CODE/CrewBE/BE3/Task-Management-Application/web/views/createProject.jsp</file>
-            <file>file:/D:/F_CODE/CrewBE/BE3/Task-Management-Application/src/java/common/constants/Queries.java</file>
-            <file>file:/D:/F_CODE/CrewBE/BE3/Task-Management-Application/src/java/common/utils/DBUtils.java</file>
-            <file>file:/D:/F_CODE/CrewBE/BE3/Task-Management-Application/src/java/dao/implementations/ProjectDAO.java</file>
-            <file>file:/D:/F_CODE/CrewBE/BE3/Task-Management-Application/src/java/entities/Project.java</file>
-            <file>file:/D:/F_CODE/CrewBE/BE3/Task-Management-Application/src/java/controllers/project_manager/CreateProjectController.java</file>
-            <file>file:/D:/F_CODE/CrewBE/BE3/Task-Management-Application/src/java/dto/ProjectDTO.java</file>
-            <file>file:/D:/LearningMaterial/FPTU/SPRING25/Task-Management-Application/src/java/services/implementations/UserServices.java</file>
-            <file>file:/D:/LearningMaterial/FPTU/SPRING25/Task-Management-Application/src/java/dao/implementations/UserDAO.java</file>
-            <file>file:/D:/LearningMaterial/FPTU/SPRING25/Task-Management-Application/src/java/controllers/MainController.java</file>
-            <file>file:/D:/LearningMaterial/FPTU/SPRING25/Task-Management-Application/src/java/controllers/auth/LoginController.java</file>
-            <file>file:/D:/LearningMaterial/FPTU/SPRING25/Task-Management-Application/web/views/login.jsp</file>
-            <file>file:/D:/LearningMaterial/FPTU/SPRING25/Task-Management-Application/src/java/services/interfaces/IUserServices.java</file>
             <file>file:/C:/Users/NGHIA/Project/Java%20stuffs/Task-Management-Application/src/java/dao/interfaces/IProjectDAO.java</file>
             <file>file:/C:/Users/NGHIA/Project/Java%20stuffs/Task-Management-Application/web/WEB-INF/web.xml</file>
-            <file>file:/C:/Users/NGHIA/Project/Java%20stuffs/Task-Management-Application/src/java/entities/Task.java</file>
-            <file>file:/C:/Users/NGHIA/Project/Java%20stuffs/Task-Management-Application/src/java/common/utils/PasswordUtils.java</file>
-            <file>file:/C:/Users/NGHIA/Project/Java%20stuffs/Task-Management-Application/src/java/entities/User.java</file>
             <file>file:/C:/Users/NGHIA/Project/Java%20stuffs/Task-Management-Application/src/java/dao/interfaces/ITaskDAO.java</file>
             <file>file:/C:/Users/NGHIA/Project/Java%20stuffs/Task-Management-Application/src/java/exceptions/InvalidDataException.java</file>
+            <file>file:/C:/Users/NGHIA/Project/Java%20stuffs/Task-Management-Application/src/java/exceptions/ValidationException.java</file>
             <file>file:/C:/Users/NGHIA/Project/Java%20stuffs/Task-Management-Application/web/views/register.jsp</file>
+            <file>file:/C:/Users/NGHIA/Project/Java%20stuffs/Task-Management-Application/web/views/createProject.jsp</file>
             <file>file:/C:/Users/NGHIA/Project/Java%20stuffs/Task-Management-Application/src/java/dao/interfaces/IUserDAO.java</file>
+            <file>file:/C:/Users/NGHIA/Project/Java%20stuffs/Task-Management-Application/build.xml</file>
+            <file>file:/C:/Users/NGHIA/Project/Java%20stuffs/Task-Management-Application/web/META-INF/context.xml</file>
+            <file>file:/C:/Users/NGHIA/Project/Java%20stuffs/Task-Management-Application/src/java/controllers/auth/RegisterController.java</file>
+            <file>file:/C:/Users/NGHIA/Project/Java%20stuffs/Task-Management-Application/src/java/dao/implementations/UserDAO.java</file>
+            <file>file:/C:/Users/NGHIA/Project/Java%20stuffs/Task-Management-Application/src/java/services/implementations/UserServices.java</file>
+            <file>file:/C:/Users/NGHIA/Project/Java%20stuffs/Task-Management-Application/src/java/common/constants/Pages.java</file>
+            <file>file:/C:/Users/NGHIA/Project/Java%20stuffs/Task-Management-Application/src/java/common/constants/Queries.java</file>
+            <file>file:/C:/Users/NGHIA/Project/Java%20stuffs/Task-Management-Application/src/java/common/utils/PasswordUtils.java</file>
+            <file>file:/C:/Users/NGHIA/Project/Java%20stuffs/Task-Management-Application/src/java/entities/User.java</file>
+            <file>file:/C:/Users/NGHIA/Project/Java%20stuffs/Task-Management-Application/src/java/services/implementations/ProjectServices.java</file>
+            <file>file:/C:/Users/NGHIA/Project/Java%20stuffs/Task-Management-Application/src/java/common/enums/TaskStatus.java</file>
             <file>file:/C:/Users/NGHIA/Project/Java%20stuffs/Task-Management-Application/src/java/dao/implementations/TaskDAO.java</file>
             <file>file:/C:/Users/NGHIA/Project/Java%20stuffs/Task-Management-Application/src/conf/MANIFEST.MF</file>
             <file>file:/C:/Users/NGHIA/Project/Java%20stuffs/Task-Management-Application/src/java/dto/UserDTO.java</file>
             <file>file:/C:/Users/NGHIA/Project/Java%20stuffs/Task-Management-Application/src/java/dao/implementations/ProjectDAO.java</file>
-            <file>file:/C:/Users/NGHIA/Project/Java%20stuffs/Task-Management-Application/web/META-INF/context.xml</file>
             <file>file:/C:/Users/NGHIA/Project/Java%20stuffs/Task-Management-Application/src/java/common/utils/DBUtils.java</file>
             <file>file:/C:/Users/NGHIA/Project/Java%20stuffs/Task-Management-Application/src/java/entities/Project.java</file>
-            <file>file:/C:/Users/NGHIA/Project/Java%20stuffs/Task-Management-Application/web/views/index.jsp</file>
+            <file>file:/C:/Users/NGHIA/Project/Java%20stuffs/Task-Management-Application/src/java/services/implementations/TaskServices.java</file>
             <file>file:/C:/Users/NGHIA/Project/Java%20stuffs/Task-Management-Application/src/java/controllers/auth/LoginController.java</file>
-            <file>file:/C:/Users/NGHIA/Project/Java%20stuffs/Task-Management-Application/src/java/controllers/auth/RegisterController.java</file>
-            <file>file:/C:/Users/NGHIA/Project/Java%20stuffs/Task-Management-Application/src/java/dao/implementations/UserDAO.java</file>
+            <file>file:/C:/Users/NGHIA/Project/Java%20stuffs/Task-Management-Application/src/java/controllers/MainController.java</file>
+            <file>file:/C:/Users/NGHIA/Project/Java%20stuffs/Task-Management-Application/src/java/controllers/auth/LogoutController.java</file>
         </group>
     </open-files>
 </project-private>
