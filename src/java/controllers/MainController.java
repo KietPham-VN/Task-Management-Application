@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 
 @WebServlet(name = "MainController", urlPatterns =
 {
-    "/"
+    "/home"
 })
 public class MainController extends HttpServlet
 {
@@ -20,9 +20,8 @@ public class MainController extends HttpServlet
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         response.setContentType("text/html;charset=UTF-8");
-        String action = request.getParameter("action");
+        String action = (request.getParameter("action")!=null?request.getParameter("action"):"");
         String url = Pages.LOGIN;
-        HttpSession session = request.getSession(false);
         
         if(Functions.AuthenticatePath(request, "Project Manager")){
             request.getRequestDispatcher(Pages.PROJECT_MANAGER_DASH_BOARD).forward(request,response);
