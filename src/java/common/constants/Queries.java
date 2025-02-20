@@ -28,7 +28,7 @@ public class Queries {
             + "FROM [Users] "
             + "WHERE email = ?";
 
-    // geting all infor after logging in
+    // getting all information after logging in
     public static final String GET_USER_INFO
             = "SELECT [id], [name], [role], [createdAt] "
             + "FROM [User] "

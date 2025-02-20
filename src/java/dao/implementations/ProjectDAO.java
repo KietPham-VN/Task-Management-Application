@@ -51,19 +51,17 @@ public class ProjectDAO implements IProjectDAO
         return success;
     }
     
-    public Project getProjectByName(String name) {
+    public Project getProjectByName(String name) throws Exception
+    {
         Project project = null;
         String query = Queries.GET_PROJECTS_BY_USER;
-        try {
-            conn = DBUtils.getConnection();
-            ps = conn.prepareStatement(query);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                project = new Project();
-                project.setProjectId(rs.getInt("id"));
-                project.setName(rs.getString("name"));
-            }
-        } catch (Exception e) {
+        conn = DBUtils.getConnection();
+        ps = conn.prepareStatement(query);
+        rs = ps.executeQuery();
+        while (rs.next()) {
+            project = new Project();
+            project.setProjectId(rs.getInt("id"));
+            project.setName(rs.getString("name"));
         }
         return project;
     }
