@@ -6,5 +6,5 @@ import java.util.ArrayList;
 public interface IProjectServices
 {
 
-    ArrayList<Project> getProjectsByUser(int UserId);
+    ArrayList<Project> getProjectsByUser(int userId);
 }

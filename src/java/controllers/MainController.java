@@ -39,9 +39,10 @@ public class MainController extends HttpServlet
                 url = "LogoutController";
                 break;
             }
-            case "viewMemberProjects":
+            
+            case "register":
             {
-                url = "ViewMemberProjectsController";
+                url = "RegisterController";
                 break;
             }
             default:

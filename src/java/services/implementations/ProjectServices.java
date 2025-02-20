@@ -15,5 +15,4 @@ public class ProjectServices implements IProjectServices
         IProjectDAO projectDAO = new ProjectDAO();
         return projectDAO.getProjectsByUser(userId);
     }
-
 }

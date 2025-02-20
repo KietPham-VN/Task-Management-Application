@@ -11,5 +11,5 @@ public interface IProjectDAO
 
     boolean update(ProjectDTO o);
 
-    ArrayList<Project> getProjectsByUser(int UserId);
+    ArrayList<Project> getProjectsByUser(int userId);
 }

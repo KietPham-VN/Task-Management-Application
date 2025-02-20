@@ -52,19 +52,19 @@ public class UserDAO implements IUserDAO
     public User getUserByEmail(String username)
     {
         User user = null;
-        try 
+        try (PreparedStatement preparedStatement = DBUtils.getConnection().prepareStatement(Queries.LOGIN))
         {
-            PreparedStatement ps = DBUtils.getConnection().prepareStatement(Queries.LOGIN);
-            ps.setString(1, username);
-            ResultSet rs = ps.executeQuery();
 
-            if (rs != null && rs.next())
+            preparedStatement.setString(1, username);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet != null && resultSet.next())
             {
                 user = new User();
-                int id = rs.getInt(1);
-                String hashedPassword = rs.getString(2);
-                String storedSalt = rs.getString(3);
-                String role = rs.getString(4);
+                int id = resultSet.getInt(1);
+                String hashedPassword = resultSet.getString(2);
+                String storedSalt = resultSet.getString(3);
+                String role = resultSet.getString(4);
 
                 user.setId(id);
                 user.setEmail(username);

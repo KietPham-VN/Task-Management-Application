@@ -2,6 +2,9 @@ package common.constants;
 
 public class Queries
 {
+    private Queries()
+    {
+    }
 
     public static final String CREATE_PROJECT
             = "INSERT INTO dbo.Projects (name, description, createdBy) "

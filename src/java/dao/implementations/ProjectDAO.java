@@ -59,20 +59,20 @@ public class ProjectDAO implements IProjectDAO
     {
         ArrayList<Project> projects = new ArrayList<>();
 
-        try (Connection conn = DBUtils.getConnection();
-                PreparedStatement ps = conn.prepareStatement(Queries.GET_PROJECTS_BY_USER))
+        try (Connection connection = DBUtils.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(Queries.GET_PROJECTS_BY_USER))
         {
-            ps.setInt(1, userId);
+            preparedStatement.setInt(1, userId);
 
-            try (ResultSet rs = ps.executeQuery())
+            try (ResultSet resultSet = ps.executeQuery())
             {
-                while (rs.next())
+                while (resultSet.next())
                 {
-                    int projectId = rs.getInt("id");
-                    String name = rs.getString("name");
-                    String description = rs.getString("description");
-                    int createdBy = rs.getInt("createdBy");
-                    Timestamp createdAt = rs.getTimestamp("createdAt");
+                    int projectId = resultSet.getInt("id");
+                    String name = resultSet.getString("name");
+                    String description = resultSet.getString("description");
+                    int createdBy = resultSet.getInt("createdBy");
+                    Timestamp createdAt = resultSet.getTimestamp("createdAt");
 
                     projects.add(new Project(projectId, name, description, createdBy, createdAt));
                 }
@@ -86,5 +86,4 @@ public class ProjectDAO implements IProjectDAO
         }
         return projects;
     }
-
 }
