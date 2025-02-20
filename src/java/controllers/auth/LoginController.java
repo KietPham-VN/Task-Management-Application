@@ -43,7 +43,6 @@ public class LoginController extends HttpServlet
             HttpSession session = request.getSession();
             session.setAttribute("userId", user.getId());
             session.setMaxInactiveInterval(1800);
-
             if (user.getRole().equals(AccountRoles.TEAM_MEMBER.getRoleName()))
             {
                 response.sendRedirect("MainController?action=viewMemberProjects");

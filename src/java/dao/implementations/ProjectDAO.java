@@ -60,12 +60,13 @@ public class ProjectDAO implements IProjectDAO
         ArrayList<Project> projects = new ArrayList<>();
 
         try (Connection connection = DBUtils.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(Queries.GET_PROJECTS_BY_USER))
+                PreparedStatement preparedStatement = connection.prepareStatement(Queries.GET_PROJECTS_BY_USER))
         {
             preparedStatement.setInt(1, userId);
 
-            try (ResultSet resultSet = ps.executeQuery())
+            try (ResultSet resultSet = preparedStatement.executeQuery())
             {
+                System.out.println("ahihi");
                 while (resultSet.next())
                 {
                     int projectId = resultSet.getInt("id");
@@ -73,8 +74,8 @@ public class ProjectDAO implements IProjectDAO
                     String description = resultSet.getString("description");
                     int createdBy = resultSet.getInt("createdBy");
                     Timestamp createdAt = resultSet.getTimestamp("createdAt");
-
                     projects.add(new Project(projectId, name, description, createdBy, createdAt));
+
                 }
             }
         } catch (SQLException ex)
