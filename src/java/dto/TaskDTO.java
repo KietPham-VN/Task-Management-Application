@@ -1,13 +1,12 @@
 package dto;
 
-import entities.User;
 import java.sql.Date;
 
 public class TaskDTO {
     private int projectId;
     private String name;
     private String description;
-    private User assignedTo;
+    private int assignedTo;
     private String status;
     private String priority;
     private Date dueDate;
@@ -15,7 +14,7 @@ public class TaskDTO {
     public TaskDTO() {
     }
 
-    public TaskDTO(int projectId, String name, String description, User assignedTo, String status, String priority, Date dueDate) {
+    public TaskDTO(int projectId, String name, String description, int assignedTo, String status, String priority, Date dueDate) {
         this.projectId = projectId;
         this.name = name;
         this.description = description;
@@ -49,11 +48,11 @@ public class TaskDTO {
         this.description = description;
     }
 
-    public User getAssignedTo() {
+    public int getAssignedTo() {
         return assignedTo;
     }
 
-    public void setAssignedTo(User assignedTo) {
+    public void setAssignedTo(int assignedTo) {
         this.assignedTo = assignedTo;
     }
 

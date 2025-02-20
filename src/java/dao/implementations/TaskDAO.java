@@ -17,12 +17,23 @@ public class TaskDAO implements ITaskDAO
     @Override
     public boolean add(TaskDTO taskDto) {
         boolean success = false;
-        String query = Queries.CREATE_TASK;
+        String query = Queries.CREATE_TASK; //projectId, name, description, assignedTo, status, priority, dueDate
         try {
             conn = DBUtils.getConnection();
             ps = conn.prepareStatement(query);
-            ps.set
+            ps.setInt(1, taskDto.getProjectId());
+            ps.setString(2, taskDto.getName());
+            ps.setString(3, taskDto.getDescription());
+            ps.setInt(4, taskDto.getAssignedTo());
+            ps.setString(5, taskDto.getStatus());
+            ps.setString(6, taskDto.getPriority());
+            ps.setDate(7, taskDto.getDueDate());
+            int exe = ps.executeUpdate();
+            if (exe > 0) {
+                success = true;
+            }
         } catch (Exception e) {
+            System.out.println("Failed added to database" + e);
         }
         return success;
     }

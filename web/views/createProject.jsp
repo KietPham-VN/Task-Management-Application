@@ -20,8 +20,6 @@
             <input class="form-control" type='text' name='name' required/>
             <label class="form-label">Description</label>
             <textarea class="form-control" type='text' name='desc' required/></textarea>
-            <label class="form-label">Created By</label>
-            <input class="form-control" type='text' name='createdBy'/><br>
             <input class="btn btn-success" type='submit' />
     </form>
 </body>

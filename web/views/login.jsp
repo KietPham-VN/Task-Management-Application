@@ -56,14 +56,14 @@
                                                 <p>${error}</p>
                                             </c:if>
                                             <div data-mdb-input-init class="form-outline mb-4">
-                                                <input type="email" id="form2Example11" class="form-control"
-                                                       placeholder="email address" name="username"/>
                                                 <label class="form-label" for="form2Example11" >Username</label>
+                                                <input type="email" id="form2Example11" class="form-control"
+                                                       placeholder="Enter email address" name="username"/>
                                             </div>
 
                                             <div data-mdb-input-init class="form-outline mb-4">
-                                                <input type="password" id="form2Example22" class="form-control" name="password"/>
                                                 <label class="form-label" for="form2Example22" >Password</label>
+                                                <input type="password" id="form2Example22" class="form-control" name="password"/>
                                             </div>
 
                                             <div class="text-center pt-1 mb-5 pb-1">

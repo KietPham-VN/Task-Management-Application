@@ -1,9 +1,7 @@
 package controllers.project_manager;
 
 import common.constants.Pages;
-import dao.implementations.ProjectDAO;
-import dao.implementations.UserDAO;
-import dto.ProjectDTO;
+import entities.Project;
 import entities.User;
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -12,13 +10,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import services.implementations.ProjectServices;
 
 /**
  *
  * @author anhki
  */
-@WebServlet(name = "CreateProjectController", urlPatterns = {"/CreateProjectController"})
+@WebServlet(name = "CreateProjectController", urlPatterns = {"/CreateProject"})
 public class CreateProjectController extends HttpServlet {
+
+    private final ProjectServices projectServices = new ProjectServices();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -29,28 +30,6 @@ public class CreateProjectController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-//    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        response.setContentType("text/html;charset=UTF-8");
-//        System.out.println("AGFG");
-//        PrintWriter out = response.getWriter();
-//        try {
-//
-//            /* TODO output your page here. You may use following sample code. */
-//            out.println("<!DOCTYPE html>");
-//            out.println("<html>");
-//            out.println("<head>");
-//            out.println("<title>Servlet CreateProjectController</title>");
-//            out.println("</head>");
-//            out.println("<body>");
-//            out.println("<h1>Servlet CreateProjectController at " + request.getContextPath () + "</h1>");
-//            out.println("</body>");
-//            out.println("</html>");
-//        } catch (Exception ex) {
-//            log(ex.getMessage());
-//        } finally {
-//            out.close();
-//        }
-//    }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -76,30 +55,36 @@ public class CreateProjectController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            //lay user tu session
-            HttpSession session = request.getSession(false);
+            HttpSession session = request.getSession();
             User user = (session != null) ? (User) session.getAttribute("user") : null;
-
-            //kiem tra xem co user khong
+            System.out.println(user.getId());
+            System.out.println(user.getEmail());
+            // If no user found in session, redirect to login
             if (user == null) {
-                request.setAttribute("error", "User not exist");
+                request.setAttribute("error", "User not logged in.");
                 request.getRequestDispatcher(Pages.LOGIN).forward(request, response);
                 return;
             }
-            //lay data tu user nhap vao
+
+            // Get the userId from the session (user object)
+            int userId = user.getId();
+
+            // Get project details from the request
             String projectName = request.getParameter("name");
             String description = request.getParameter("desc");
-            
-            ProjectDTO prj = new ProjectDTO(projectName, description, user.getId());
-            boolean add = new ProjectDAO().add(prj);
-            if (add) {
+
+            // Call the service to create the project
+            ProjectServices projectService = new ProjectServices();
+            boolean success = projectService.createProject(projectName, description, userId);
+
+            if (success) {
                 response.sendRedirect(Pages.HOME);
             } else {
+                request.setAttribute("error", "Failed to create project");
                 request.getRequestDispatcher(Pages.CREATE_PROJECT).forward(request, response);
             }
         } catch (Exception e) {
-            System.out.println("Cannot add to database: " + e.getMessage());
-            request.setAttribute("error", "Failed create project");
+            request.setAttribute("error", "Error occurred: " + e.getMessage());
             request.getRequestDispatcher(Pages.CREATE_PROJECT).forward(request, response);
         }
     }

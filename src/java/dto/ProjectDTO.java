@@ -1,6 +1,5 @@
 package dto;
 
-import entities.User;
 
 public class ProjectDTO {
 

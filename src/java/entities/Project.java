@@ -1,6 +1,7 @@
 
 package entities;
 
+import dto.ProjectDTO;
 import java.sql.Date;
 
 
@@ -9,19 +10,20 @@ public class Project
     private int projectId;
     private String name;
     private String description;
-    private User createBy;
+    private int createBy;
     private Date createAt;
 
     public Project() {
     }
+    
 
-    public Project(String name, String description, User createBy) {
+    public Project(String name, String description, int createBy) {
         this.name = name;
         this.description = description;
         this.createBy = createBy;
     }
 
-    public Project(int projectId, String name, String description, User createBy, Date createAt) {
+    public Project(int projectId, String name, String description, int createBy, Date createAt) {
         this.projectId = projectId;
         this.name = name;
         this.description = description;
@@ -53,11 +55,11 @@ public class Project
         this.description = description;
     }
 
-    public User getCreateBy() {
+    public int getCreateBy() {
         return createBy;
     }
 
-    public void setCreateBy(User createBy) {
+    public void setCreateBy(int createBy) {
         this.createBy = createBy;
     }
 
