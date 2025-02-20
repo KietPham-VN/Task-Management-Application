@@ -38,6 +38,7 @@ public class RegisterController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -52,7 +53,7 @@ public class RegisterController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        response.setContentType("text/html;charset=UTF-8");
         request.getRequestDispatcher(Pages.REGISTER).forward(request, response);
     }
 
@@ -90,7 +91,7 @@ public class RegisterController extends HttpServlet {
                 HttpSession session = request.getSession();
                 session.setAttribute("user", newRegisteredUser);
                 session.setMaxInactiveInterval(1800);
-                response.sendRedirect("");
+                response.sendRedirect("index");
             }
         }
         catch (ValidationException ex) {

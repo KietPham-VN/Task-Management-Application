@@ -1,8 +1,3 @@
-<%-- 
-    Document   : register
-    Created on : Feb 9, 2025, 10:48:43 PM
-    Author     : NGHIA
---%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.List"%>
