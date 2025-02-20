@@ -22,7 +22,7 @@ public class MainController extends HttpServlet
         String action = request.getParameter("action");
         String url = Pages.LOGIN;
         HttpSession session = request.getSession(false);
-        if ((session == null || session.getAttribute("user") == null) && !"login".equals(action))
+        if ((session == null || session.getAttribute("userId") == null) && !"login".equals(action))
         {
             request.getRequestDispatcher(Pages.LOGIN).forward(request, response);
             return;
@@ -37,6 +37,16 @@ public class MainController extends HttpServlet
             case "logout":
             {
                 url = "LogoutController";
+                break;
+            }
+            case "viewMemberProjects":
+            {
+                url = "ViewMemberProjectsController";
+                break;
+            }
+            case "register":
+            {
+                url = "RegisterController";
                 break;
             }
             default:

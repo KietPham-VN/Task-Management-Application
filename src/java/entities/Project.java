@@ -1,21 +1,17 @@
-
 package entities;
 
-import dto.ProjectDTO;
-import java.sql.Date;
+import java.sql.Timestamp;
 
+public class Project {
 
-public class Project
-{
     private int projectId;
     private String name;
     private String description;
     private int createBy;
-    private Date createAt;
+    private Timestamp createAt;
 
     public Project() {
     }
-    
 
     public Project(String name, String description, int createBy) {
         this.name = name;
@@ -23,7 +19,7 @@ public class Project
         this.createBy = createBy;
     }
 
-    public Project(int projectId, String name, String description, int createBy, Date createAt) {
+    public Project(int projectId, String name, String description, int createBy, Timestamp createAt) {
         this.projectId = projectId;
         this.name = name;
         this.description = description;
@@ -63,13 +59,12 @@ public class Project
         this.createBy = createBy;
     }
 
-    public Date getCreateAt() {
+    public Timestamp getCreateAt() {
         return createAt;
     }
 
-    public void setCreateAt(Date createAt) {
+    public void setCreateAt(Timestamp createAt) {
         this.createAt = createAt;
     }
-    
-    
+
 }

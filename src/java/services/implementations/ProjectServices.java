@@ -4,6 +4,8 @@ import dao.implementations.ProjectDAO;
 import dao.interfaces.IProjectDAO;
 import dto.ProjectDTO;
 import entities.Project;
+import entities.Project;
+import java.util.ArrayList;
 import services.interfaces.IProjectServices;
 
 public class ProjectServices implements IProjectServices {
@@ -16,5 +18,11 @@ public class ProjectServices implements IProjectServices {
         }
         ProjectDTO project = new ProjectDTO(name, description, userId);
         return projectDAO.add(project);
+    }
+
+    @Override
+    public ArrayList<Project> getProjectsByUser(int userId) {
+        IProjectDAO projectDAO = new ProjectDAO();
+        return projectDAO.getProjectsByUser(userId);
     }
 }

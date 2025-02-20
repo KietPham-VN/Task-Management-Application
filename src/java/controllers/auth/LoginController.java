@@ -1,6 +1,7 @@
 package controllers.auth;
 
 import common.constants.Pages;
+import common.enums.AccountRoles;
 import entities.User;
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -35,8 +36,11 @@ public class LoginController extends HttpServlet {
         User user = userServices.login(username, password);
         if (user != null) {
             HttpSession session = request.getSession();
-            session.setAttribute("user", user);
+            session.setAttribute("userId", user.getId());
             session.setMaxInactiveInterval(1800);
+            if (user.getRole().equals(AccountRoles.TEAM_MEMBER.getRoleName())) {
+                response.sendRedirect("MainController?action=viewMemberProjects");
+            }
         } else {
             request.setAttribute("error", "Wrong email or password");
             request.getRequestDispatcher(Pages.LOGIN).forward(request, response);

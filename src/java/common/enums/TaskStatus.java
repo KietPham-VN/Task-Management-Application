@@ -6,19 +6,21 @@
 package common.enums;
 
 /**
- *
  * @author NGHIA
  */
-public enum TaskStatus {
+public enum TaskStatus
+{
     PENDING("Pending"), IN_PROGRESS("In Progress"), COMPLETED("Completed");
-    
+
     private final String status;
-    
-    TaskStatus(String status){
+
+    TaskStatus(String status)
+    {
         this.status = status;
     }
-    
-    public String getTaskStatus(){
+
+    public String getTaskStatus()
+    {
         return this.status;
     }
 }

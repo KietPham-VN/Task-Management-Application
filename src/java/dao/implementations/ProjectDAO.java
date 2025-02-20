@@ -6,10 +6,17 @@ import dao.interfaces.IProjectDAO;
 import dto.ProjectDTO;
 import entities.Project;
 import java.sql.Connection;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-public class ProjectDAO implements IProjectDAO {
+public class ProjectDAO implements IProjectDAO
+{
 
     Connection conn = null;
     PreparedStatement ps = null;
@@ -26,10 +33,12 @@ public class ProjectDAO implements IProjectDAO {
             ps.setString(2, projectDto.getDescription());
             ps.setInt(3, projectDto.getCreatedBy());
             int exe = ps.executeUpdate();
-            if (exe > 0) {
+            if (exe > 0)
+            {
                 sucess = true;
             }
-        } catch (Exception e) {
+        } catch (Exception e)
+        {
             System.out.println(e.getMessage());
             System.out.println("Failed added to database");
         }
@@ -44,7 +53,7 @@ public class ProjectDAO implements IProjectDAO {
     
     public Project getProjectByName(String name) {
         Project project = null;
-        String query = Queries.GET_PROJECT_BY_NAME;
+        String query = Queries.GET_PROJECTS_BY_USER;
         try {
             conn = DBUtils.getConnection();
             ps = conn.prepareStatement(query);
@@ -57,5 +66,40 @@ public class ProjectDAO implements IProjectDAO {
         } catch (Exception e) {
         }
         return project;
+    }
+    
+
+    @Override
+    public ArrayList<Project> getProjectsByUser(int userId)
+    {
+        ArrayList<Project> projects = new ArrayList<>();
+
+        try (Connection connection = DBUtils.getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement(Queries.GET_PROJECTS_BY_USER))
+        {
+            preparedStatement.setInt(1, userId);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery())
+            {
+                System.out.println("ahihi"); //????
+                while (resultSet.next())
+                {
+                    int projectId = resultSet.getInt("id");
+                    String name = resultSet.getString("name");
+                    String description = resultSet.getString("description");
+                    int createdBy = resultSet.getInt("createdBy");
+                    Timestamp createdAt = resultSet.getTimestamp("createdAt");
+                    projects.add(new Project(projectId, name, description, createdBy, createdAt));
+
+                }
+            }
+        } catch (SQLException ex)
+        {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, "SQL Error", ex);
+        } catch (ClassNotFoundException ex)
+        {
+            Logger.getLogger(ProjectDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return projects;
     }
 }
