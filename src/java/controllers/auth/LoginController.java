@@ -13,42 +13,35 @@ import javax.servlet.http.HttpSession;
 import services.implementations.UserServices;
 import services.interfaces.IUserServices;
 
-@WebServlet(name = "LoginController", urlPatterns =
-{
-    "/LoginController"
-})
-public class LoginController extends HttpServlet
-{
+@WebServlet(name = "LoginController", urlPatterns
+        = {
+            "/LoginController"
+        })
+public class LoginController extends HttpServlet {
 
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-    {
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
     }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-    {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         processRequest(request, response);
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-    {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         IUserServices userServices = new UserServices();
         User user = userServices.login(username, password);
-        if (user != null)
-        {
+        if (user != null) {
             HttpSession session = request.getSession();
             session.setAttribute("userId", user.getId());
             session.setMaxInactiveInterval(1800);
-            if (user.getRole().equals(AccountRoles.TEAM_MEMBER.getRoleName()))
-            {
+            if (user.getRole().equals(AccountRoles.TEAM_MEMBER.getRoleName())) {
                 response.sendRedirect("MainController?action=viewMemberProjects");
             }
-        } else
-        {
+        } else {
             request.setAttribute("error", "Wrong email or password");
             request.getRequestDispatcher(Pages.LOGIN).forward(request, response);
         }
@@ -56,8 +49,7 @@ public class LoginController extends HttpServlet
     }
 
     @Override
-    public String getServletInfo()
-    {
+    public String getServletInfo() {
         return "LoginController";
     }
 }

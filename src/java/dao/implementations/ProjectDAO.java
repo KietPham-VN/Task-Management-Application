@@ -5,7 +5,6 @@ import common.utils.DBUtils;
 import dao.interfaces.IProjectDAO;
 import dto.ProjectDTO;
 import entities.Project;
-
 import java.sql.Connection;
 
 import java.sql.PreparedStatement;
@@ -24,17 +23,15 @@ public class ProjectDAO implements IProjectDAO
     ResultSet rs = null;
 
     @Override
-    public boolean add(ProjectDTO o)
-    {
+    public boolean add(ProjectDTO projectDto) {
         boolean sucess = false;
         String query = Queries.CREATE_PROJECT;
-        try
-        {
+        try {
             conn = DBUtils.getConnection();
             ps = conn.prepareStatement(query);
-            ps.setString(1, o.getName());
-            ps.setString(2, o.getDescription());
-            ps.setInt(3, o.getCreatedBy().getId());
+            ps.setString(1, projectDto.getName());
+            ps.setString(2, projectDto.getDescription());
+            ps.setInt(3, projectDto.getCreatedBy());
             int exe = ps.executeUpdate();
             if (exe > 0)
             {
@@ -49,10 +46,28 @@ public class ProjectDAO implements IProjectDAO
     }
 
     @Override
-    public boolean update(ProjectDTO o)
-    {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean update(ProjectDTO projectDto) {
+        boolean success = false;
+        return success;
     }
+    
+    public Project getProjectByName(String name) {
+        Project project = null;
+        String query = Queries.GET_PROJECTS_BY_USER;
+        try {
+            conn = DBUtils.getConnection();
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                project = new Project();
+                project.setProjectId(rs.getInt("id"));
+                project.setName(rs.getString("name"));
+            }
+        } catch (Exception e) {
+        }
+        return project;
+    }
+    
 
     @Override
     public ArrayList<Project> getProjectsByUser(int userId)
@@ -66,7 +81,7 @@ public class ProjectDAO implements IProjectDAO
 
             try (ResultSet resultSet = preparedStatement.executeQuery())
             {
-                System.out.println("ahihi");
+                System.out.println("ahihi"); //????
                 while (resultSet.next())
                 {
                     int projectId = resultSet.getInt("id");

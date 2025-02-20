@@ -13,9 +13,16 @@ public class DBUtils
     {
     }
 
-    private static final Dotenv DOT_ENV
-            = Dotenv.configure()
-            .directory(Paths.get("D:/LearningMaterial/FPTU/FCODE/Task-Management-Application").toAbsolutePath().toString())
+    /**
+     * Logger cho lớp DBUtils.
+     */
+   // private static final Logger LOGGER = Logger.getLogger(DBUtils.class.getName());
+
+    /**
+     * Đối tượng Dotenv để tải các biến môi trường từ file .env.
+     */
+    private static final Dotenv DOT_ENV = Dotenv.configure()
+            .directory(Paths.get("D:/F_CODE/CrewBE/BE3/Task-Management-Application").toAbsolutePath().toString())
             .load();
 
     public static Connection getConnection() throws ClassNotFoundException, SQLException
