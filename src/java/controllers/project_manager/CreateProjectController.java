@@ -55,23 +55,26 @@ public class CreateProjectController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            HttpSession session = request.getSession();
-            User user = (session != null) ? (User) session.getAttribute("user") : null;
-            System.out.println(user.getId());
-            System.out.println(user.getEmail());
-            // If no user found in session, redirect to login
-            if (user == null) {
+            HttpSession session = request.getSession(false); // Do not create a new session
+            if (session == null || session.getAttribute("userId") == null) {
                 request.setAttribute("error", "User not logged in.");
                 request.getRequestDispatcher(Pages.LOGIN).forward(request, response);
                 return;
             }
-
-            // Get the userId from the session (user object)
-            int userId = user.getId();
-
-            // Get project details from the request
+            
+            // Get the user from session
+            int userId = (int) session.getAttribute("userId");
+            
+            // Get project details from request
             String projectName = request.getParameter("name");
             String description = request.getParameter("desc");
+            
+            // Validate inputs
+            if (projectName == null || projectName.trim().isEmpty() || description == null || description.trim().isEmpty()) {
+                request.setAttribute("error", "Project name and description are required.");
+                request.getRequestDispatcher(Pages.CREATE_PROJECT).forward(request, response);
+                return;
+            }
 
             // Call the service to create the project
             ProjectServices projectService = new ProjectServices();
@@ -80,11 +83,11 @@ public class CreateProjectController extends HttpServlet {
             if (success) {
                 response.sendRedirect(Pages.HOME);
             } else {
-                request.setAttribute("error", "Failed to create project");
+                request.setAttribute("error", "Failed to create project.");
                 request.getRequestDispatcher(Pages.CREATE_PROJECT).forward(request, response);
             }
         } catch (Exception e) {
-            request.setAttribute("error", "Error occurred: " + e.getMessage());
+            request.setAttribute("error", "An error occurred: " + e.getMessage());
             request.getRequestDispatcher(Pages.CREATE_PROJECT).forward(request, response);
         }
     }

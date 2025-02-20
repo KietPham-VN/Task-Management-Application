@@ -5,13 +5,8 @@
         <servlet-class>controllers.MainController</servlet-class>
     </servlet>
     <servlet-mapping>
-<<<<<<< HEAD
         <servlet-name>Maincontroller</servlet-name>
         <url-pattern>/Maincontroller</url-pattern>
-=======
-        <servlet-name>CreateProjectController</servlet-name>
-        <url-pattern>/CreateProject</url-pattern>
->>>>>>> main
     </servlet-mapping>
 
     <welcome-file-list>

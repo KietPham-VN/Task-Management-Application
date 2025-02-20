@@ -4,7 +4,6 @@ import dao.implementations.ProjectDAO;
 import dao.interfaces.IProjectDAO;
 import dto.ProjectDTO;
 import entities.Project;
-import entities.Project;
 import java.util.ArrayList;
 import services.interfaces.IProjectServices;
 
