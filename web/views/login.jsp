@@ -72,16 +72,13 @@
                                                 <a class="text-muted" href="#!">Forgot password?</a>
                                             </div>
 
-
-
-                                        </form>
-                                        <form action="MainController" method="POST">
-                                            <input type="hidden" name="action" value="register">
                                             <div class="d-flex align-items-center justify-content-center pb-4">
                                                 <p class="mb-0 me-2">Don't have an account?</p>
-                                                <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-danger">Create new</button>
-                                            </div>  
+                                                <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-danger" onclick="window.location.href='views/register.jsp'">Create new</button>
+                                            </div>
+
                                         </form>
+
                                     </div>
                                 </div>
                                 <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
