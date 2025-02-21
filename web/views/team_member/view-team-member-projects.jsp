@@ -1,15 +1,13 @@
-
-<%@page import="java.util.ArrayList"%>
-<%@page import="entities.Project"%>
-<%@page import="entities.User"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html lang="vi">
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Dash board</title>
-                <style>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Danh sách Dự án</title>
+
+        <style>
             /* Reset margin/padding để tránh ảnh hưởng từ trình duyệt */
             * {
                 margin: 0;
@@ -112,13 +110,11 @@
 
         </style>
     </head>
-    <%
-        User user = (User) session.getAttribute("user");
-    %>
     <body>
-        <div  class="container">
+        <div class="container">
             <h2>Danh sách Dự án</h2>
-             <c:choose>
+
+            <c:choose>
                 <c:when test="${empty sessionScope['project-list']}">
                     <p class="no-projects">Không có dự án nào.</p>
                 </c:when>
@@ -126,8 +122,6 @@
                     <jsp:include page="../components/projectList.jsp"/>
                 </c:otherwise>
             </c:choose>
-            <a href="CreateProjectController">Create new project</a>
         </div>
-
     </body>
 </html>

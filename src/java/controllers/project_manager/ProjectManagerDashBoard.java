@@ -58,9 +58,9 @@ public class ProjectManagerDashBoard extends HttpServlet {
         
         try{
             ProjectDAO projectDAO = new ProjectDAO();
-            ArrayList<Project> projectList = projectDAO.getListOfProject(user.getId());
+            ArrayList<Project> projectList = projectDAO.getProjectsByUser(user.getId());
             
-            request.setAttribute("projects", projectList);
+            request.setAttribute("project-list", projectList);
             request.getRequestDispatcher(Pages.PROJECT_MANAGER_DASH_BOARD).forward(request,response);
         }
         catch(Exception e){
