@@ -132,9 +132,12 @@
                                     <tr>
                                         <td>${project.getName()}</td>
                                         <td class="action-column">
-                                            <a href="ProjectDetailsController?id=${project.projectId}" class="btn-gradient">
-                                                Details
-                                            </a>
+                                            <!-- Chuyển hướng đến Servlet khi bấm vào Details -->
+                                            <form action="MainController" method="POST">
+                                                <input type="hidden" name="action" value="viewTeamMemberTask">
+                                                <input type="hidden" name="id" value="${project.projectId}">
+                                                <button type="submit" class="btn-gradient">Details</button>
+                                            </form>
                                         </td>
                                     </tr>
                                 </c:forEach>

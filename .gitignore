@@ -30,3 +30,5 @@ private/
 hs_err_pid*
 replay_pid*
 /dist/
+nbproject/build-impl.xml
+nbproject/project.properties

@@ -37,7 +37,7 @@ public class ProjectDAO implements IProjectDAO
             {
                 sucess = true;
             }
-        } catch (Exception e)
+        } catch (ClassNotFoundException | SQLException e)
         {
             System.out.println(e.getMessage());
             System.out.println("Failed added to database");
@@ -79,7 +79,6 @@ public class ProjectDAO implements IProjectDAO
 
             try (ResultSet resultSet = preparedStatement.executeQuery())
             {
-                System.out.println("ahihi"); //????
                 while (resultSet.next())
                 {
                     int projectId = resultSet.getInt("id");
@@ -88,7 +87,6 @@ public class ProjectDAO implements IProjectDAO
                     int createdBy = resultSet.getInt("createdBy");
                     Timestamp createdAt = resultSet.getTimestamp("createdAt");
                     projects.add(new Project(projectId, name, description, createdBy, createdAt));
-
                 }
             }
         } catch (SQLException ex)
