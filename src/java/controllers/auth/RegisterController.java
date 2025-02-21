@@ -6,6 +6,7 @@
 package controllers.auth;
 
 import common.constants.Pages;
+import common.enums.AccountRoles;
 import entities.User;
 import exceptions.InvalidDataException;
 import exceptions.ValidationException;
@@ -53,7 +54,7 @@ public class RegisterController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+        response.setContentType("text/html");
         request.getRequestDispatcher(Pages.REGISTER).forward(request, response);
     }
 
@@ -91,7 +92,16 @@ public class RegisterController extends HttpServlet {
                 HttpSession session = request.getSession();
                 session.setAttribute("user", newRegisteredUser);
                 session.setMaxInactiveInterval(1800);
-                response.sendRedirect("index");
+                
+                //Redirect to dashboard when a user is created
+                if(newRegisteredUser.getRole().equals(AccountRoles.PROJECT_MANAGER.getRoleName()))
+                {
+                    response.sendRedirect("ProjectManagerDashBoard");
+                }
+                if (newRegisteredUser.getRole().equals(AccountRoles.TEAM_MEMBER.getRoleName()))
+                {
+                    response.sendRedirect("MainController?action=viewMemberProjects");
+                }
             }
         }
         catch (ValidationException ex) {
@@ -101,7 +111,7 @@ public class RegisterController extends HttpServlet {
         }
         catch(InvalidDataException ex){
             request.setAttribute("formData", formData);
-            request.setAttribute("invalid-data-exception",ex);
+            request.setAttribute("invalid-data-exception",ex.getMessage());
             request.getRequestDispatcher(Pages.REGISTER).forward(request, response);
         }
     }

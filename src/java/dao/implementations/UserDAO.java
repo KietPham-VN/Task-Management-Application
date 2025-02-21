@@ -7,6 +7,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import common.utils.DBUtils;
+import io.github.cdimascio.dotenv.Dotenv;
+import java.nio.file.Paths;
 import java.sql.ResultSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;

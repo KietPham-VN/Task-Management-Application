@@ -37,7 +37,7 @@ public class UserServices implements IUserServices
     public User register(String name, String email, String password, String role) throws ValidationException
     {
         IUserDAO userDAO = new UserDAO();
-        if (userDAO.getUserByEmail(email) == null)
+        if (userDAO.getUserByEmail(email) != null)
         {
             throw new InvalidDataException("Email has already been registered");
         }

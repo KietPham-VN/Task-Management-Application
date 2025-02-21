@@ -12,7 +12,8 @@ public class DBUtils
 
     private static final Dotenv DOT_ENV
             = Dotenv.configure()
-                    .directory(Paths.get("D:/LearningMaterial/FPTU/FCODE/Task-Management-Application").toAbsolutePath().toString())
+                    .directory(Paths.get("C:\\Users\\NGHIA\\Project\\Java stuffs\\Task-Management-Application").toAbsolutePath().toString())
+                    .filename(".env")
                     .load();
 
     public static Connection getConnection() throws ClassNotFoundException, SQLException

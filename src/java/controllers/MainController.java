@@ -19,12 +19,12 @@ public class MainController extends HttpServlet
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        response.setContentType("text/html;charset=UTF-8");
+        response.setContentType("text/html");
         String action = (request.getParameter("action")!=null?request.getParameter("action"):"");
         String url = Pages.LOGIN;
         
         if(Functions.AuthenticatePath(request, "Project Manager")){
-            request.getRequestDispatcher(Pages.PROJECT_MANAGER_DASH_BOARD).forward(request,response);
+            response.sendRedirect("ProjectManagerDashBoard");
             return;
         }
         

@@ -9,7 +9,7 @@
             </tr>
         </thead>
         <tbody>
-            <c:forEach var="project" items="${sessionScope['team-member-projects']}">
+            <c:forEach var="project" items="${sessionScope['project-list']}">
                 <tr>
                     <td>${project.getName()}</td>
                     <td class="action-column">

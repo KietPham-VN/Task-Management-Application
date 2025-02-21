@@ -52,7 +52,7 @@ public class ProjectManagerDashBoard extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        if(!Functions.AuthenticatePath(request, "Project Manager")) response.sendRedirect("LoginController");
+        if(!Functions.AuthenticatePath(request, "Project Manager")) response.sendRedirect("home");
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
         

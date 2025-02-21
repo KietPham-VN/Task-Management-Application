@@ -44,6 +44,10 @@ public class LoginController extends HttpServlet
             session.setAttribute("userId", user.getId());
             session.setMaxInactiveInterval(1800);
 
+            if(user.getRole().equals(AccountRoles.PROJECT_MANAGER.getRoleName()))
+            {
+                response.sendRedirect("ProjectManagerDashBoard");
+            }
             if (user.getRole().equals(AccountRoles.TEAM_MEMBER.getRoleName()))
             {
                 response.sendRedirect("MainController?action=viewMemberProjects");
