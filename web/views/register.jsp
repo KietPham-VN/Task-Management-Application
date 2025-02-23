@@ -59,7 +59,7 @@
                                             <h1>Register</h1>
                                         </div>
 
-                                        <form action="RegisterController" method="POST">
+                                        <form action="MainController?action=register" method="POST">
                                             <div data-mdb-input-init class="form-outline mb-4">
                                                 <label class="form-label" for="name">Name:</label>
                                                 <input class="form-control" type="text" name="name" id="name" value="<%= (formData != null && formData.get("name") != null) ? formData.get("name") : "" %>" required>
@@ -94,7 +94,7 @@
 
                                             <div class="d-flex align-items-center justify-content-center pb-4">
                                                 <p class="mb-0 me-2">Already have an account?</p>
-                                                <a href="home">
+                                                <a href="MainController">
                                                     <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-danger">Login</button>
                                                 </a>
                                             </div>

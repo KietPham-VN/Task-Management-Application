@@ -14,10 +14,9 @@ import javax.servlet.http.HttpSession;
 import services.implementations.ProjectServices;
 import services.interfaces.IProjectServices;
 
-//Khoi thay doi cai path o day thanh "/team-member" de filter hoat dong nha
 @WebServlet(name = "ViewMemberProjectsController", urlPatterns =
 {
-    "/ViewMemberProjectsController"
+    "/team-member"
 })
 public class ViewMemberProjectsController extends HttpServlet
 {

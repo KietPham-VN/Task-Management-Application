@@ -42,11 +42,10 @@ public class LoginController extends HttpServlet {
 
             if(user.getRole().equals(AccountRoles.PROJECT_MANAGER.getRoleName()))
             {
-                response.sendRedirect("project-manager");
+                response.sendRedirect("MainController?action=viewManagerProjects");
             }
             if (user.getRole().equals(AccountRoles.TEAM_MEMBER.getRoleName()))
             {
-                //Khoi them cai route cua may vo day nho la path co "/team-member" o dau de filter hoat dong
                 response.sendRedirect("MainController?action=viewMemberProjects");
             }
         } else {

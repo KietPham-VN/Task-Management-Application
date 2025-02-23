@@ -89,7 +89,7 @@ public class RegisterController extends HttpServlet {
                 //Redirect to dashboard when a user is created
                 if(newRegisteredUser.getRole().equals(AccountRoles.PROJECT_MANAGER.getRoleName()))
                 {
-                    response.sendRedirect("project-manager");
+                    response.sendRedirect("MainController?action=viewManagerProjects");
                 }
                 if (newRegisteredUser.getRole().equals(AccountRoles.TEAM_MEMBER.getRoleName()))
                 {

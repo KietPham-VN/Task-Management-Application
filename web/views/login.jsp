@@ -71,7 +71,7 @@
 
                                             <div class="d-flex align-items-center justify-content-center pb-4">
                                                 <p class="mb-0 me-2">Don't have an account?</p>
-                                                <a href="RegisterController">
+                                                <a href="MainController?action=register">
                                                     <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-danger">Register</button>
                                                 </a>
                                             </div>

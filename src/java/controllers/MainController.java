@@ -42,7 +42,12 @@ public class MainController extends HttpServlet
             }
             case "viewTeamMemberTask":
             {
-                url = "ViewTeamMemberTaskController";
+                url = "/team-member";
+                break;
+            }
+            case "viewManagerProjects":
+            {
+                url = "/project-manager";
                 break;
             }
             default:
