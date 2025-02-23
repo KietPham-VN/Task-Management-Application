@@ -27,20 +27,20 @@ public class User
         this._role = _role;
     }
 
-    public User(String _name, String _email, String _passwordHash, String _role, String _salt) {
-        this._name = _name;
-        this._email = _email;
-        this._passwordHash = _passwordHash;
-        this._salt = _salt;
-        this._role = _role;
+    public User(String name, String email, String passwordHash, String role, String salt) {
+        this._name = name;
+        this._email = email;
+        this._passwordHash = passwordHash;
+        this._salt = salt;
+        this._role = role;
     }
 
     public User() {
     }
 
-    public void setId(int _id)
+    public void setId(int id)
     {
-        this._id = _id;
+        this._id = id;
     }
 
     public String getName()
@@ -48,9 +48,9 @@ public class User
         return _name;
     }
 
-    public void setName(String _name)
+    public void setName(String name)
     {
-        this._name = _name;
+        this._name = name;
     }
 
     public String getEmail()
@@ -58,9 +58,9 @@ public class User
         return _email;
     }
 
-    public void setEmail(String _email)
+    public void setEmail(String email)
     {
-        this._email = _email;
+        this._email = email;
     }
 
     public String getPasswordHash()
@@ -68,9 +68,9 @@ public class User
         return _passwordHash;
     }
 
-    public void setPasswordHash(String _passwordHash)
+    public void setPasswordHash(String passwordHash)
     {
-        this._passwordHash = _passwordHash;
+        this._passwordHash = passwordHash;
     }
 
     public String getSalt()
@@ -78,9 +78,9 @@ public class User
         return _salt;
     }
 
-    public void setSalt(String _salt)
+    public void setSalt(String salt)
     {
-        this._salt = _salt;
+        this._salt = salt;
     }
 
     public String getRole()

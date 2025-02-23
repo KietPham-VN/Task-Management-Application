@@ -9,18 +9,18 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
         <title>Create Project</title>
     </head>
-    <body>
+    <body class="container">
         <h1>Create new project</h1>
         <form action="CreateProject" method="POST">
-            <label>Project name</label>
-            <input type='text' name='name' required/>
-            <label>Description</label>
-            <input type='text' name='desc' required/>
-            <label>Created By</label>
-            <input type='text' name='createdBy'/>
-            <input type='submit' />
-        </form>
-    </body>
+            <label class="form-label">Project name</label>
+            <input class="form-control" type='text' name='name' required/>
+            <label class="form-label">Description</label>
+            <textarea class="form-control" type='text' name='desc' required/></textarea>
+            <input class="btn btn-success" type='submit' />
+    </form>
+</body>
 </html>

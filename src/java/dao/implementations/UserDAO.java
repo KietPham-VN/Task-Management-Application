@@ -3,12 +3,12 @@ package dao.implementations;
 import common.constants.Queries;
 import dao.interfaces.IUserDAO;
 import entities.User;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import common.utils.DBUtils;
 import io.github.cdimascio.dotenv.Dotenv;
 import java.nio.file.Paths;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -54,13 +54,13 @@ public class UserDAO implements IUserDAO
     public User getUserByEmail(String username)
     {
         User user = null;
-        try 
+        try (PreparedStatement preparedStatement = DBUtils.getConnection().prepareStatement(Queries.LOGIN))
         {
-            PreparedStatement ps = DBUtils.getConnection().prepareStatement(Queries.LOGIN);
-            ps.setString(1, username);
-            ResultSet rs = ps.executeQuery();
 
-            if (rs != null && rs.next())
+            preparedStatement.setString(1, username);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet != null && resultSet.next())
             {
                 user = new User();
                 int id = rs.getInt(1);
@@ -70,6 +70,7 @@ public class UserDAO implements IUserDAO
                 String storedSalt = rs.getString(5);
                 String role = rs.getString(6);
 
+
                 user.setId(id);
                 user.setName(name);
                 user.setEmail(email);
@@ -77,38 +78,43 @@ public class UserDAO implements IUserDAO
                 user.setSalt(storedSalt);
                 user.setRole(role);
             }
-        } catch (ClassNotFoundException | SQLException ex)
-        {
+        } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return user;
     }
 
-    @Override
-    public User getUserByName(String name)
-    {
-        User user = null;
-        String query = Queries.GET_USER_BY_NAME;
 
-        try
-        {
-            conn = DBUtils.getConnection();
-            ps = conn.prepareStatement(query);
-            ps.setString(1, name);
-            rs = ps.executeQuery();
-            while (rs.next())
-            {
-                user = new User();
-                user.setId(rs.getInt("id"));
-                user.setId(rs.getInt("id"));
-                user.setName(rs.getString("username"));
-                user.setEmail(rs.getString("email"));
-                user.setRole(rs.getString("role"));
-            }
-        } catch (ClassNotFoundException | SQLException e)
-        {
-            System.out.println("Cannot add to database" + e);
-        }
-        return user;
+//    @Override
+//    public User getUserByName(String name)
+//    {
+//        User user = null;
+//        String query = Queries.GET_USER_BY_NAME;
+//
+//        try
+//        {
+//            conn = DBUtils.getConnection();
+//            ps = conn.prepareStatement(query);
+//            ps.setString(1, name);
+//            rs = ps.executeQuery();
+//            while (rs.next())
+//            {
+//                user = new User();
+//                user.setId(rs.getInt("id"));
+//                user.setId(rs.getInt("id"));
+//                user.setName(rs.getString("username"));
+//                user.setEmail(rs.getString("email"));
+//                user.setRole(rs.getString("role"));
+//            }
+//        } catch (ClassNotFoundException | SQLException e)
+//        {
+//            System.out.println("Cannot add to database" + e);
+//        }
+//        return user;
+//    }
+
+    @Override
+    public User getUserByName(String name) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

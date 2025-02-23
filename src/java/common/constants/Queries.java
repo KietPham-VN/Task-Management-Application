@@ -1,11 +1,21 @@
 package common.constants;
 
-public class Queries
-{
+//create new task
+// login
+public class Queries {
+
+    private Queries() {
+    }
 
     public static final String CREATE_PROJECT
             = "INSERT INTO dbo.Projects (name, description, createdBy) "
             + "VALUES (?, ?, ?) ";
+    public static final String UPDATE_PROJECT
+            = "UPDATE dbo.Projects"
+            + "SET name = ?, description = ?"
+            + "WHERE name = ?";
+    public static final String CREATE_TASK
+            = "INSERT INTO dbo.Tasks (projectId, name, description, assignedTo, status, priority, dueDate) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
     public static final String GET_USER_BY_NAME
             = "SELECT [id], [name], [email], [role] "
@@ -18,7 +28,7 @@ public class Queries
             + "FROM [Users] "
             + "WHERE email = ?";
 
-    // geting all infor after logging in
+    // getting all information after logging in
     public static final String GET_USER_INFO
             = "SELECT id, name, role, createdAt "
             + "FROM User "
