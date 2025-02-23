@@ -1,6 +1,7 @@
 package dto;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 public class TaskDTO {
     private int projectId;

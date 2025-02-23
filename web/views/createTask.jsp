@@ -19,22 +19,24 @@
             <label class="form-label">Task name</label>
             <input class="form-control" type='text' name='name' required/>
             <label class="form-label">Task description</label>
-            <textarea class="form-control" type='text' name='desc' required/></textarea>
-            <label class="form-label">Assign to</label>
-            <input class="form-control" type='text' name='member' required/>
-            <label class="form-label">Status</label>
-            <select class="form-select" name='status' required/>
-                <option>Pending</option>
-                <option>In progress</option>
-                <option>Done</option>
-            </select>
-            <label class="form-label">Priority</label>
-            <select class="form-select" name='priority' required/>
-                <option>Low</option>
-                <option>Medium</option>
-                <option>High</option>
-            </select><br>
-            <input class="btn btn-success" type='submit' />
+            <textarea class="form-control" name='desc' required/></textarea>
+        <label class="form-label">Assign to</label>
+        <input class="form-control" type='text' name='member' required/>
+        <label class="form-label">Status</label>
+        <select class="form-select" name='status' required/>
+        <option>Pending</option>
+        <option>In progress</option>
+        <option>Done</option>
+    </select>
+    <label class="form-label">Priority</label>
+    <select class="form-select" name='priority' required/>
+    <option>Low</option>
+    <option>Medium</option>
+    <option>High</option>
+</select><br>
+        <label class="form-label">Due Date</label>
+        <input class="form-control" type="date" name="dueDate" required/><br>
+<input class="btn btn-success" type='submit' />
 </form>
 </body>
 </html>

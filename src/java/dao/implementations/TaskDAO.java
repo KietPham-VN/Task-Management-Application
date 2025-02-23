@@ -28,9 +28,11 @@ public class TaskDAO implements ITaskDAO
             ps.setString(5, taskDto.getStatus());
             ps.setString(6, taskDto.getPriority());
             ps.setDate(7, taskDto.getDueDate());
+            
             int exe = ps.executeUpdate();
             if (exe > 0) {
                 success = true;
+                System.out.println("chac add dc");
             }
         } catch (Exception e) {
             System.out.println("Failed added to database" + e);

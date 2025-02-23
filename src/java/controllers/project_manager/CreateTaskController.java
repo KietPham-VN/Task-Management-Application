@@ -1,4 +1,4 @@
- /*
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -6,18 +6,22 @@
 package controllers.project_manager;
 
 import common.constants.Pages;
+import dao.implementations.TaskDAO;
+import dto.TaskDTO;
 import java.io.IOException;
+import java.sql.Date;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Hoang Tran
  */
-@WebServlet (name = "CreateTaskController", urlPatterns = {"/CreateTask"})
+@WebServlet(name = "CreateTaskController", urlPatterns = {"/CreateTask"})
 public class CreateTaskController extends HttpServlet {
 
     /**
@@ -29,7 +33,6 @@ public class CreateTaskController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -56,7 +59,33 @@ public class CreateTaskController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        try {
+            HttpSession session = request.getSession(false);
+            if (session ==  null || session.getAttribute("userId") == null || session.getAttribute("projectId") == null) {
+                response.sendRedirect(Pages.LOGIN);
+                return;
+            }
+            int projectId = (int) session.getAttribute("projectId");
+            int assignedTo = (int) session.getAttribute("userId");
+            String name = request.getParameter("name");
+            String description = request.getParameter("desc");
+            String status = request.getParameter("status");
+            String priority = request.getParameter("priority");
+            Date dueDate = (Date.valueOf(request.getParameter("dueDate")));
+            TaskDAO taskDAO = new TaskDAO();
+            boolean success = taskDAO.add(new TaskDTO(1, name, 
+                    description, assignedTo, status, priority,dueDate));
+            if (success) {
+                response.sendRedirect(Pages.HOME);
+            } else {
+                request.setAttribute("Error", "Failed");
+                request.getRequestDispatcher(Pages.CREATE_TASK);
+            }
             
+        } catch (Exception e) {
+            System.out.println("Cannot add task" + e);
+            request.getRequestDispatcher(Pages.CREATE_TASK).forward(request, response);
+        }
     }
 
     /**

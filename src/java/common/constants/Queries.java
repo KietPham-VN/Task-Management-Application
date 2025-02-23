@@ -43,4 +43,7 @@ public class Queries {
     public static final String REGISTER
             = "INSERT INTO Users(name,email,passwordHash,role,salt) "
             + "VALUES(?,?,?,?,?)";
+
+    public static final String GET_PROJECT_BY_ID
+            = "SELECT id, name, description FROM projects WHERE id = ?";
 }

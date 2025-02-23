@@ -15,8 +15,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class ProjectDAO implements IProjectDAO
-{
+public class ProjectDAO implements IProjectDAO {
 
     Connection conn = null;
     PreparedStatement ps = null;
@@ -33,12 +32,10 @@ public class ProjectDAO implements IProjectDAO
             ps.setString(2, projectDto.getDescription());
             ps.setInt(3, projectDto.getCreatedBy());
             int exe = ps.executeUpdate();
-            if (exe > 0)
-            {
+            if (exe > 0) {
                 sucess = true;
             }
-        } catch (Exception e)
-        {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
             System.out.println("Failed added to database");
         }
@@ -46,11 +43,25 @@ public class ProjectDAO implements IProjectDAO
     }
 
     @Override
-    public boolean update(ProjectDTO projectDto) {
+    public boolean update(ProjectDTO project) {
         boolean success = false;
+        String query = Queries.UPDATE_PROJECT;
+        try {
+            ps = conn.prepareStatement(query);
+            ps.setString(1, project.getName());
+            ps.setString(2, project.getDescription());
+            ps.setInt(3, project.getId());
+            int isOk = ps.executeUpdate();
+            if (isOk > 0) {
+                success = true;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ProjectDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         return success;
     }
-    
+
     public Project getProjectByName(String name) {
         Project project = null;
         String query = Queries.GET_PROJECTS_BY_USER;
@@ -64,26 +75,22 @@ public class ProjectDAO implements IProjectDAO
                 project.setName(rs.getString("name"));
             }
         } catch (Exception e) {
+            System.out.println("Cannot connect to database" + e);
         }
         return project;
     }
-    
 
     @Override
-    public ArrayList<Project> getProjectsByUser(int userId)
-    {
+    public ArrayList<Project> getProjectsByUser(int userId) {
         ArrayList<Project> projects = new ArrayList<>();
 
         try (Connection connection = DBUtils.getConnection();
-                PreparedStatement preparedStatement = connection.prepareStatement(Queries.GET_PROJECTS_BY_USER))
-        {
+                PreparedStatement preparedStatement = connection.prepareStatement(Queries.GET_PROJECTS_BY_USER)) {
             preparedStatement.setInt(1, userId);
 
-            try (ResultSet resultSet = preparedStatement.executeQuery())
-            {
-                System.out.println("ahihi"); //????
-                while (resultSet.next())
-                {
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                //     System.out.println("ahihi"); //????
+                while (resultSet.next()) {
                     int projectId = resultSet.getInt("id");
                     String name = resultSet.getString("name");
                     String description = resultSet.getString("description");
@@ -93,13 +100,35 @@ public class ProjectDAO implements IProjectDAO
 
                 }
             }
-        } catch (SQLException ex)
-        {
+        } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, "SQL Error", ex);
-        } catch (ClassNotFoundException ex)
-        {
+        } catch (ClassNotFoundException ex) {
             Logger.getLogger(ProjectDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return projects;
     }
+
+    public Project getProjectById(int projectId) throws ClassNotFoundException {
+        Project project = null;
+
+        try {
+            conn = DBUtils.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(Queries.GET_PROJECT_BY_ID);
+
+            stmt.setInt(1, projectId);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                project = new Project(
+                        rs.getInt(project.getProjectId()),
+                        rs.getString(project.getName()),
+                        rs.getString(project.getDescription()));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); // Log the error (better to use a logging framework)
+        }
+
+        return project;
+    }
+    
 }
