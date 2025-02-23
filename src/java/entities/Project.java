@@ -2,8 +2,7 @@ package entities;
 
 import java.sql.Timestamp;
 
-public class Project
-{
+public class Project {
 
     private int projectId;
     private String name;
@@ -11,19 +10,16 @@ public class Project
     private int createBy;
     private Timestamp createAt;
 
-    public Project()
-    {
+    public Project() {
     }
 
-    public Project(String name, String description, int createBy)
-    {
+    public Project(String name, String description, int createBy) {
         this.name = name;
         this.description = description;
         this.createBy = createBy;
     }
 
-    public Project(int projectId, String name, String description, int createBy, Timestamp createAt)
-    {
+    public Project(int projectId, String name, String description, int createBy, Timestamp createAt) {
         this.projectId = projectId;
         this.name = name;
         this.description = description;
@@ -31,53 +27,43 @@ public class Project
         this.createAt = createAt;
     }
 
-    public int getProjectId()
-    {
+    public int getProjectId() {
         return projectId;
     }
 
-    public void setProjectId(int projectId)
-    {
+    public void setProjectId(int projectId) {
         this.projectId = projectId;
     }
 
-    public String getName()
-    {
+    public String getName() {
         return name;
     }
 
-    public void setName(String name)
-    {
+    public void setName(String name) {
         this.name = name;
     }
 
-    public String getDescription()
-    {
+    public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description)
-    {
+    public void setDescription(String description) {
         this.description = description;
     }
 
-    public int getCreateBy()
-    {
+    public int getCreateBy() {
         return createBy;
     }
 
-    public void setCreateBy(int createBy)
-    {
+    public void setCreateBy(int createBy) {
         this.createBy = createBy;
     }
 
-    public Timestamp getCreateAt()
-    {
+    public Timestamp getCreateAt() {
         return createAt;
     }
 
-    public void setCreateAt(Timestamp createAt)
-    {
+    public void setCreateAt(Timestamp createAt) {
         this.createAt = createAt;
     }
 

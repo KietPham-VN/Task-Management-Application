@@ -1,8 +1,7 @@
 package controllers.project_manager;
 
-import dao.implementations.ProjectDAO;
-import dao.implementations.UserDAO;
-import dto.ProjectDTO;
+import common.constants.Pages;
+import entities.Project;
 import entities.User;
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -10,13 +9,17 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import services.implementations.ProjectServices;
 
 /**
  *
  * @author anhki
  */
-@WebServlet(name = "CreateProjectController", urlPatterns = {"/CreateProjectController"})
+@WebServlet(name = "CreateProjectController", urlPatterns = {"/CreateProject"})
 public class CreateProjectController extends HttpServlet {
+
+    private final ProjectServices projectServices = new ProjectServices();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -27,28 +30,6 @@ public class CreateProjectController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-//    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        response.setContentType("text/html;charset=UTF-8");
-//        System.out.println("AGFG");
-//        PrintWriter out = response.getWriter();
-//        try {
-//
-//            /* TODO output your page here. You may use following sample code. */
-//            out.println("<!DOCTYPE html>");
-//            out.println("<html>");
-//            out.println("<head>");
-//            out.println("<title>Servlet CreateProjectController</title>");
-//            out.println("</head>");
-//            out.println("<body>");
-//            out.println("<h1>Servlet CreateProjectController at " + request.getContextPath () + "</h1>");
-//            out.println("</body>");
-//            out.println("</html>");
-//        } catch (Exception ex) {
-//            log(ex.getMessage());
-//        } finally {
-//            out.close();
-//        }
-//    }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -60,7 +41,7 @@ public class CreateProjectController extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/views/createProject.jsp").forward(request, response);
+        request.getRequestDispatcher(Pages.CREATE_PROJECT).forward(request, response);
     }
 
     /**
@@ -74,29 +55,40 @@ public class CreateProjectController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            //lay data tu user nhap vao
-            String projectName = request.getParameter("name");
-            String description = request.getParameter("desc");
-            String userCreated = request.getParameter("createdBy");
-
-            User createdBy = new UserDAO().getUserByName(userCreated);
-            //kiem tra xem co user khong
-            if (createdBy == null) {
-                request.setAttribute("error", "User không tồn tại.");
-                request.getRequestDispatcher("/views/createProject.jsp").forward(request, response);
+            HttpSession session = request.getSession(false); // Do not create a new session
+            if (session == null || session.getAttribute("userId") == null) {
+                request.setAttribute("error", "User not logged in.");
+                request.getRequestDispatcher(Pages.LOGIN).forward(request, response);
                 return;
             }
-            ProjectDTO prj = new ProjectDTO(projectName, description, createdBy);
-            boolean add = new ProjectDAO().add(prj);
-            if (add) {
-                response.sendRedirect("index.jsp");
+            
+            // Get the user from session
+            int userId = (int) session.getAttribute("userId");
+            
+            // Get project details from request
+            String projectName = request.getParameter("name");
+            String description = request.getParameter("desc");
+            
+            // Validate inputs
+            if (projectName == null || projectName.trim().isEmpty() || description == null || description.trim().isEmpty()) {
+                request.setAttribute("error", "Project name and description are required.");
+                request.getRequestDispatcher(Pages.CREATE_PROJECT).forward(request, response);
+                return;
+            }
+
+            // Call the service to create the project
+            ProjectServices projectService = new ProjectServices();
+            boolean success = projectService.createProject(projectName, description, userId);
+
+            if (success) {
+                response.sendRedirect(Pages.HOME);
             } else {
-                request.getRequestDispatcher("/views/createProject.jsp").forward(request, response);
+                request.setAttribute("error", "Failed to create project.");
+                request.getRequestDispatcher(Pages.CREATE_PROJECT).forward(request, response);
             }
         } catch (Exception e) {
-            System.out.println("Cannot add to database: " + e.getMessage());
-            request.setAttribute("error", "Có lỗi khi tạo dự án.");
-            request.getRequestDispatcher("/views/createProject.jsp").forward(request, response);
+            request.setAttribute("error", "An error occurred: " + e.getMessage());
+            request.getRequestDispatcher(Pages.CREATE_PROJECT).forward(request, response);
         }
     }
 

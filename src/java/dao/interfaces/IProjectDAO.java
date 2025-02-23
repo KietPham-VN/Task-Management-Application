@@ -6,10 +6,8 @@ import java.util.ArrayList;
 
 public interface IProjectDAO
 {
+    boolean add(ProjectDTO projectDto);
+    boolean update(ProjectDTO projectDto);
 
-    boolean add(ProjectDTO o);
-
-    boolean update(ProjectDTO o);
-
-    ArrayList<Project> getProjectsByUser(int UserId);
+    ArrayList<Project> getProjectsByUser(int userId);
 }

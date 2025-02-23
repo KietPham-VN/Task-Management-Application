@@ -1,16 +1,21 @@
 package dto;
 
-import entities.User;
 
 public class ProjectDTO {
+
     private String name;
     private String description;
-    private User createdBy;
+    private int createdBy;
 
     public ProjectDTO() {
     }
 
-    public ProjectDTO(String name, String description, User createdBy) {
+    public ProjectDTO(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
+
+    public ProjectDTO(String name, String description, int createdBy) {
         this.name = name;
         this.description = description;
         this.createdBy = createdBy;
@@ -32,13 +37,12 @@ public class ProjectDTO {
         this.description = description;
     }
 
-    public User getCreatedBy() {
+    public int getCreatedBy() {
         return createdBy;
     }
 
-    public void setCreatedBy(User createdBy) {
+    public void setCreatedBy(int createdBy) {
         this.createdBy = createdBy;
     }
-    
-    
+
 }

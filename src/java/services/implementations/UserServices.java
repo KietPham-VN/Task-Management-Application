@@ -51,7 +51,6 @@ public class UserServices implements IUserServices
         {
             return null;
         }
-
         return userDAO.getUserByEmail(email);
     }
 }

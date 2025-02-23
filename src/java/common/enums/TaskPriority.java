@@ -6,19 +6,21 @@
 package common.enums;
 
 /**
- *
  * @author NGHIA
  */
-public enum TaskPriority {
+public enum TaskPriority
+{
     LOW("Low"), MEDIUM("Medium"), HIGH("High");
-    
+
     private final String priority;
-    
-    TaskPriority(String priority){
+
+    TaskPriority(String priority)
+    {
         this.priority = priority;
     }
-    
-    public String getTaskPriority(){
+
+    public String getTaskPriority()
+    {
         return this.priority;
     }
 }
