@@ -36,16 +36,16 @@ public class ProjectManagerFilter implements Filter {
         HttpSession session = httpReq.getSession(false);
     
         if(session==null){
-            httpResp.sendRedirect("home");
+            httpResp.sendRedirect("MainController");
             return;
         }
         AuthenticatedUser user = (AuthenticatedUser)session.getAttribute("authenticated-user");
         if(user==null){
-            httpResp.sendRedirect("home");
+            httpResp.sendRedirect("MainController");
             return;
         }
         if(!AccountRoles.PROJECT_MANAGER.getRoleName().equals(user.getRole())){
-            httpResp.sendRedirect("home");
+            httpResp.sendRedirect("MainController");
             return;
         }
         chain.doFilter(request, response);

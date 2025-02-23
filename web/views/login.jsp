@@ -46,7 +46,7 @@
                                             <h4 class="mt-1 mb-5 pb-1">Task management application</h4>
                                         </div>
 
-                                        <form action="home" method="POST">
+                                        <form action="MainController" method="POST">
                                             <input type="hidden" name="action" value="login">
                                             <p>Please login to your account</p>
                                             <c:if test="${not empty error}">

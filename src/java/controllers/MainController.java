@@ -1,7 +1,6 @@
 package controllers;
 
 import common.constants.Pages;
-import common.utils.Functions;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,7 +11,7 @@ import javax.servlet.http.HttpSession;
 
 @WebServlet(name = "MainController", urlPatterns =
 {
-    "/home"
+    "/MainController"
 })
 public class MainController extends HttpServlet
 {
