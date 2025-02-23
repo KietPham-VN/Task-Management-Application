@@ -6,10 +6,9 @@
 package controllers.project_manager;
 
 import common.constants.Pages;
-import common.utils.Functions;
 import dao.implementations.ProjectDAO;
+import entities.AuthenticatedUser;
 import entities.Project;
-import entities.User;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
@@ -23,7 +22,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author NGHIA
  */
-@WebServlet(name = "ProjectManagerDashBoard", urlPatterns = {"/ProjectManagerDashBoard"})
+@WebServlet(name = "ProjectManagerDashBoard", urlPatterns = {"/project-manager"})
 public class ProjectManagerDashBoard extends HttpServlet {
 
     /**
@@ -52,9 +51,8 @@ public class ProjectManagerDashBoard extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        if(!Functions.AuthenticatePath(request, "Project Manager")) response.sendRedirect("home");
         HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
+        AuthenticatedUser user = (AuthenticatedUser) session.getAttribute("authenticated-user");
         
         try{
             ProjectDAO projectDAO = new ProjectDAO();

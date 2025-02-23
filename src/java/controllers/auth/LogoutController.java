@@ -31,7 +31,7 @@ public class LogoutController extends HttpServlet
             session.invalidate();
         }
 
-        response.sendRedirect(Pages.LOGIN);
+        response.sendRedirect("home");
     }
 
     @Override

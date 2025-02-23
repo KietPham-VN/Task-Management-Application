@@ -7,6 +7,7 @@ package controllers.auth;
 
 import common.constants.Pages;
 import common.enums.AccountRoles;
+import entities.AuthenticatedUser;
 import entities.User;
 import exceptions.InvalidDataException;
 import exceptions.ValidationException;
@@ -90,13 +91,13 @@ public class RegisterController extends HttpServlet {
                 throw new InvalidDataException("Cannot save product to database!");
             } else {
                 HttpSession session = request.getSession();
-                session.setAttribute("user", newRegisteredUser);
+                session.setAttribute("authenticated-user", new AuthenticatedUser(newRegisteredUser));
                 session.setMaxInactiveInterval(1800);
                 
                 //Redirect to dashboard when a user is created
                 if(newRegisteredUser.getRole().equals(AccountRoles.PROJECT_MANAGER.getRoleName()))
                 {
-                    response.sendRedirect("ProjectManagerDashBoard");
+                    response.sendRedirect("project-manager");
                 }
                 if (newRegisteredUser.getRole().equals(AccountRoles.TEAM_MEMBER.getRoleName()))
                 {

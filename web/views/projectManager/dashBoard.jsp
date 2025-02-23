@@ -1,4 +1,5 @@
 
+<%@page import="entities.AuthenticatedUser"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="entities.Project"%>
 <%@page import="entities.User"%>
@@ -8,7 +9,8 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Dash board</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+        <title>Dashboard</title>
                 <style>
             /* Reset margin/padding để tránh ảnh hưởng từ trình duyệt */
             * {
@@ -113,9 +115,12 @@
         </style>
     </head>
     <%
-        User user = (User) session.getAttribute("user");
+        AuthenticatedUser user = (AuthenticatedUser) session.getAttribute("authenticated-user");
     %>
     <body>
+        <a class="position-absolute top-0 start-0" href="LogoutController">
+            <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-danger">Logout</button>
+        </a>
         <div  class="container">
             <h1>Hello, <%=user.getName()%></h1>
             <h2>Danh sách Dự án</h2>

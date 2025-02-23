@@ -23,14 +23,6 @@ public class MainController extends HttpServlet
         String action = (request.getParameter("action")!=null?request.getParameter("action"):"");
         String url = Pages.LOGIN;
         
-        if(Functions.AuthenticatePath(request, "Project Manager")){
-            response.sendRedirect("ProjectManagerDashBoard");
-            return;
-        }
-        
-        if(Functions.AuthenticatePath(request, "Team Member")){
-            //Routed to team member
-        }
         
         switch (action)
         {

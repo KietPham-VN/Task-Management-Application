@@ -14,7 +14,7 @@ public class Queries
 
     // login
     public static final String LOGIN
-            = "SELECT [id], [passwordHash], [salt], [role] "
+            = "SELECT [id], [name], [email], [passwordHash], [salt], [role] "
             + "FROM [Users] "
             + "WHERE email = ?";
 

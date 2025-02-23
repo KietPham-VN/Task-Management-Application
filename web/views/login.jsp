@@ -34,8 +34,8 @@
         </style>
     </head>
     <body>
-        <section class="py-2" style="background-color: #eee;">
-            <div class="container">
+        <section class="py-2 min-vh-100 d-flex align-items-center" style="background-color: #eee;">
+            <div class="container ">
                 <div class="row d-flex justify-content-center align-items-center">
                     <div class="col-xl-10">
                         <div class="card rounded-3 text-black">
@@ -43,9 +43,7 @@
                                     <div class="card-body p-md-5 mx-md-4">
 
                                         <div class="text-center">
-                                            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/lotus.webp"
-                                                 style="width: 185px;" alt="logo">
-                                            <h4 class="mt-1 mb-5 pb-1">We are Fun Snack Developer</h4>
+                                            <h4 class="mt-1 mb-5 pb-1">Task management application</h4>
                                         </div>
 
                                         <form action="home" method="POST">
@@ -55,14 +53,14 @@
                                                 <p>${error}</p>
                                             </c:if>
                                             <div data-mdb-input-init class="form-outline mb-4">
+                                                <label class="form-label" for="form2Example11" >Username</label>
                                                 <input type="email" id="form2Example11" class="form-control"
                                                        placeholder="email address" name="username"/>
-                                                <label class="form-label" for="form2Example11" >Username</label>
                                             </div>
 
                                             <div data-mdb-input-init class="form-outline mb-4">
-                                                <input type="password" id="form2Example22" class="form-control" name="password"/>
                                                 <label class="form-label" for="form2Example22" >Password</label>
+                                                <input type="password" id="form2Example22" class="form-control" name="password"/>
                                             </div>
 
                                             <div class="text-center pt-1 mb-5 pb-1">

@@ -19,6 +19,27 @@
     <welcome-file-list>
         <welcome-file>views/login.jsp</welcome-file>
     </welcome-file-list>
+    
+    <filter>
+        <filter-name>ProjectManagerFilter</filter-name>
+        <filter-class>filter.ProjectManagerFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>ProjectManagerFilter</filter-name>
+        <url-pattern>/project-manager/*</url-pattern>
+    </filter-mapping>    
+    
+    <filter>
+        <filter-name>TeamMemberFilter</filter-name>
+        <filter-class>filter.TeamMemberFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>TeamMemberFilter</filter-name>
+        <url-pattern>/team-member/*</url-pattern>
+    </filter-mapping>    
+    
     <session-config>
         <session-timeout>
             30

@@ -47,7 +47,7 @@
             String invalidDataErr = (String) request.getAttribute("invalid-data-exception");
         %>
 
-        <section class="py-2" style="background-color: #eee;">
+        <section class="py-2  min-vh-100 d-flex align-items-center" style="background-color: #eee;">
             <div class="container">
                 <div class="row d-flex justify-content-center align-items-center">
                     <div class="col-xl-10">

@@ -64,12 +64,15 @@ public class UserDAO implements IUserDAO
             {
                 user = new User();
                 int id = rs.getInt(1);
-                String hashedPassword = rs.getString(2);
-                String storedSalt = rs.getString(3);
-                String role = rs.getString(4);
+                String name = rs.getString(2);
+                String email = rs.getString(3);
+                String hashedPassword = rs.getString(4);
+                String storedSalt = rs.getString(5);
+                String role = rs.getString(6);
 
                 user.setId(id);
-                user.setEmail(username);
+                user.setName(name);
+                user.setEmail(email);
                 user.setPasswordHash(hashedPassword);
                 user.setSalt(storedSalt);
                 user.setRole(role);
