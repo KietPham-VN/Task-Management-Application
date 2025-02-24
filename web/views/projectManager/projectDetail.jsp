@@ -20,6 +20,19 @@
                 </c:when>
                 <c:otherwise>
                     <div>
+                        <form action="">
+                            <label class="form-label" for="searchName">Search</label>
+                            <input type="hidden" name="id" id="id" value="${param.id}">
+                            <input class="form-control" name="searchName" id="searchName" value="${param.searchName != null ? param.searchName : ''}">
+
+                            <label>Sort by:</label>
+                            <select name="sortBy" id="sortBy" class="my-2">
+                                <option value="duedate" ${param.sortBy == 'duedate' ? 'selected' : ''}>Duedate</option>
+                                <option value="status" ${param.sortBy == 'status' ? 'selected' : ''}>Status</option>
+                                <option value="priority" ${param.sortBy == 'priority' ? 'selected' : ''}>Priority</option>
+                            </select>
+                            <input type="submit" class="btn btn-primary d-block" value="Search">
+                        </form>
                         <div class="card my-2">
                             <div class="card-header">
                                 ${project.getName()}
