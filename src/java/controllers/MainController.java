@@ -48,12 +48,14 @@ public class MainController extends HttpServlet
             case "viewTeamMemberProjects":
             {
                 url = "team-member";
-                break;
+                response.sendRedirect(url);
+                return;
             }
             case "viewManagerProjects":
             {
                 url = "project-manager";
-                break;
+                response.sendRedirect(url);
+                return;
             }
             default:
             {
