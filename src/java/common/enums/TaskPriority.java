@@ -8,19 +8,28 @@ package common.enums;
 /**
  * @author NGHIA
  */
-public enum TaskPriority
-{
-    LOW("Low"), MEDIUM("Medium"), HIGH("High");
+// TaskPriority.java
+public enum TaskPriority {
+    LOW(1),
+    MEDIUM(2),
+    HIGH(3);
 
-    private final String priority;
+    private final int value;
 
-    TaskPriority(String priority)
-    {
-        this.priority = priority;
+    TaskPriority(int value) {
+        this.value = value;
     }
 
-    public String getTaskPriority()
-    {
-        return this.priority;
+    public int getValue() {
+        return value;
+    }
+
+    public static TaskPriority fromValue(int value) {
+        for (TaskPriority priority : TaskPriority.values()) {
+            if (priority.value == value) {
+                return priority;
+            }
+        }
+        throw new IllegalArgumentException("Invalid priority value: " + value);
     }
 }

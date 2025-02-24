@@ -52,4 +52,9 @@ public class Queries {
     public static final String REGISTER
             = "INSERT INTO Users(name,email,passwordHash,role,salt) "
             + "VALUES(?,?,?,?,?)";
+    
+    public static final String GET_TASKS_BY_PROJECT
+            ="SELECT id,projectId,name,description,assignedTo,"
+            + "status,priority,dueDate,createdAt FROM Tasks"
+            + "WHERE projectId = ?";
 }

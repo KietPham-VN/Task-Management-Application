@@ -8,19 +8,29 @@ package common.enums;
 /**
  * @author NGHIA
  */
-public enum TaskStatus
-{
-    PENDING("Pending"), IN_PROGRESS("In Progress"), COMPLETED("Completed");
+// TaskStatus.java
+public enum TaskStatus {
+    PENDING(1),
+    IN_PROGRESS(2),
+    COMPLETED(3);
 
-    private final String status;
+    private final int value;
 
-    TaskStatus(String status)
-    {
-        this.status = status;
+    TaskStatus(int value) {
+        this.value = value;
     }
 
-    public String getTaskStatus()
-    {
-        return this.status;
+    public int getValue() {
+        return value;
+    }
+
+    public static TaskStatus fromValue(int value) {
+        for (TaskStatus status : TaskStatus.values()) {
+            if (status.value == value) {
+                return status;
+            }
+        }
+        throw new IllegalArgumentException("Invalid status value: " + value);
     }
 }
+

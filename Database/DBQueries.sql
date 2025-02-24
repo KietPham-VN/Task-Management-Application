@@ -42,9 +42,9 @@ CREATE TABLE Tasks (
     name VARCHAR(255) NOT NULL,
     description TEXT,
     assignedTo INT REFERENCES projectMembers(id) ON DELETE SET NULL,
-    status VARCHAR(50) CHECK (status IN ('Pending', 'In Progress', 'Completed')) DEFAULT 'Pending',
-    priority VARCHAR(50) CHECK (priority IN ('Low', 'Medium', 'High')) DEFAULT 'Medium',
-    dueDate DATE,
+    status INT CHECK (status BETWEEN 1 AND 3) DEFAULT 1, -- 1: Pending, 2: In Progress, 3: Completed
+    priority INT CHECK (priority BETWEEN 1 AND 3) DEFAULT 2, -- 1: Low, 2: Medium, 3: High
+    dueDate DATETIME,
     createdAt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 GO
@@ -95,9 +95,9 @@ END
 GO
 
 -- Insert sample data for Users
-INSERT INTO Users (name, email, passwordHash, salt, role) VALUES ('Alice', 'alice@example.com', 'hash1', 'salt1', 'Project Manager');
-INSERT INTO Users (name, email, passwordHash, salt, role) VALUES ('Bob', 'bob@example.com', 'hash2', 'salt2', 'Team Member');
-INSERT INTO Users (name, email, passwordHash, salt, role) VALUES ('Charlie', 'charlie@example.com', 'hash3', 'salt3', 'Team Member');
+INSERT INTO Users (name, email, passwordHash, salt, role) VALUES ('Alice', 'alice@example.com', '94c9eef0fe9b8abaa7d2d6ac16628b61e404d0afcd82de44f8c001bad499518e', '8d274fa624fb4827a4496154b2931bfd', 'Project Manager');
+INSERT INTO Users (name, email, passwordHash, salt, role) VALUES ('Bob', 'bob@example.com', '94c9eef0fe9b8abaa7d2d6ac16628b61e404d0afcd82de44f8c001bad499518e', '8d274fa624fb4827a4496154b2931bfd', 'Team Member');
+INSERT INTO Users (name, email, passwordHash, salt, role) VALUES ('Charlie', 'charlie@example.com', '94c9eef0fe9b8abaa7d2d6ac16628b61e404d0afcd82de44f8c001bad499518e', '8d274fa624fb4827a4496154b2931bfd', 'Team Member');
 
 -- Insert sample data for Projects
 INSERT INTO Projects (name, description, createdBy) VALUES ('Project Alpha', 'Description for Project Alpha', 1);
@@ -109,8 +109,8 @@ INSERT INTO ProjectMembers (projectId, userId) VALUES (1, 2);
 INSERT INTO ProjectMembers (projectId, userId) VALUES (2, 3);
 
 -- Insert sample data for Tasks
-INSERT INTO Tasks (projectId, name, description, assignedTo, status, priority, dueDate) VALUES (1, 'Task 1', 'Description Task 1', 1, 'Pending', 'Medium', '2025-03-01');
-INSERT INTO Tasks (projectId, name, description, assignedTo, status, priority, dueDate) VALUES (2, 'Task 2', 'Description Task 2', 3, 'In Progress', 'High', '2025-03-10');
+INSERT INTO Tasks (projectId, name, description, assignedTo, status, priority, dueDate) VALUES (1, 'Task 1', 'Description Task 1', 1, 1, 2, '2025-03-01');
+INSERT INTO Tasks (projectId, name, description, assignedTo, status, priority, dueDate) VALUES (2, 'Task 2', 'Description Task 2', 3, 2, 3, '2025-03-10');
 
 -- Insert sample data for TaskUpdates
 INSERT INTO TaskUpdates (taskId, updatedBy, updateNotes) VALUES (1, 1, 'Initial update');
