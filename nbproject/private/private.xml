@@ -19,6 +19,7 @@
             <file>file:/C:/Users/NGHIA/Project/Java%20stuffs/Task-Management-Application/src/java/controllers/auth/RegisterController.java</file>
             <file>file:/C:/Users/NGHIA/Project/Java%20stuffs/Task-Management-Application/src/java/dao/implementations/UserDAO.java</file>
             <file>file:/C:/Users/NGHIA/Project/Java%20stuffs/Task-Management-Application/src/java/controllers/team_member/ViewMemberProjectsController.java</file>
+            <file>file:/C:/Users/NGHIA/Project/Java%20stuffs/Task-Management-Application/src/java/controllers/team_member/ViewTeamMemberTaskController.java</file>
             <file>file:/C:/Users/NGHIA/Project/Java%20stuffs/Task-Management-Application/src/java/services/implementations/UserServices.java</file>
             <file>file:/C:/Users/NGHIA/Project/Java%20stuffs/Task-Management-Application/src/java/common/constants/Pages.java</file>
             <file>file:/C:/Users/NGHIA/Project/Java%20stuffs/Task-Management-Application/src/java/common/constants/Queries.java</file>
@@ -26,6 +27,7 @@
             <file>file:/C:/Users/NGHIA/Project/Java%20stuffs/Task-Management-Application/src/java/common/enums/TaskPriority.java</file>
             <file>file:/C:/Users/NGHIA/Project/Java%20stuffs/Task-Management-Application/src/java/entities/User.java</file>
             <file>file:/C:/Users/NGHIA/Project/Java%20stuffs/Task-Management-Application/src/java/services/implementations/ProjectServices.java</file>
+            <file>file:/C:/Users/NGHIA/Project/Java%20stuffs/Task-Management-Application/web/views/projectManager/dashBoard.jsp</file>
             <file>file:/C:/Users/NGHIA/Project/Java%20stuffs/Task-Management-Application/src/java/common/enums/TaskStatus.java</file>
             <file>file:/C:/Users/NGHIA/Project/Java%20stuffs/Task-Management-Application/src/java/dao/implementations/TaskDAO.java</file>
             <file>file:/C:/Users/NGHIA/Project/Java%20stuffs/Task-Management-Application/src/conf/MANIFEST.MF</file>
@@ -36,11 +38,14 @@
             <file>file:/C:/Users/NGHIA/Project/Java%20stuffs/Task-Management-Application/src/java/entities/Project.java</file>
             <file>file:/C:/Users/NGHIA/Project/Java%20stuffs/Task-Management-Application/src/java/services/implementations/TaskServices.java</file>
             <file>file:/C:/Users/NGHIA/Project/Java%20stuffs/Task-Management-Application/src/java/controllers/auth/LoginController.java</file>
+            <file>file:/C:/Users/NGHIA/Project/Java%20stuffs/Task-Management-Application/src/java/controllers/project_manager/ProjectManagerDashBoard.java</file>
             <file>file:/C:/Users/NGHIA/Project/Java%20stuffs/Task-Management-Application/src/java/controllers/MainController.java</file>
             <file>file:/C:/Users/NGHIA/Project/Java%20stuffs/Task-Management-Application/web/views/login.jsp</file>
+            <file>file:/C:/Users/NGHIA/Project/Java%20stuffs/Task-Management-Application/nbproject/project.properties</file>
+            <file>file:/C:/Users/NGHIA/Project/Java%20stuffs/Task-Management-Application/src/java/filter/ProjectManagerFilter.java</file>
             <file>file:/C:/Users/NGHIA/Project/Java%20stuffs/Task-Management-Application/src/java/controllers/auth/LogoutController.java</file>
             <file>file:/C:/Users/NGHIA/Project/Java%20stuffs/Task-Management-Application/src/java/services/interfaces/ITaskServices.java</file>
-            <file>file:/C:/Users/NGHIA/Project/Java%20stuffs/Task-Management-Application/nbproject/build-impl.xml</file>
+            <file>file:/C:/Users/NGHIA/Project/Java%20stuffs/Task-Management-Application/src/java/controllers/project_manager/CreateTaskController.java</file>
         </group>
     </open-files>
 </project-private>
