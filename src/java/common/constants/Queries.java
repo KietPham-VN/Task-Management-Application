@@ -61,4 +61,14 @@ public class Queries {
             ="SELECT * "
             + "FROM [Projects] "
             + "WHERE id = ?";
+    
+    public static final String DELETE_TASK_BY_ID
+            ="DELETE FROM Tasks WHERE id = ?";
+    
+    public static final String GET_TASK_WITH_ASSIGN_USER
+            ="SELECT t.*, u.id AS userId, u.name AS userName, u.email AS userEmail " +
+                       "FROM Tasks t " +
+                       "LEFT JOIN ProjectMembers pm ON t.assignedTo = pm.id " +
+                       "LEFT JOIN Users u ON pm.userId = u.id "+ 
+                        "WHERE t.projectId = ?";
 }

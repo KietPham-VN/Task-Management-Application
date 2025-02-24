@@ -5,7 +5,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-        <title>JSP Page</title>
+        <title>Task detail</title>
         <link rel="stylesheet" href="css/style.css">
     </head>
     <body>
@@ -38,7 +38,13 @@
                                 ${project.getName()}
                             </div>
                             <div class="card-body">
-                                ${project.getDescription()}
+                                <p class="card-text">${project.getDescription()}</p>
+                                <p>Team members: </p>
+                                <div class="overflow-auto" style="max-height: 100px">
+                                    <c:forEach var="user" items="${requestScope['member-list']}">
+                                        <p>${user.getName()}</p>
+                                    </c:forEach>
+                                </div>
                             </div>
                         </div>
                         <div>
@@ -60,7 +66,7 @@
                                             <span>Priority: ${task.getPriority()}</span>
                                             <p>Duedate: ${task.getDueDate()}</p>
                                         </div>
-                                        <p>Assigned to:</p>
+                                        <p>Assigned to: ${task.getAssignedToUser()==null?"none":task.getAssignedToUser().getName()}</p>
                                     </div>
                                 </div>
                             </c:forEach>

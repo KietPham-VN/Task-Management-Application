@@ -15,6 +15,7 @@ public class Tasks
     private TaskPriority _priority;
     private Timestamp _dueDate;
     private Timestamp _createdAt;
+    private User _assignedToUser;
 
     public Tasks(int _id, int _projectId, String name, String description, int _assidnedTo, int _status, int _priority, Timestamp _dueDate, Timestamp _createdAt) {
         this._id = _id;
@@ -101,6 +102,14 @@ public class Tasks
 
     public void setCreatedAt(Timestamp _createdAt) {
         this._createdAt = _createdAt;
+    }
+
+    public void setAssignedToUser(User _assignedToUser) {
+        this._assignedToUser = _assignedToUser;
+    }
+
+    public User getAssignedToUser() {
+        return _assignedToUser;
     }
     
     

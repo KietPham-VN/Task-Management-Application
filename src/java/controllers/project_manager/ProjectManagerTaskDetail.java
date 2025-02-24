@@ -69,11 +69,11 @@ public class ProjectManagerTaskDetail extends HttpServlet {
         
         if(projectId!=null) {
             project = projectDAO.getProjectById(projectId);
-            tasks = taskService.getTasksByProjectId(projectId, searchName, sortBy);
+            tasks = taskService.getTasksByProjectIdWithMembers(projectId, searchName, sortBy);
             request.setAttribute("task-list", tasks);
             request.setAttribute("project", project);
+            request.setAttribute("member-list", taskService.getUserFromTasks(tasks));
         }
-        System.out.println(Pages.PROJECT_MANAGER_TASK_DETAILS);
         request.getRequestDispatcher(Pages.PROJECT_MANAGER_TASK_DETAILS).forward(request,response);
     }
 
