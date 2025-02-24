@@ -1,4 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <div class="table-container">
     <table>
@@ -9,11 +10,11 @@
             </tr>
         </thead>
         <tbody>
-            <c:forEach var="project" items="${sessionScope['project-list']}">
+            <c:forEach var="project" items="${requestScope['project-list']}">
                 <tr>
                     <td>${project.getName()}</td>
                     <td class="action-column">
-                        <a href="ProjectDetailsController?id=${project.projectId}" class="btn-gradient">
+                        <a href="ProjectDetailsController?id=${project.getProjectId()}" class="btn-gradient">
                             Details
                         </a>
                     </td>

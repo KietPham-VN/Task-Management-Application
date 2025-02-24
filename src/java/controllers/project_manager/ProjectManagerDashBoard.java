@@ -63,7 +63,7 @@ public class ProjectManagerDashBoard extends HttpServlet {
         }
         catch(Exception e){
             System.out.println(e);
-            request.getRequestDispatcher(Pages.LOGIN);
+            request.getRequestDispatcher(Pages.LOGIN).forward(request,response);
         }
     }
 

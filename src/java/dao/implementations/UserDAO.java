@@ -58,9 +58,9 @@ public class UserDAO implements IUserDAO
         {
 
             preparedStatement.setString(1, username);
-            ResultSet resultSet = preparedStatement.executeQuery();
+            rs = preparedStatement.executeQuery();
 
-            if (resultSet != null && resultSet.next())
+            if (rs != null && rs.next())
             {
                 user = new User();
                 int id = rs.getInt(1);

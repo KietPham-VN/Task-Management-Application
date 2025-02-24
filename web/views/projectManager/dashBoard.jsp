@@ -126,7 +126,7 @@
             <h1>Hello, <%=user.getName()%></h1>
             <h2>Danh sách Dự án</h2>
              <c:choose>
-                <c:when test="${empty sessionScope['project-list']}">
+                <c:when test="${empty requestScope['project-list']}">
                     <p class="no-projects">Không có dự án nào.</p>
                 </c:when>
                 <c:otherwise>
