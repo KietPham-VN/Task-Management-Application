@@ -54,7 +54,11 @@ public class Queries {
             + "VALUES(?,?,?,?,?)";
     
     public static final String GET_TASKS_BY_PROJECT
-            ="SELECT id,projectId,name,description,assignedTo,"
-            + "status,priority,dueDate,createdAt FROM Tasks"
+            ="SELECT * FROM Tasks "
             + "WHERE projectId = ?";
+    
+    public static final String GET_PROJECT_BY_ID
+            ="SELECT * "
+            + "FROM [Projects] "
+            + "WHERE id = ?";
 }

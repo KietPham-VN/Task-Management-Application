@@ -52,12 +52,15 @@ public class TaskDAO implements ITaskDAO
     }
 
     @Override
-    public ArrayList<Tasks> getTasksByProjectId(int projectId) {
+    public ArrayList<Tasks> getTasksByProjectId(int projectId,String name) {
+        String query = Queries.GET_TASKS_BY_PROJECT;
+        if(!name.isEmpty())query+=" AND name LIKE ?";
         ArrayList<Tasks> tasks = new ArrayList<>();
         try{
             conn = DBUtils.getConnection();
             ps = conn.prepareCall(Queries.GET_TASKS_BY_PROJECT);
             ps.setInt(1, projectId);
+            if(!name.isEmpty()) ps.setString(2, name);
             rs = ps.executeQuery();
             while(rs.next()){
                 Tasks task = new Tasks(rs.getInt("id"),rs.getInt("projectId"),
@@ -67,11 +70,12 @@ public class TaskDAO implements ITaskDAO
                 rs.getTimestamp("createdAt"));
                 tasks.add(task);
             }
+            conn.close();
         }
         catch (ClassNotFoundException | SQLException e)
         {
             System.out.println(e.getMessage());
-            System.out.println("Failed added to database");
+            System.out.println("Failed get tasks from database");
         }
         return tasks;
     }

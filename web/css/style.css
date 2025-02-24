@@ -1,0 +1,120 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+h2 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;  /* Giúp các ô b?ng dính sát nhau */
+    margin: 0;
+}
+
+/* Lo?i b? padding/margin bên trong b?ng */
+.table-container {
+    border: 3px solid #b44593;
+    border-radius: 8px;
+    overflow: hidden;
+    background: white;
+    padding: 0; /* Lo?i b? padding */
+    margin: 0; /* Lo?i b? margin */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Tiêu ?? b?ng v?i gradient */
+thead {
+    background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
+    color: white;
+    text-align: center;
+}
+
+thead th {
+    padding: 10px; /* ??m b?o n?i dung không b? l?ch */
+    font-size: 16px;
+    font-weight: bold;
+    border-bottom: 2px solid white;
+}
+
+/* Dính sát n?i dung vào vi?n */
+tbody td {
+    padding: 8px; /* ?i?u ch?nh padding cho h?p lý */
+    text-align: center;
+    /*border: 1px solid #b44593;  ??m b?o border gi?a các ô */
+}
+
+/* Dính sát vi?n b?ng */
+tbody tr {
+    border-bottom: 1px solid #b44593;
+}
+/* Hi?u ?ng hover cho hàng */
+tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+.action-column {
+    width: 120px;
+    text-align: center;
+}
+
+/* Nút gradient */
+.btn-gradient {
+    display: inline-block;
+    background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    text-decoration: none;
+    font-size: 14px;
+    border-radius: 5px;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.btn-gradient:hover {
+    opacity: 0.9;
+}
+
+.no-projects {
+    color: #6c757d;
+    font-style: italic;
+    margin-top: 20px;
+}
+
+.gradient-custom-2 {
+    /* fallback for old browsers */
+    background: #fccb90;
+
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
+
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
+}
+
+@media (min-width: 768px) {
+    .gradient-form {
+        height: 100vh !important;
+    }
+}
+@media (min-width: 769px) {
+    .gradient-custom-2 {
+        border-top-right-radius: .3rem;
+        border-bottom-right-radius: .3rem;
+    }
+}

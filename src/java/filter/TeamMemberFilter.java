@@ -36,16 +36,16 @@ public class TeamMemberFilter implements Filter {
         HttpSession session = httpReq.getSession(false);
     
         if(session==null){
-            httpResp.sendRedirect("MainController");
+            httpResp.sendRedirect(httpReq.getContextPath());
             return;
         }
         AuthenticatedUser user = (AuthenticatedUser)session.getAttribute("authenticated-user");
         if(user==null){
-            httpResp.sendRedirect("MainController");
+            httpResp.sendRedirect(httpReq.getContextPath());
             return;
         }
         if(!AccountRoles.TEAM_MEMBER.getRoleName().equals(user.getRole())){
-            httpResp.sendRedirect("MainController");
+            httpResp.sendRedirect(httpReq.getContextPath());
             return;
         }
         chain.doFilter(request, response);    }

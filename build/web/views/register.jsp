@@ -8,30 +8,7 @@
         <title>Register</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
-        <style>
-            .gradient-custom-2 {
-                /* fallback for old browsers */
-                background: #fccb90;
-
-                /* Chrome 10-25, Safari 5.1-6 */
-                background: -webkit-linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
-
-                /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-                background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
-            }
-
-            @media (min-width: 768px) {
-                .gradient-form {
-                    height: 100vh !important;
-                }
-            }
-            @media (min-width: 769px) {
-                .gradient-custom-2 {
-                    border-top-right-radius: .3rem;
-                    border-bottom-right-radius: .3rem;
-                }
-            }
-        </style>
+        <link rel="stylesheet" href="css/style.css">
     </head>
 
     <body>
@@ -61,25 +38,25 @@
 
                                         <form action="MainController?action=register" method="POST">
                                             <div data-mdb-input-init class="form-outline mb-4">
-                                                <label class="form-label" for="name">Name:</label>
+                                                <label class="form-label" for="name">Name</label>
                                                 <input class="form-control" type="text" name="name" id="name" value="<%= (formData != null && formData.get("name") != null) ? formData.get("name") : "" %>" required>
                                                 <p class="text-danger"><%=(nameErr!=null)?nameErr:""%></p>
                                             </div>
 
                                             <div data-mdb-input-init class="form-outline mb-4">
-                                                <label class="form-label" for="email">Email:</label>
+                                                <label class="form-label" for="email">Email</label>
                                                 <input class="form-control" type="email" name="email" id="email" value="<%= (formData != null && formData.get("email") != null) ? formData.get("email") : "" %>" required>
                                                 <p class="text-danger"><%=(emailErr!=null)?emailErr:""%></p>
                                             </div>
                                             
                                             <div data-mdb-input-init class="form-outline mb-4">
-                                                <label class="form-label" for="password">Password:</label>
+                                                <label class="form-label" for="password">Password</label>
                                                 <input class="form-control" type="password" name="password" id="password" value="<%= (formData != null && formData.get("password") != null) ? formData.get("password") : "" %>" required>
                                                 <p class="text-danger"><%=(passwordErr!=null)?passwordErr:""%></p>
                                             </div>
                                             
                                             <div data-mdb-input-init class="form-outline mb-4">
-                                                <label class="form-label" for="role">Role:</label>
+                                                <label class="form-label" for="role">Role</label>
                                                 <select name="role" id="role">
                                                     <option value="Team Member" <%= (formData != null && "Team Member".equals(formData.get("role"))) ? "selected" : "" %>>Team Member</option>
                                                     <option value="Project Manager" <%= (formData != null && "Project Manager".equals(formData.get("role"))) ? "selected" : "" %>>Project Manager</option>

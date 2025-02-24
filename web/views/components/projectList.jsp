@@ -14,7 +14,7 @@
                 <tr>
                     <td>${project.getName()}</td>
                     <td class="action-column">
-                        <a href="ProjectDetailsController?id=${project.getProjectId()}" class="btn-gradient">
+                        <a href="${param.baseUrl}?id=${project.projectId}" class="btn-gradient">
                             Details
                         </a>
                     </td>

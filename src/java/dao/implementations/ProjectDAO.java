@@ -97,4 +97,24 @@ public class ProjectDAO implements IProjectDAO
         }
         return projects;
     }
+
+    @Override
+    public Project getProjectById(int projectId) {
+        Project project = null;
+        try(Connection conn = DBUtils.getConnection()){
+            PreparedStatement ps = conn.prepareStatement(Queries.GET_PROJECT_BY_ID);
+            ps.setInt(1, projectId);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                project = new Project(rs.getInt("id"),rs.getString("name"),rs.getString("description"),rs.getInt("createdBy"),rs.getTimestamp("createdAt"));
+            }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ProjectDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ProjectDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return project;
+    }
+    
+    
 }
