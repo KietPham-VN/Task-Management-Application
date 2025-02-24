@@ -20,7 +20,7 @@ public class MainController extends HttpServlet
     {
         response.setContentType("text/html");
         String action = (request.getParameter("action")!=null?request.getParameter("action"):"");
-        String url = Pages.LOGIN;
+        String url = "";
         
         
         switch (action)
@@ -42,16 +42,22 @@ public class MainController extends HttpServlet
             }
             case "viewTeamMemberTask":
             {
-                url = "/team-member";
+                url = "team-member";
+                break;
+            }
+            case "viewTeamMemberProjects":
+            {
+                url = "team-member";
                 break;
             }
             case "viewManagerProjects":
             {
-                url = "/project-manager";
+                url = "project-manager";
                 break;
             }
             default:
             {
+                url = Pages.LOGIN;
                 break;
             }
         }

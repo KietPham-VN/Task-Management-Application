@@ -118,8 +118,8 @@
         AuthenticatedUser user = (AuthenticatedUser) session.getAttribute("authenticated-user");
     %>
     <body>
-        <form action="POST" class="position-absolute top-0 start-0" action="LogoutController">
-            <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-danger">Logout</button>
+        <form method="POST" class="position-absolute top-0 start-0" action="LogoutController">
+            <input  type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-danger" value="Logout">
         </form>
         
         <div  class="container">

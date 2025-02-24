@@ -13,7 +13,6 @@
         <welcome-file>views/login.jsp</welcome-file>
     </welcome-file-list>
     
-<<<<<<< HEAD
     <filter>
         <filter-name>ProjectManagerFilter</filter-name>
         <filter-class>filter.ProjectManagerFilter</filter-class>
@@ -34,8 +33,6 @@
         <url-pattern>/team-member/*</url-pattern>
     </filter-mapping>    
     
-=======
->>>>>>> main
     <session-config>
         <session-timeout>
             30

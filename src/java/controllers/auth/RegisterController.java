@@ -93,7 +93,7 @@ public class RegisterController extends HttpServlet {
                 }
                 if (newRegisteredUser.getRole().equals(AccountRoles.TEAM_MEMBER.getRoleName()))
                 {
-                    response.sendRedirect("MainController?action=viewMemberProjects");
+                    response.sendRedirect("MainController?action=viewTeamMemberProjects");
                 }
             }
         }
