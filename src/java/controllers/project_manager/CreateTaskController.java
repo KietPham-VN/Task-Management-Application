@@ -65,7 +65,7 @@ public class CreateTaskController extends HttpServlet {
                 response.sendRedirect(Pages.LOGIN);
                 return;
             }
-            int projectId = (int) session.getAttribute("projectId");
+            int projectId =Integer.parseInt(request.getParameter("projectId"));
             int assignedTo = (int) session.getAttribute("userId");
             String name = request.getParameter("name");
             String description = request.getParameter("desc");
@@ -73,7 +73,7 @@ public class CreateTaskController extends HttpServlet {
             String priority = request.getParameter("priority");
             Date dueDate = (Date.valueOf(request.getParameter("dueDate")));
             TaskDAO taskDAO = new TaskDAO();
-            boolean success = taskDAO.add(new TaskDTO(1, name, 
+            boolean success = taskDAO.add(new TaskDTO(projectId, name, 
                     description, assignedTo, status, priority,dueDate));
             if (success) {
                 response.sendRedirect(Pages.HOME);
