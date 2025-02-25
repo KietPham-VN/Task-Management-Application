@@ -5,20 +5,20 @@
  */
 package controllers.project_manager;
 
-import dao.implementations.ProjectDAO;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import services.implementations.TaskServices;
 
 /**
  *
  * @author NGHIA
  */
-@WebServlet(name = "AddUser", urlPatterns = {"/project-manager/project-detail/add-user"})
-public class AddUser extends HttpServlet {
+@WebServlet(name = "DeleteTask", urlPatterns = {"/project-manager/project-detail/delete-task"})
+public class DeleteTask extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -60,17 +60,13 @@ public class AddUser extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String projectIdString =(String) request.getParameter("projectId");
-        String userIdString = (String) request.getParameter("userId");
+        String taskIdString = request.getParameter("taskId");
+        Integer taskId;
         
-        Integer projectId, userId;
+        taskId = Integer.parseInt(taskIdString);
+        TaskServices taskServices = new TaskServices();
+        taskServices.deleteTask(taskId);
         
-        projectId = Integer.parseInt(projectIdString);
-        userId = Integer.parseInt(userIdString);
-        
-        
-        ProjectDAO projectDAO = new ProjectDAO();
-        projectDAO.addUserToProject(projectId, userId);
         response.sendRedirect(request.getHeader("Referer"));
     }
 

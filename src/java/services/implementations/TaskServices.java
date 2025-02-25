@@ -62,4 +62,12 @@ public class TaskServices implements ITaskServices
         return users;
     }
 
+    @Override
+    public boolean deleteTask(int taskId) {
+        TaskDAO taskDAO = new TaskDAO();
+        boolean hasDeleted = taskDAO.delete(taskId);
+        
+        return hasDeleted;
+    }
+
 }

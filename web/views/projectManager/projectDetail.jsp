@@ -63,11 +63,14 @@
                                         <b>${task.getName()}</b>
                                         <div>
                                             <button class="btn btn-primary">Edit</button>
-                                            <button class="btn btn-danger">Delete</button>
+                                            <form class="d-inline" method="POST" action="${pageContext.request.contextPath}/project-manager/project-detail/delete-task">
+                                                <input type="hidden" value="${task.getId()}" name="taskId" id="taskId">
+                                                <input type="submit" value="Delete" class="btn btn-danger">
+                                            </form>
                                         </div>
                                     </div>
                                     <div class="card-body">
-                                        <p class="card-text" id="task-description-${task.getId()}">${task.getDescription()}</p>
+                                        <p class="card-text" >${task.getDescription()}</p>
                                     </div>
                                     <div class="card-footer d-flex justify-content-between">
                                         <div>

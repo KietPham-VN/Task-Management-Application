@@ -9,4 +9,5 @@ public interface ITaskServices
     ArrayList<Tasks> getTasksByProjectId(int projectId, String name, String sortBy);
     ArrayList<Tasks> getTasksByProjectIdWithMembers(int projectId, String name, String sortBy);
     ArrayList<User> getUserFromTasks(ArrayList<Tasks> tasks);
+    boolean deleteTask(int taskId);
 }
