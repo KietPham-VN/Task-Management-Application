@@ -54,7 +54,7 @@
                                     </select>
                                     <input type="submit" value="Add new member" class="btn btn-primary">
                                 </form>
-                                <a href="${pageContext.request.contextPath}/project-manager/project-detail/add-task?projectId=${param.id}">
+                                <a href="${pageContext.request.contextPath}/project-manager/project-detail/createTask?projectId=${param.id}">
                                     <button class="btn btn-primary">Add task</button>
                                 </a>
                             </div>

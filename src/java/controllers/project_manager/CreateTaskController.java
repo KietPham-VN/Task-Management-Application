@@ -21,7 +21,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author Hoang Tran
  */
-@WebServlet(name = "CreateTaskController", urlPatterns = {"/CreateTask"})
+@WebServlet(name = "CreateTaskController", urlPatterns = {"/project-manager/project-detail/createTask"})
+
 public class CreateTaskController extends HttpServlet {
 
     /**
@@ -59,12 +60,14 @@ public class CreateTaskController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        TaskDAO taskDAO = new TaskDAO();
         try {
             HttpSession session = request.getSession(false);
-            if (session ==  null || session.getAttribute("userId") == null || session.getAttribute("projectId") == null) {
+            if (session ==  null) {
                 response.sendRedirect(Pages.LOGIN);
                 return;
             }
+
             int projectId =Integer.parseInt(request.getParameter("projectId"));
             int assignedTo = (int) session.getAttribute("userId");
             String name = request.getParameter("name");
@@ -72,14 +75,14 @@ public class CreateTaskController extends HttpServlet {
             String status = request.getParameter("status");
             String priority = request.getParameter("priority");
             Date dueDate = (Date.valueOf(request.getParameter("dueDate")));
-            TaskDAO taskDAO = new TaskDAO();
+            
             boolean success = taskDAO.add(new TaskDTO(projectId, name, 
                     description, assignedTo, status, priority,dueDate));
             if (success) {
-                response.sendRedirect(Pages.HOME);
+                response.sendRedirect(Pages.PROJECT_MANAGER_DASH_BOARD);
             } else {
                 request.setAttribute("Error", "Failed");
-                request.getRequestDispatcher(Pages.CREATE_TASK);
+                request.getRequestDispatcher(Pages.CREATE_TASK).forward(request, response);
             }
             
         } catch (Exception e) {

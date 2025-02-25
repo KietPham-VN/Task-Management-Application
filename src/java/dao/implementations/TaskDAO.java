@@ -1,6 +1,8 @@
 package dao.implementations;
 
 import common.constants.Queries;
+import common.enums.TaskPriority;
+import common.enums.TaskStatus;
 import common.utils.DBUtils;
 import dao.interfaces.ITaskDAO;
 import dto.TaskDTO;
@@ -11,7 +13,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -32,10 +33,9 @@ public class TaskDAO implements ITaskDAO
             ps.setString(2, taskDto.getName());
             ps.setString(3, taskDto.getDescription());
             ps.setInt(4, taskDto.getAssignedTo());
-            ps.setString(5, taskDto.getStatus());
-            ps.setString(6, taskDto.getPriority());
+            ps.setInt(5, TaskStatus.valueOf(taskDto.getStatus().toUpperCase()).getValue());
+            ps.setInt(6, TaskPriority.valueOf(taskDto.getPriority().toUpperCase()).getValue());
             ps.setDate(7, taskDto.getDueDate());
-            
             int exe = ps.executeUpdate();
             if (exe > 0) {
                 success = true;
