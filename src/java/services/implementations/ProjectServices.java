@@ -24,4 +24,10 @@ public class ProjectServices implements IProjectServices {
         IProjectDAO projectDAO = new ProjectDAO();
         return projectDAO.getProjectsByUser(userId);
     }
+    
+    @Override
+    public Project getProjectById(int projectId){
+        IProjectDAO projectDAO = new ProjectDAO();
+        return projectDAO.getProjectById(projectId);
+    }
 }
