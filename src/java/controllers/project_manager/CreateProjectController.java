@@ -15,7 +15,7 @@ import services.implementations.ProjectServices;
  *
  * @author anhki
  */
-@WebServlet(name = "CreateProjectController", urlPatterns = {"/CreateProject"})
+@WebServlet(name = "CreateProjectController", urlPatterns = {"/project-manager/create-project"})
 public class CreateProjectController extends HttpServlet {
 
     private final ProjectServices projectServices = new ProjectServices();
@@ -54,17 +54,7 @@ public class CreateProjectController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            HttpSession session = request.getSession(false); // Do not create a new session
-            if (session == null || session.getAttribute("userId") == null) {
-                request.setAttribute("error", "User not logged in.");
-                request.getRequestDispatcher(Pages.LOGIN).forward(request, response);
-                return;
-            }
-            
-            if (session.getAttribute("role") == null || !session.getAttribute("role").equals("Project Manager"))  {
-                response.sendRedirect(Pages.LOGIN);
-                return;
-            }
+            HttpSession session = request.getSession(false);
 
             // Get the user from session
             int userId = (int) session.getAttribute("userId");
@@ -85,7 +75,7 @@ public class CreateProjectController extends HttpServlet {
             boolean success = projectService.createProject(projectName, description, userId);
 
             if (success) {
-                response.sendRedirect(request.getContextPath()+"/project-manager/project-detail");
+                response.sendRedirect(request.getContextPath()+"/project-manager");
             } else {
                 request.setAttribute("error", "Failed to create project.");
                 response.sendRedirect(request.getHeader("Referer"));

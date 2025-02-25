@@ -5,7 +5,7 @@ public class Pages
     public static String LOGIN = "views/login.jsp";
     public static String REGISTER = "views/register.jsp";
     public static String HOME = "views/index.jsp";
-    public static String CREATE_PROJECT = "views/createProject.jsp";
+    public static String CREATE_PROJECT = "/views/projectManager/createProject.jsp";
     public static String EDIT_PROJECT = "views/editProject.jsp";
     public static String CREATE_TASK = "/views/projectManager/createTask.jsp";
     public static String UPDATE_TASK = "/views/projectManager/editTask.jsp";

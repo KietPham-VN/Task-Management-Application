@@ -34,7 +34,7 @@
                     </jsp:include>
                 </c:otherwise>
             </c:choose>
-            <a href="CreateProjectController">Create new project</a>
+            <a href="project-manager/create-project">Create new project</a>
         </div>
 
     </body>
