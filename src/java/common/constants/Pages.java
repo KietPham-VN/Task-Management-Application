@@ -13,4 +13,5 @@ public class Pages
     public static String PROJECT_DETAILS;
     public static final String PROJECT_MANAGER_DASH_BOARD="views/projectManager/dashBoard.jsp";
     public static final String PROJECT_MANAGER_TASK_DETAILS = "/views/projectManager/projectDetail.jsp";
+    public static final String TEAM_MEMBER_TASK_DETAILS = "/views/team_member/view-team-member-tasks.jsp";
 }

@@ -34,7 +34,7 @@
                                         <p>${user.getName()}</p>
                                     </c:forEach>
                                 </div>
-                                <form class="my-2" method="POST" action="${pageContext.request.contextPath}/project-manager/project-detail/add-user">
+                                <form method="POST" action="${pageContext.request.contextPath}/project-manager/project-detail/add-user">
                                     <input type="hidden" value="${param.id}" name="projectId" id="projectId">
                                     <select name="userId" id="userId" style="min-width: 150px; min-height: 35px;">
                                         <c:forEach var="user" items="${requestScope['available-users']}">
