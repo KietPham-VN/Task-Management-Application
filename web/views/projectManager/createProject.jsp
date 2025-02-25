@@ -13,15 +13,16 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
         <title>Create Project</title>
+        <link href="css/style.css" rel="stylesheet" type="text/css"/>
     </head>
-    <body class="container">
+    <body class="container mt-4 text-start">
         <h1>Create new project</h1>
         <form action="CreateProject" method="POST">
             <label class="form-label">Project name</label>
             <input class="form-control" type='text' name='name' required/>
             <label class="form-label">Description</label>
             <textarea class="form-control" type='text' name='desc' required/></textarea>
-            <input class="btn btn-success" type='submit' />
+            <input class="btn btn-gradient mt-2" type='submit' />
     </form>
 </body>
 </html>
