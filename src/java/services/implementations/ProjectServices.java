@@ -5,8 +5,6 @@ import dao.interfaces.IProjectDAO;
 import dto.ProjectDTO;
 import entities.Project;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import services.interfaces.IProjectServices;
 
 public class ProjectServices implements IProjectServices {
@@ -43,5 +41,12 @@ public class ProjectServices implements IProjectServices {
 //            Logger.getLogger(ProjectServices.class.getName()).log(Level.SEVERE, null, ex);
 //        }
 //    }
+
+    @Override
+    public Project getProjectById(int projectId)
+    {
+        IProjectDAO projectDAO = new ProjectDAO();
+        return projectDAO.getProjectById(projectId);
+    }
     
 }
