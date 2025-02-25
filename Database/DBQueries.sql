@@ -63,7 +63,7 @@ CREATE TABLE Comments (
 	commentTxt TEXT,
     createdAt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     memberId INT REFERENCES projectMembers(id) ON DELETE SET NULL,
-	taskUpdateId INT REFERENCES TaskUpdates(id)
+	taskUpdateId INT REFERENCES TaskUpdates(id) ON DELETE CASCADE
 );
 GO
 
