@@ -5,6 +5,7 @@ import common.utils.DBUtils;
 import dao.interfaces.IProjectDAO;
 import dto.ProjectDTO;
 import entities.Project;
+import entities.User;
 import java.sql.Connection;
 
 import java.sql.PreparedStatement;
@@ -134,6 +135,61 @@ public class ProjectDAO implements IProjectDAO
         }
         
         return status;
+    }
+
+    @Override
+    public ArrayList<User> getUserNotInProject(int projectId) {
+        ArrayList<User> users = new ArrayList<>();
+        
+        try {
+            conn = DBUtils.getConnection();
+            ps = conn.prepareStatement(Queries.GET_USER_NOT_IN_PROJECT);
+            ps.setInt(1,projectId);
+            rs = ps.executeQuery();
+            
+            while(rs.next()){
+                User user = new User();
+                user.setId(rs.getInt("id"));
+                user.setName(rs.getString("name"));
+                user.setEmail(rs.getString("email"));
+                users.add(user);
+            }
+                    
+            conn.close();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ProjectDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ProjectDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return users;
+    }
+
+    @Override
+    public ArrayList<User> getUserInProject(int projectId) {
+        ArrayList<User> users = new ArrayList<>();
+        
+        try {
+            conn = DBUtils.getConnection();
+            ps = conn.prepareStatement(Queries.GET_USER_IN_PROJECT);
+            ps.setInt(1,projectId);
+            rs = ps.executeQuery();
+            
+            while(rs.next()){
+                User user = new User();
+                user.setId(rs.getInt("id"));
+                user.setName(rs.getString("name"));
+                user.setEmail(rs.getString("email"));
+                users.add(user);
+            }
+                    
+            conn.close();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ProjectDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ProjectDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return users;
     }
     
 }

@@ -60,12 +60,18 @@ public class AddUser extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Integer projectId =(Integer) request.getAttribute("projectId");
-        Integer userId = (Integer) request.getAttribute("userId");
+        String projectIdString =(String) request.getParameter("projectId");
+        String userIdString = (String) request.getParameter("userId");
+        
+        Integer projectId, userId;
+        
+        projectId = Integer.parseInt(projectIdString);
+        userId = Integer.parseInt(userIdString);
+        
         
         ProjectDAO projectDAO = new ProjectDAO();
         projectDAO.addUserToProject(projectId, userId);
-        response.sendRedirect("project-manager/project-detail");
+        response.sendRedirect(request.getContextPath()+"/project-manager/project-detail");
     }
 
     /**

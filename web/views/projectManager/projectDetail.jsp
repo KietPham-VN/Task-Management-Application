@@ -40,11 +40,20 @@
                             <div class="card-body">
                                 <p class="card-text">${project.getDescription()}</p>
                                 <p>Team members: </p>
-                                <div class="overflow-auto" style="max-height: 100px">
+                                <div class="overflow-auto my-2" style="max-height: 100px">
                                     <c:forEach var="user" items="${requestScope['member-list']}">
                                         <p>${user.getName()}</p>
                                     </c:forEach>
                                 </div>
+                                <form method="POST" action="${pageContext.request.contextPath}/project-manager/project-detail/add-user">
+                                    <input type="hidden" value="${param.id}" name="projectId" id="projectId">
+                                    <select name="userId" id="userId">
+                                        <c:forEach var="user" items="${requestScope['available-users']}">
+                                            <option value="${user.getId()}">${user.getName()}</option>
+                                        </c:forEach>
+                                    </select>
+                                    <input type="submit" value="Add new member" class="btn btn-primary">
+                                </form>
                             </div>
                         </div>
                         <div>

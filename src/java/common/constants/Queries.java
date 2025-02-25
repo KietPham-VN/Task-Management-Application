@@ -73,4 +73,10 @@ public class Queries {
                         "WHERE t.projectId = ?";
     
     public static final String ADD_USER_TO_PROJECT = "INSERT INTO ProjectMembers (projectId, userId) VALUES (?, ?)";
+    
+    public static final String GET_USER_NOT_IN_PROJECT = "SELECT u.* FROM Users u " +
+                       "WHERE u.id NOT IN (SELECT pm.userId FROM ProjectMembers pm WHERE pm.projectId = ?)";
+
+    public static final String GET_USER_IN_PROJECT = "SELECT u.* FROM Users u "
+                        + "WHERE u.id IN (SELECT pm.userId FROM ProjectMembers pm WHERE pm.projectId = ?)";
 }

@@ -9,6 +9,7 @@ import common.constants.Pages;
 import dao.implementations.ProjectDAO;
 import entities.Project;
 import entities.Tasks;
+import entities.User;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
@@ -58,8 +59,6 @@ public class ProjectManagerTaskDetail extends HttpServlet {
         
         TaskServices taskService = new TaskServices();
         ProjectDAO projectDAO = new ProjectDAO();
-        ArrayList<Tasks> tasks = new ArrayList<>();
-        Project project;
         try{
             projectId = Integer.parseInt(projectIdString);
         }
@@ -68,11 +67,15 @@ public class ProjectManagerTaskDetail extends HttpServlet {
         }
         
         if(projectId!=null) {
-            project = projectDAO.getProjectById(projectId);
-            tasks = taskService.getTasksByProjectIdWithMembers(projectId, searchName, sortBy);
+            Project project = projectDAO.getProjectById(projectId);
+            ArrayList<Tasks> tasks = taskService.getTasksByProjectIdWithMembers(projectId, searchName, sortBy);
+            ArrayList<User> availableUsers = projectDAO.getUserNotInProject(projectId);
+            ArrayList<User> teamMembers = projectDAO.getUserInProject(projectId);
+            
             request.setAttribute("task-list", tasks);
             request.setAttribute("project", project);
-            request.setAttribute("member-list", taskService.getUserFromTasks(tasks));
+            request.setAttribute("member-list", teamMembers);
+            request.setAttribute("available-users",availableUsers);
         }
         request.getRequestDispatcher(Pages.PROJECT_MANAGER_TASK_DETAILS).forward(request,response);
     }
