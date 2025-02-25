@@ -10,4 +10,6 @@ public interface ITaskServices
     ArrayList<Tasks> getTasksByProjectIdWithMembers(int projectId, String name, String sortBy);
     ArrayList<User> getUserFromTasks(ArrayList<Tasks> tasks);
     boolean deleteTask(int taskId);
+    boolean updateTaskStatus(Tasks task);
+    int getProjectIdByTaskId(int taskId);
 }
