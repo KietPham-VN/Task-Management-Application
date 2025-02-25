@@ -1,8 +1,7 @@
 package controllers.project_manager;
 
 import common.constants.Pages;
-import entities.Project;
-import entities.User;
+import common.enums.AccountRoles;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -62,13 +61,18 @@ public class CreateProjectController extends HttpServlet {
                 return;
             }
             
+            if (session.getAttribute("role") == null || !session.getAttribute("role").equals("Project Manager"))  {
+                response.sendRedirect(Pages.LOGIN);
+                return;
+            }
+
             // Get the user from session
             int userId = (int) session.getAttribute("userId");
-            
+
             // Get project details from request
             String projectName = request.getParameter("name");
             String description = request.getParameter("desc");
-            
+
             // Validate inputs
             if (projectName == null || projectName.trim().isEmpty() || description == null || description.trim().isEmpty()) {
                 request.setAttribute("error", "Project name and description are required.");
@@ -81,14 +85,14 @@ public class CreateProjectController extends HttpServlet {
             boolean success = projectService.createProject(projectName, description, userId);
 
             if (success) {
-                response.sendRedirect(Pages.PROJECT_MANAGER_DASH_BOARD);
+                response.sendRedirect(request.getContextPath()+"/project-manager/project-detail");
             } else {
                 request.setAttribute("error", "Failed to create project.");
-                request.getRequestDispatcher(Pages.CREATE_PROJECT).forward(request, response);
+                response.sendRedirect(request.getHeader("Referer"));
             }
         } catch (Exception e) {
             request.setAttribute("error", "An error occurred: " + e.getMessage());
-            request.getRequestDispatcher(Pages.CREATE_PROJECT).forward(request, response);
+            response.sendRedirect(request.getHeader("Referer"));
         }
     }
 

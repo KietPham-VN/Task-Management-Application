@@ -12,6 +12,7 @@ public class User
     private String _salt;
     private String _role;
     private Date _timeStamp;
+    private int teamMemberId;
 
     public int getId()
     {
@@ -101,6 +102,14 @@ public class User
     public void setTimeStamp(Date _timeStamp)
     {
         this._timeStamp = _timeStamp;
+    }
+
+    public void setTeamMemberId(int teamMemberId) {
+        this.teamMemberId = teamMemberId;
+    }
+
+    public int getTeamMemberId() {
+        return teamMemberId;
     }
 
 }

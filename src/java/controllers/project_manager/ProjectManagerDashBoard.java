@@ -6,7 +6,6 @@
 package controllers.project_manager;
 
 import common.constants.Pages;
-import dao.implementations.ProjectDAO;
 import entities.AuthenticatedUser;
 import entities.Project;
 import java.io.IOException;
@@ -17,6 +16,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import services.implementations.ProjectServices;
 
 /**
  *
@@ -55,8 +55,8 @@ public class ProjectManagerDashBoard extends HttpServlet {
         AuthenticatedUser user = (AuthenticatedUser) session.getAttribute("authenticated-user");
         
         try{
-            ProjectDAO projectDAO = new ProjectDAO();
-            ArrayList<Project> projectList = projectDAO.getProjectsByUser(user.getId());
+            ProjectServices projectService = new ProjectServices();
+            ArrayList<Project> projectList = projectService.getProjectsByUser(user.getId());
             
             request.setAttribute("project-list", projectList);
             request.getRequestDispatcher(Pages.PROJECT_MANAGER_DASH_BOARD).forward(request,response);

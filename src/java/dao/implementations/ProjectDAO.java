@@ -16,8 +16,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class ProjectDAO implements IProjectDAO
-{
+public class ProjectDAO implements IProjectDAO {
 
     Connection conn = null;
     PreparedStatement ps = null;
@@ -36,8 +35,7 @@ public class ProjectDAO implements IProjectDAO
             ps.setString(2, projectDto.getDescription());
             ps.setInt(3, projectDto.getCreatedBy());
             int exe = ps.executeUpdate();
-            if (exe > 0)
-            {
+            if (exe > 0) {
                 sucess = true;
             }
         } catch (ClassNotFoundException | SQLException e)
@@ -48,12 +46,7 @@ public class ProjectDAO implements IProjectDAO
         return sucess;
     }
 
-    @Override
-    public boolean update(ProjectDTO projectDto)
-    {
-        boolean success = false;
-        return success;
-    }
+
 
     public Project getProjectByName(String name) throws Exception
     {
@@ -77,8 +70,7 @@ public class ProjectDAO implements IProjectDAO
         ArrayList<Project> projects = new ArrayList<>();
 
         try (Connection connection = DBUtils.getConnection();
-                PreparedStatement preparedStatement = connection.prepareStatement(Queries.GET_PROJECTS_BY_USER))
-        {
+                PreparedStatement preparedStatement = connection.prepareStatement(Queries.GET_PROJECTS_BY_USER)) {
             preparedStatement.setInt(1, userId);
 
             try (ResultSet resultSet = preparedStatement.executeQuery())
@@ -93,11 +85,9 @@ public class ProjectDAO implements IProjectDAO
                     projects.add(new Project(projectId, name, description, createdBy, createdAt));
                 }
             }
-        } catch (SQLException ex)
-        {
+        } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, "SQL Error", ex);
-        } catch (ClassNotFoundException ex)
-        {
+        } catch (ClassNotFoundException ex) {
             Logger.getLogger(ProjectDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return projects;
@@ -197,6 +187,7 @@ public class ProjectDAO implements IProjectDAO
                 user.setId(rs.getInt("id"));
                 user.setName(rs.getString("name"));
                 user.setEmail(rs.getString("email"));
+                user.setTeamMemberId(rs.getInt("teamMemberId"));
                 users.add(user);
             }
 

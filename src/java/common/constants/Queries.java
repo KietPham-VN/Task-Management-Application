@@ -10,12 +10,16 @@ public class Queries {
     public static final String CREATE_PROJECT
             = "INSERT INTO dbo.Projects (name, description, createdBy) "
             + "VALUES (?, ?, ?) ";
-    public static final String UPDATE_PROJECT
-            = "UPDATE dbo.Projects"
-            + "SET name = ?, description = ?"
-            + "WHERE name = ?";
     public static final String CREATE_TASK
             = "INSERT INTO dbo.Tasks (projectId, name, description, assignedTo, status, priority, dueDate) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    
+    public static final String UPDATE_TASK
+            = "UPDATE dbo.Tasks "
+            + " SET projectId = ?, name = ?, description = ?, assignedTo = ?, status = ?, priority = ?, dueDate = ?"
+            + " WHERE id = ?";
+    
+    public static final String GET_TASK_BY_ID
+            = "SELECT * FROM dbo.Tasks WHERE id = ?";
 
     public static final String GET_USER_BY_NAME
             = "SELECT [id], [name], [email], [role] "
@@ -77,11 +81,14 @@ public class Queries {
     public static final String GET_USER_NOT_IN_PROJECT = "SELECT u.* FROM Users u " +
                        "WHERE u.id NOT IN (SELECT pm.userId FROM ProjectMembers pm WHERE pm.projectId = ?)";
 
-    public static final String GET_USER_IN_PROJECT = "SELECT u.* FROM Users u "
-                        + "WHERE u.id IN (SELECT pm.userId FROM ProjectMembers pm WHERE pm.projectId = ?)";
+    public static final String GET_USER_IN_PROJECT = "SELECT u.*, pm.id AS teamMemberId" +
+            " FROM Users u" +
+            " JOIN ProjectMembers pm ON u.id = pm.userId" +
+            " WHERE pm.projectId = ?";
     
     public static final String GET_PROJECT_ID_BY_TASK_ID 
             = "SELECT projectId "
             + "FROM Tasks "
             + "WHERE id = ?";
+    
 }

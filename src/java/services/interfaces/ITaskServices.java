@@ -1,5 +1,6 @@
 package services.interfaces;
 
+import dto.TaskDTO;
 import entities.Tasks;
 import entities.User;
 import java.util.ArrayList;
@@ -12,4 +13,5 @@ public interface ITaskServices
     boolean deleteTask(int taskId);
     boolean updateTaskStatus(Tasks task);
     int getProjectIdByTaskId(int taskId);
+    TaskDTO getTaskById(int taskId);
 }

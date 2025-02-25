@@ -1,7 +1,5 @@
 package common.utils;
-
 import io.github.cdimascio.dotenv.Dotenv;
-
 import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -15,7 +13,7 @@ public class DBUtils
 
     private static final Dotenv DOT_ENV
             = Dotenv.configure()
-                    .directory(Paths.get("D:\\LearningMaterial\\FPTU\\Task-Management-Application").toAbsolutePath().toString())
+                    .directory(Paths.get("C:\\Users\\NGHIA\\Project\\Java stuffs\\Task-Management-Application").toAbsolutePath().toString())
                     .filename(".env")
                     .load();
 

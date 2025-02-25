@@ -2,6 +2,7 @@ package dto;
 
 
 public class ProjectDTO {
+    private int id;
 
     private String name;
     private String description;
@@ -20,6 +21,12 @@ public class ProjectDTO {
         this.description = description;
         this.createdBy = createdBy;
     }
+
+    public int getId() {
+        return id;
+    }
+    
+    
 
     public String getName() {
         return name;

@@ -1,6 +1,7 @@
 package services.interfaces;
 
 import entities.Project;
+import entities.User;
 import java.util.ArrayList;
 
 public interface IProjectServices
@@ -11,4 +12,6 @@ public interface IProjectServices
     ArrayList<Project> getProjectsByUser(int userId);
     
     Project getProjectById(int projectId);
+    ArrayList<User> getUserInProject(int projectId);
+    ArrayList<User> getUserNotInProject(int projectId);
 }

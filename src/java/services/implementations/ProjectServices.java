@@ -4,10 +4,14 @@ import dao.implementations.ProjectDAO;
 import dao.interfaces.IProjectDAO;
 import dto.ProjectDTO;
 import entities.Project;
+import entities.User;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import services.interfaces.IProjectServices;
 
 public class ProjectServices implements IProjectServices {
+    private final ProjectDAO projectDao = new ProjectDAO();
 
     @Override
     public boolean createProject(String name, String description, int userId) {
@@ -29,5 +33,17 @@ public class ProjectServices implements IProjectServices {
     public Project getProjectById(int projectId){
         IProjectDAO projectDAO = new ProjectDAO();
         return projectDAO.getProjectById(projectId);
+    }
+
+    @Override
+    public ArrayList<User> getUserInProject(int projectId) {
+        IProjectDAO projectDAO = new ProjectDAO();
+        return projectDAO.getUserInProject(projectId);
+    }
+
+    @Override
+    public ArrayList<User> getUserNotInProject(int projectId) {
+        IProjectDAO projectDAO = new ProjectDAO();
+        return projectDAO.getUserNotInProject(projectId);    
     }
 }

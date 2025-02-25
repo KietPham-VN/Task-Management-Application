@@ -6,10 +6,12 @@
 package controllers.project_manager;
 
 import common.constants.Pages;
+import dao.implementations.TaskDAO;
+import dto.TaskDTO;
 import entities.Project;
-import entities.Tasks;
 import entities.User;
 import java.io.IOException;
+import java.sql.Date;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,10 +23,10 @@ import services.implementations.TaskServices;
 
 /**
  *
- * @author NGHIA
+ * @author Hoang Tran
  */
-@WebServlet(name = "ProjectManagerTaskDetail", urlPatterns = {"/project-manager/project-detail"})
-public class ProjectManagerTaskDetail extends HttpServlet {
+@WebServlet(name = "EditTask", urlPatterns = {"/project-manager/project-detail/editTask"})
+public class EditTask extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,11 +37,6 @@ public class ProjectManagerTaskDetail extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-    }
-
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -52,32 +49,29 @@ public class ProjectManagerTaskDetail extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String projectIdString =  request.getParameter("id");
-        Integer projectId = null;
-        String searchName =  (request.getParameter("searchName")!=null)?request.getParameter("searchName"):"";
-        String sortBy =  (request.getParameter("sortBy")!=null)?request.getParameter("sortBy"):"";
+        String taskIdString = request.getParameter("taskId");
+        String projectIdString = request.getParameter("projectId");
         
-        TaskServices taskService = new TaskServices();
-        ProjectServices projectService = new ProjectServices();
         try{
-            projectId = Integer.parseInt(projectIdString);
+            Integer taskId = Integer.parseInt(taskIdString);
+            Integer projectId = Integer.parseInt(projectIdString);
+            
+            TaskServices taskService = new TaskServices();
+            ProjectServices projectService = new ProjectServices();
+            
+            ArrayList<User> teamMembers = projectService.getUserInProject(projectId);
+            Project project = projectService.getProjectById(projectId);
+            TaskDTO task = taskService.getTaskById(taskId);
+            
+            request.setAttribute("task", task);
+            request.setAttribute("project",project);
+            request.setAttribute("teamMembers",teamMembers);
         }
-        catch(NumberFormatException e){
-            System.out.println(e);
+        catch(NumberFormatException ex){
+            System.out.println(ex);
         }
         
-        if(projectId!=null) {
-            Project project = projectService.getProjectById(projectId);
-            ArrayList<Tasks> tasks = taskService.getTasksByProjectIdWithMembers(projectId, searchName, sortBy);
-            ArrayList<User> availableUsers = projectService.getUserNotInProject(projectId);
-            ArrayList<User> teamMembers = projectService.getUserInProject(projectId);
-            
-            request.setAttribute("task-list", tasks);
-            request.setAttribute("project", project);
-            request.setAttribute("member-list", teamMembers);
-            request.setAttribute("available-users",availableUsers);
-        }
-        request.getRequestDispatcher(Pages.PROJECT_MANAGER_TASK_DETAILS).forward(request,response);
+        request.getRequestDispatcher(Pages.UPDATE_TASK).forward(request, response);
     }
 
     /**
@@ -91,7 +85,26 @@ public class ProjectManagerTaskDetail extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        int projectId = Integer.parseInt(request.getParameter("projectId"));
+        int taskId = Integer.parseInt(request.getParameter("taskId"));
+        String name = request.getParameter("taskName");
+        String desc = request.getParameter("description");
+        int assignedTo = Integer.parseInt(request.getParameter("assignedTo"));
+        String status = request.getParameter("status");
+        String priority = request.getParameter("priority");
+        Date dueDate = Date.valueOf(request.getParameter("dueDate"));
+        
+        TaskDTO task = new TaskDTO(taskId, projectId, name, desc, assignedTo, status, priority, dueDate);
+        
+        TaskDAO taskDAO = new TaskDAO();
+        boolean success = taskDAO.update(task);
+
+        if (success) {
+            response.sendRedirect(request.getContextPath()+"/project-manager/project-detail?id="+projectId); // Redirect to task list after update
+        } else {
+            request.setAttribute("errorMessage", "Failed to update task.");
+            response.sendRedirect(request.getHeader("Referer"));
+        }
     }
 
     /**
