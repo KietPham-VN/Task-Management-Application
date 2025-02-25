@@ -54,7 +54,7 @@
                     <input class="form-control" type="date" name="dueDate" required/><br>
 
                     <div class="d-flex justify-content-between">
-                        <button type="submit" class="btn btn-primary">Update Task</button>
+                        <button type="submit" class="btn btn-primary">Create Task</button>
                         <a href="${pageContext.request.contextPath}/project-manager/project-detail?id=${param.projectId}" class="btn btn-secondary">Cancel</a>
                     </div>
                 </form>

@@ -2,6 +2,7 @@ package controllers.project_manager;
 
 import common.constants.Pages;
 import common.enums.AccountRoles;
+import entities.AuthenticatedUser;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -55,9 +56,10 @@ public class CreateProjectController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             HttpSession session = request.getSession(false);
+            AuthenticatedUser user = (AuthenticatedUser)session.getAttribute("authenticated-user");
 
             // Get the user from session
-            int userId = (int) session.getAttribute("userId");
+            int userId = user.getId();
 
             // Get project details from request
             String projectName = request.getParameter("name");
