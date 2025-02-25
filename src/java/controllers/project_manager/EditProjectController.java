@@ -39,9 +39,9 @@ public class EditProjectController extends HttpServlet {
 
         try {
             int projectId = Integer.parseInt(request.getParameter("id"));
-            Project project = projectServices.getProjectById(projectId);
+            //Project project = projectServices.getProjectById(projectId);
 
-            if (project == null) {
+          //  if (project == null) {
                 request.setAttribute("error", "Project not found.");
           //      request.getRequestDispatcher(Pages.PROJECT_LIST).forward(request, response);
                 return;

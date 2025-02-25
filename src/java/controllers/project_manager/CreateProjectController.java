@@ -85,7 +85,7 @@ public class CreateProjectController extends HttpServlet {
             boolean success = projectService.createProject(projectName, description, userId);
 
             if (success) {
-                response.sendRedirect(Pages.HOME);
+                response.sendRedirect(Pages.PROJECT_MANAGER_DASH_BOARD);
             } else {
                 request.setAttribute("error", "Failed to create project.");
                 request.getRequestDispatcher(Pages.CREATE_PROJECT).forward(request, response);

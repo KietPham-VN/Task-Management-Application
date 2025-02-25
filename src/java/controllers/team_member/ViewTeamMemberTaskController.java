@@ -1,19 +1,18 @@
-package controllers.auth;
+package controllers.team_member;
 
-import common.constants.Pages;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-@WebServlet(name = "LogoutController", urlPatterns =
+@WebServlet(name = "ViewTeamMemberTaskController", urlPatterns =
 {
-    "/LogoutController"
+    "/ViewTeamMemberTaskController"
 })
-public class LogoutController extends HttpServlet
+public class ViewTeamMemberTaskController extends HttpServlet
 {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
@@ -25,24 +24,19 @@ public class LogoutController extends HttpServlet
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        processRequest(request,response);
+        processRequest(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        HttpSession session = request.getSession(false);
-        if (session != null)
-        {
-            session.invalidate();
-        }
-
-        response.sendRedirect("MainController");
+        processRequest(request, response);
     }
 
     @Override
     public String getServletInfo()
     {
-        return "LogoutController";
+        return "ViewTeamMemberTaskController";
     }
+
 }

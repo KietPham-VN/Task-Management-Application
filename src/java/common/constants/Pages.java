@@ -10,4 +10,6 @@ public class Pages
     public static String CREATE_TASK = "views/createTask.jsp";
     public static final String VIEWS_MEMBER_PROJECTS = "views/team_member/view-team-member-projects.jsp";
     public static String PROJECT_DETAILS;
+    public static final String PROJECT_MANAGER_DASH_BOARD="views/projectManager/dashBoard.jsp";
+    public static final String PROJECT_MANAGER_TASK_DETAILS = "/views/projectManager/projectDetail.jsp";
 }

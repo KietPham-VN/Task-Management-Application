@@ -2,6 +2,18 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/D:/F_CODE/CrewBE/BE3/Task-Management-Application/src/java/dao/implementations/UserDAO.java</file>
+            <file>file:/D:/F_CODE/CrewBE/BE3/Task-Management-Application/src/java/services/implementations/TaskServices.java</file>
+            <file>file:/D:/F_CODE/CrewBE/BE3/Task-Management-Application/src/java/controllers/project_manager/EditProjectController.java</file>
+            <file>file:/D:/F_CODE/CrewBE/BE3/Task-Management-Application/src/java/common/utils/DBUtils.java</file>
+            <file>file:/D:/F_CODE/CrewBE/BE3/Task-Management-Application/src/java/dao/implementations/ProjectDAO.java</file>
+            <file>file:/D:/F_CODE/CrewBE/BE3/Task-Management-Application/src/java/controllers/project_manager/ProjectManagerTaskDetail.java</file>
+            <file>file:/D:/F_CODE/CrewBE/BE3/Task-Management-Application/src/java/controllers/auth/LoginController.java</file>
+            <file>file:/D:/F_CODE/CrewBE/BE3/Task-Management-Application/src/java/controllers/project_manager/ProjectManagerDashBoard.java</file>
+            <file>file:/D:/F_CODE/CrewBE/BE3/Task-Management-Application/src/java/services/implementations/ProjectServices.java</file>
+            <file>file:/D:/F_CODE/CrewBE/BE3/Task-Management-Application/src/java/controllers/project_manager/CreateProjectController.java</file>
+            <file>file:/D:/F_CODE/CrewBE/BE3/Task-Management-Application/src/java/entities/AuthenticatedUser.java</file>
+        </group>
     </open-files>
 </project-private>

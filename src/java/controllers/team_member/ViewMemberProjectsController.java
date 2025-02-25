@@ -1,6 +1,7 @@
 package controllers.team_member;
 
 import common.constants.Pages;
+import entities.AuthenticatedUser;
 import entities.Project;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ import services.interfaces.IProjectServices;
 
 @WebServlet(name = "ViewMemberProjectsController", urlPatterns =
 {
-    "/ViewMemberProjectsController"
+    "/team-member"
 })
 public class ViewMemberProjectsController extends HttpServlet
 {
@@ -31,12 +32,12 @@ public class ViewMemberProjectsController extends HttpServlet
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         HttpSession session = request.getSession(false);
-        if (session != null && session.getAttribute("userId") != null)
+        if (session != null && session.getAttribute("authenticated-user") != null)
         {
-            int userId = (int) session.getAttribute("userId");
+            AuthenticatedUser authedUser = (AuthenticatedUser) session.getAttribute("authenticated-user");
             IProjectServices projectServices = new ProjectServices();
-            ArrayList<Project> projects = projectServices.getProjectsByUser(userId);
-            session.setAttribute("team-member-projects", projects);
+            ArrayList<Project> projects = projectServices.getProjectsByUser(authedUser.getId());
+            request.setAttribute("project-list", projects);
             request.getRequestDispatcher(Pages.VIEWS_MEMBER_PROJECTS).forward(request, response);
         }
     }

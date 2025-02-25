@@ -24,13 +24,22 @@ public class Queries {
 
     // login
     public static final String LOGIN
-            = "SELECT [id], [passwordHash], [salt], [role] "
+            = "SELECT [id], [name], [email], [passwordHash], [salt], [role] "
             + "FROM [Users] "
             + "WHERE email = ?";
 
-    // geting all infor after logging in
+    // getting all information after logging in
     public static final String GET_USER_INFO
-            = "SELECT [id], [name], [role], [createdAt] "
+            = "SELECT id, name, role, createdAt "
+            + "FROM User "
+            + "WHERE email = ? AND passwordHash = ?";
+    
+    
+    public static final String GET_PROJECT_LIST = "SELECT id, name, description, createdBy, createdAt"
+            + "FROM Projects"
+            + "WHERE createdBy = ?";
+    
+    public static final String GET_TASK_LIST  = "SELECT [id], [name], [role], [createdAt] "
             + "FROM [User] "
             + "WHERE [email] = ? AND [passwordHash] = ?";
 
@@ -43,7 +52,31 @@ public class Queries {
     public static final String REGISTER
             = "INSERT INTO Users(name,email,passwordHash,role,salt) "
             + "VALUES(?,?,?,?,?)";
-
+    
+    public static final String GET_TASKS_BY_PROJECT
+            ="SELECT * FROM Tasks "
+            + "WHERE projectId = ?";
+    
     public static final String GET_PROJECT_BY_ID
-            = "SELECT id, name, description FROM projects WHERE id = ?";
+            ="SELECT * "
+            + "FROM [Projects] "
+            + "WHERE id = ?";
+    
+    public static final String DELETE_TASK_BY_ID
+            ="DELETE FROM Tasks WHERE id = ?";
+    
+    public static final String GET_TASK_WITH_ASSIGN_USER
+            ="SELECT t.*, u.id AS userId, u.name AS userName, u.email AS userEmail " +
+                       "FROM Tasks t " +
+                       "LEFT JOIN ProjectMembers pm ON t.assignedTo = pm.id " +
+                       "LEFT JOIN Users u ON pm.userId = u.id "+ 
+                        "WHERE t.projectId = ?";
+    
+    public static final String ADD_USER_TO_PROJECT = "INSERT INTO ProjectMembers (projectId, userId) VALUES (?, ?)";
+    
+    public static final String GET_USER_NOT_IN_PROJECT = "SELECT u.* FROM Users u " +
+                       "WHERE u.id NOT IN (SELECT pm.userId FROM ProjectMembers pm WHERE pm.projectId = ?)";
+
+    public static final String GET_USER_IN_PROJECT = "SELECT u.* FROM Users u "
+                        + "WHERE u.id IN (SELECT pm.userId FROM ProjectMembers pm WHERE pm.projectId = ?)";
 }

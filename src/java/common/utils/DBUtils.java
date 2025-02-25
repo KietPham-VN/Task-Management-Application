@@ -1,7 +1,5 @@
 package common.utils;
-
 import io.github.cdimascio.dotenv.Dotenv;
-
 import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -13,17 +11,11 @@ public class DBUtils
     {
     }
 
-    /**
-     * Logger cho lớp DBUtils.
-     */
-   // private static final Logger LOGGER = Logger.getLogger(DBUtils.class.getName());
-
-    /**
-     * Đối tượng Dotenv để tải các biến môi trường từ file .env.
-     */
-    private static final Dotenv DOT_ENV = Dotenv.configure()
-            .directory(Paths.get("D:/F_CODE/CrewBE/BE3/Task-Management-Application").toAbsolutePath().toString())
-            .load();
+    private static final Dotenv DOT_ENV
+            = Dotenv.configure()
+                    .directory(Paths.get("D:\\F_CODE\\CrewBE\\BE3\\Task-Management-Application").toAbsolutePath().toString())
+                    .filename(".env")
+                    .load();
 
     public static Connection getConnection() throws ClassNotFoundException, SQLException
     {

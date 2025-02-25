@@ -2,7 +2,7 @@ package entities;
 
 import common.enums.TaskPriority;
 import common.enums.TaskStatus;
-import java.sql.Date;
+import java.sql.Timestamp;
 
 public class Tasks
 {
@@ -13,8 +13,21 @@ public class Tasks
     private int _assidnedTo;
     private TaskStatus _status;
     private TaskPriority _priority;
-    private Date _dueDate;
-    private Date _createdAt;
+    private Timestamp _dueDate;
+    private Timestamp _createdAt;
+    private User _assignedToUser;
+
+    public Tasks(int _id, int _projectId, String name, String description, int _assidnedTo, int _status, int _priority, Timestamp _dueDate, Timestamp _createdAt) {
+        this._id = _id;
+        this._projectId = _projectId;
+        this.name = name;
+        this.description = description;
+        this._assidnedTo = _assidnedTo;
+        this._status = TaskStatus.fromValue(_status);
+        this._priority = TaskPriority.fromValue(_priority);
+        this._dueDate = _dueDate;
+        this._createdAt = _createdAt;
+    }
 
     public Tasks() {
     }
@@ -47,11 +60,11 @@ public class Tasks
         return _priority;
     }
 
-    public Date getDueDate() {
+    public Timestamp getDueDate() {
         return _dueDate;
     }
 
-    public Date getCreatedAt() {
+    public Timestamp getCreatedAt() {
         return _createdAt;
     }
 
@@ -83,12 +96,20 @@ public class Tasks
         this._priority = _priority;
     }
 
-    public void setDueDate(Date _dueDate) {
+    public void setDueDate(Timestamp _dueDate) {
         this._dueDate = _dueDate;
     }
 
-    public void setCreatedAt(Date _createdAt) {
+    public void setCreatedAt(Timestamp _createdAt) {
         this._createdAt = _createdAt;
+    }
+
+    public void setAssignedToUser(User _assignedToUser) {
+        this._assignedToUser = _assignedToUser;
+    }
+
+    public User getAssignedToUser() {
+        return _assignedToUser;
     }
     
     

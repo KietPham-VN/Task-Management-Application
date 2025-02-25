@@ -56,18 +56,22 @@ public class UserDAO implements IUserDAO
         {
 
             preparedStatement.setString(1, username);
-            ResultSet resultSet = preparedStatement.executeQuery();
+            rs = preparedStatement.executeQuery();
 
-            if (resultSet != null && resultSet.next())
+            if (rs != null && rs.next())
             {
                 user = new User();
-                int id = resultSet.getInt(1);
-                String hashedPassword = resultSet.getString(2);
-                String storedSalt = resultSet.getString(3);
-                String role = resultSet.getString(4);
+                int id = rs.getInt(1);
+                String name = rs.getString(2);
+                String email = rs.getString(3);
+                String hashedPassword = rs.getString(4);
+                String storedSalt = rs.getString(5);
+                String role = rs.getString(6);
+
 
                 user.setId(id);
-                user.setEmail(username);
+                user.setName(name);
+                user.setEmail(email);
                 user.setPasswordHash(hashedPassword);
                 user.setSalt(storedSalt);
                 user.setRole(role);

@@ -28,23 +28,20 @@ public class ProjectServices implements IProjectServices {
         return projectDAO.getProjectsByUser(userId);
     }
 
-    public boolean updateProject(int projectId, String name, String description) {
-        try {
-            Project project = projectDao.getProjectById(projectId);
-            if (project == null) {
-                return false; // Project not found
-            }
-            
-            project.setName(name);
-            project.setDescription(description);
-            
-            return projectDao.update(project);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ProjectServices.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+//    public boolean updateProject(int projectId, String name, String description) {
+//        try {
+//            Project project = projectDao.getProjectById(projectId);
+//            if (project == null) {
+//                return false; // Project not found
+//            }
+//            
+//            project.setName(name);
+//            project.setDescription(description);
+//            
+//            return projectDao.update(project);
+//        } catch (ClassNotFoundException ex) {
+//            Logger.getLogger(ProjectServices.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//    }
     
-     public ProjectDTO getProjectById(int projectId) {
-        return projectDao.getProjectById(projectId);
-    }
 }

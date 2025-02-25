@@ -6,6 +6,8 @@
 package controllers.auth;
 
 import common.constants.Pages;
+import common.enums.AccountRoles;
+import entities.AuthenticatedUser;
 import entities.User;
 import exceptions.InvalidDataException;
 import exceptions.ValidationException;
@@ -24,12 +26,13 @@ import services.interfaces.IUserServices;
  *
  * @author NGHIA
  */
-@WebServlet(name = "RegisterController", urlPatterns = {"/register"})
+@WebServlet(name = "RegisterController", urlPatterns = {"/RegisterController"})
 public class RegisterController extends HttpServlet {
 
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -44,7 +47,7 @@ public class RegisterController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        response.setContentType("text/html");
         request.getRequestDispatcher(Pages.REGISTER).forward(request, response);
     }
 
@@ -80,9 +83,18 @@ public class RegisterController extends HttpServlet {
                 throw new InvalidDataException("Cannot save product to database!");
             } else {
                 HttpSession session = request.getSession();
-                session.setAttribute("user", newRegisteredUser);
+                session.setAttribute("authenticated-user", new AuthenticatedUser(newRegisteredUser));
                 session.setMaxInactiveInterval(1800);
-                response.sendRedirect(Pages.HOME);
+                
+                //Redirect to dashboard when a user is created
+                if(newRegisteredUser.getRole().equals(AccountRoles.PROJECT_MANAGER.getRoleName()))
+                {
+                    response.sendRedirect("MainController?action=viewManagerProjects");
+                }
+                if (newRegisteredUser.getRole().equals(AccountRoles.TEAM_MEMBER.getRoleName()))
+                {
+                    response.sendRedirect("MainController?action=viewTeamMemberProjects");
+                }
             }
         }
         catch (ValidationException ex) {
@@ -92,7 +104,7 @@ public class RegisterController extends HttpServlet {
         }
         catch(InvalidDataException ex){
             request.setAttribute("formData", formData);
-            request.setAttribute("invalid-data-exception",ex);
+            request.setAttribute("invalid-data-exception",ex.getMessage());
             request.getRequestDispatcher(Pages.REGISTER).forward(request, response);
         }
     }

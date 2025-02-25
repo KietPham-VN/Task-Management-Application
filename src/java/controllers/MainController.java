@@ -18,15 +18,11 @@ public class MainController extends HttpServlet
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        response.setContentType("text/html;charset=UTF-8");
-        String action = request.getParameter("action");
-        String url = Pages.LOGIN;
-        HttpSession session = request.getSession(false);
-        if ((session == null || session.getAttribute("userId") == null) && !"login".equals(action))
-        {
-            request.getRequestDispatcher(Pages.LOGIN).forward(request, response);
-            return;
-        }
+        response.setContentType("text/html");
+        String action = (request.getParameter("action")!=null?request.getParameter("action"):"");
+        String url = "";
+        
+        
         switch (action)
         {
             case "login":
@@ -39,18 +35,31 @@ public class MainController extends HttpServlet
                 url = "LogoutController";
                 break;
             }
-            case "viewMemberProjects":
-            {
-                url = "ViewMemberProjectsController";
-                break;
-            }
             case "register":
             {
-                url = "RegisterController";
+                url="RegisterController";
                 break;
+            }
+            case "viewTeamMemberTask":
+            {
+                url = "team-member";
+                break;
+            }
+            case "viewTeamMemberProjects":
+            {
+                url = "team-member";
+                response.sendRedirect(url);
+                return;
+            }
+            case "viewManagerProjects":
+            {
+                url = "project-manager";
+                response.sendRedirect(url);
+                return;
             }
             default:
             {
+                url = Pages.LOGIN;
                 break;
             }
         }
