@@ -45,7 +45,7 @@
                                         <p>${user.getName()}</p>
                                     </c:forEach>
                                 </div>
-                                <form method="POST" action="${pageContext.request.contextPath}/project-manager/project-detail/add-user">
+                                <form class="my-2" method="POST" action="${pageContext.request.contextPath}/project-manager/project-detail/add-user">
                                     <input type="hidden" value="${param.id}" name="projectId" id="projectId">
                                     <select name="userId" id="userId">
                                         <c:forEach var="user" items="${requestScope['available-users']}">
@@ -54,6 +54,9 @@
                                     </select>
                                     <input type="submit" value="Add new member" class="btn btn-primary">
                                 </form>
+                                <a href="${pageContext.request.contextPath}/project-manager/project-detail/add-task?projectId=${param.id}">
+                                    <button class="btn btn-primary">Add task</button>
+                                </a>
                             </div>
                         </div>
                         <div>
@@ -62,7 +65,9 @@
                                     <div class="card-header d-flex justify-content-between">
                                         <b>${task.getName()}</b>
                                         <div>
-                                            <button class="btn btn-primary">Edit</button>
+                                            <a href="${pageContext.request.contextPath}/project-manager/project-detail/edit-task?projectId=${param.id}">
+                                                <button class="btn btn-primary">Edit</button>
+                                            </a>
                                             <form class="d-inline" method="POST" action="${pageContext.request.contextPath}/project-manager/project-detail/delete-task">
                                                 <input type="hidden" value="${task.getId()}" name="taskId" id="taskId">
                                                 <input type="submit" value="Delete" class="btn btn-danger">
