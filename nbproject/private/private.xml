@@ -3,14 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/F_CODE/CrewBE/BE3/Task-Management-Application/src/java/controllers/project_manager/ProjectManagerTaskDetail.java</file>
-            <file>file:/D:/F_CODE/CrewBE/BE3/Task-Management-Application/src/java/controllers/project_manager/ProjectManagerDashBoard.java</file>
-            <file>file:/D:/F_CODE/CrewBE/BE3/Task-Management-Application/src/java/controllers/team_member/ViewMemberProjectsController.java</file>
-            <file>file:/D:/F_CODE/CrewBE/BE3/Task-Management-Application/src/java/controllers/team_member/ViewTeamMemberTaskController.java</file>
+            <file>file:/D:/F_CODE/CrewBE/BE3/Task-Management-Application/web/views/login.jsp</file>
+            <file>file:/D:/F_CODE/CrewBE/BE3/Task-Management-Application/web/views/projectManager/dashBoard.jsp</file>
+            <file>file:/D:/F_CODE/CrewBE/BE3/Task-Management-Application/web/css/style.css</file>
             <file>file:/D:/F_CODE/CrewBE/BE3/Task-Management-Application/web/views/projectManager/projectDetail.jsp</file>
-            <file>file:/D:/F_CODE/CrewBE/BE3/Task-Management-Application/src/java/controllers/project_manager/CreateProjectController.java</file>
-            <file>file:/D:/F_CODE/CrewBE/BE3/Task-Management-Application/web/views/createTask.jsp</file>
-            <file>file:/D:/F_CODE/CrewBE/BE3/Task-Management-Application/src/java/controllers/project_manager/CreateTaskController.java</file>
         </group>
     </open-files>
 </project-private>

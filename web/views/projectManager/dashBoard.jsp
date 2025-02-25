@@ -17,16 +17,22 @@
         AuthenticatedUser user = (AuthenticatedUser) session.getAttribute("authenticated-user");
     %>
     <body>
-        <form method="POST" class="position-absolute top-0 start-0" action="LogoutController">
-            <input  type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-danger" value="Logout">
+        <form method="POST" class="position-absolute top-0 end-0 m-3" action="LogoutController">
+            <div class="d-flex align-items-center justify-content-center">
+                <h5 class="mb-0 mx-2">Hello, <%=user.getName()%></h5>
+                <input  type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-danger" value="Logout">
+            </div>
         </form>
-        
-        <div  class="container">
-            <h1>Hello, <%=user.getName()%></h1>
-            <h2>Danh sách Dự án</h2>
-             <c:choose>
+
+        <div class="container text-start mt-4">
+            <div class="text-center">
+
+                <h2>Project list</h2>
+            </div>
+            <button class="btn btn-gradient m-2" id="createprjbutton" onclick="location.href = 'CreateProject'">+ Create</button>
+            <c:choose>
                 <c:when test="${empty requestScope['project-list']}">
-                    <p class="no-projects">Không có dự án nào.</p>
+                    <p class="no-projects">Project not found</p>
                 </c:when>
                 <c:otherwise>
                     <jsp:include page="../components/projectList.jsp">
@@ -34,8 +40,6 @@
                     </jsp:include>
                 </c:otherwise>
             </c:choose>
-            <a href="CreateProject">Create new project</a>
         </div>
-
     </body>
 </html>
