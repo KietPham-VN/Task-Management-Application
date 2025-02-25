@@ -71,4 +71,6 @@ public class Queries {
                        "LEFT JOIN ProjectMembers pm ON t.assignedTo = pm.id " +
                        "LEFT JOIN Users u ON pm.userId = u.id "+ 
                         "WHERE t.projectId = ?";
+    
+    public static final String ADD_USER_TO_PROJECT = "INSERT INTO ProjectMembers (projectId, userId) VALUES (?, ?)";
 }

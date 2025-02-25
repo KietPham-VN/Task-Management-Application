@@ -11,4 +11,5 @@ public interface IProjectDAO
 
     ArrayList<Project> getProjectsByUser(int UserId);
     Project getProjectById(int projectId);
+    boolean addUserToProject(int projectId,int userId);
 }

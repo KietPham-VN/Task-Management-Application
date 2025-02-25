@@ -116,5 +116,24 @@ public class ProjectDAO implements IProjectDAO
         return project;
     }
     
+    @Override
+    public boolean addUserToProject(int projectId, int userId) {
+        boolean status = false;
+        
+        try {
+            conn = DBUtils.getConnection();
+            ps = conn.prepareStatement(Queries.ADD_USER_TO_PROJECT);
+            ps.setInt(1, projectId);
+            ps.setInt(2, userId);
+            status = ps.executeUpdate()>0;
+            conn.close();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(TaskDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(TaskDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return status;
+    }
     
 }
