@@ -16,8 +16,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class ProjectDAO implements IProjectDAO
-{
+public class ProjectDAO implements IProjectDAO {
 
     Connection conn = null;
     PreparedStatement ps = null;
@@ -34,8 +33,7 @@ public class ProjectDAO implements IProjectDAO
             ps.setString(2, projectDto.getDescription());
             ps.setInt(3, projectDto.getCreatedBy());
             int exe = ps.executeUpdate();
-            if (exe > 0)
-            {
+            if (exe > 0) {
                 sucess = true;
             }
         } catch (ClassNotFoundException | SQLException e)
@@ -46,11 +44,25 @@ public class ProjectDAO implements IProjectDAO
         return sucess;
     }
 
-    @Override
-    public boolean update(ProjectDTO projectDto) {
-        boolean success = false;
-        return success;
-    }
+//    @Override
+//    public boolean update(ProjectDTO project) {
+//        boolean success = false;
+//        String query = Queries.UPDATE_PROJECT;
+//        try {
+//            ps = conn.prepareStatement(query);
+//            ps.setString(1, project.getName());
+//            ps.setString(2, project.getDescription());
+//            ps.setInt(3, project.getId());
+//            int isOk = ps.executeUpdate();
+//            if (isOk > 0) {
+//                success = true;
+//            }
+//        } catch (SQLException ex) {
+//            Logger.getLogger(ProjectDAO.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//
+//        return success;
+//    }
     
     public Project getProjectByName(String name) throws Exception
     {
@@ -66,15 +78,14 @@ public class ProjectDAO implements IProjectDAO
         }
         return project;
     }
-    
 
+    @Override
     public ArrayList<Project> getProjectsByUser(int userId)
     {
         ArrayList<Project> projects = new ArrayList<>();
 
         try (Connection connection = DBUtils.getConnection();
-                PreparedStatement preparedStatement = connection.prepareStatement(Queries.GET_PROJECTS_BY_USER))
-        {
+                PreparedStatement preparedStatement = connection.prepareStatement(Queries.GET_PROJECTS_BY_USER)) {
             preparedStatement.setInt(1, userId);
 
             try (ResultSet resultSet = preparedStatement.executeQuery())
@@ -89,11 +100,9 @@ public class ProjectDAO implements IProjectDAO
                     projects.add(new Project(projectId, name, description, createdBy, createdAt));
                 }
             }
-        } catch (SQLException ex)
-        {
+        } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, "SQL Error", ex);
-        } catch (ClassNotFoundException ex)
-        {
+        } catch (ClassNotFoundException ex) {
             Logger.getLogger(ProjectDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return projects;

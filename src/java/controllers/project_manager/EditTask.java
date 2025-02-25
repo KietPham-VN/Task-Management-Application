@@ -15,15 +15,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Hoang Tran
  */
-@WebServlet(name = "CreateTaskController", urlPatterns = {"/project-manager/project-detail/createTask"})
-
-public class CreateTaskController extends HttpServlet {
+@WebServlet(name = "EditTask", urlPatterns = {"/project-manager/project-detail/editTask"})
+public class EditTask extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -46,7 +44,7 @@ public class CreateTaskController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher(Pages.CREATE_TASK).forward(request, response);
+        request.getRequestDispatcher(Pages.UPDATE_TASK).forward(request, response);
     }
 
     /**
@@ -60,34 +58,25 @@ public class CreateTaskController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        int projectId = Integer.parseInt(request.getParameter("projectId"));
+        int taskId = Integer.parseInt(request.getParameter("taskId"));
+        String name = request.getParameter("taskName");
+        String desc = request.getParameter("description");
+        int assignedTo = Integer.parseInt(request.getParameter("assignedTo"));
+        String status = request.getParameter("status");
+        String priority = request.getParameter("priority");
+        Date dueDate = Date.valueOf(request.getParameter("dueDate"));
+        
+        TaskDTO task = new TaskDTO(taskId, projectId, name, desc, assignedTo, status, priority, dueDate);
+        
         TaskDAO taskDAO = new TaskDAO();
-        try {
-            HttpSession session = request.getSession(false);
-            if (session ==  null) {
-                response.sendRedirect(Pages.LOGIN);
-                return;
-            }
+        boolean success = taskDAO.update(task);
 
-            int projectId =Integer.parseInt(request.getParameter("projectId"));
-            int assignedTo = (int) session.getAttribute("userId");
-            String name = request.getParameter("name");
-            String description = request.getParameter("desc");
-            String status = request.getParameter("status");
-            String priority = request.getParameter("priority");
-            Date dueDate = (Date.valueOf(request.getParameter("dueDate")));
-            
-            boolean success = taskDAO.add(new TaskDTO(projectId, name, 
-                    description, assignedTo, status, priority,dueDate));
-            if (success) {
-                response.sendRedirect(Pages.PROJECT_MANAGER_DASH_BOARD);
-            } else {
-                request.setAttribute("Error", "Failed");
-                request.getRequestDispatcher(Pages.CREATE_TASK).forward(request, response);
-            }
-            
-        } catch (Exception e) {
-            System.out.println("Cannot add task" + e);
-            request.getRequestDispatcher(Pages.CREATE_TASK).forward(request, response);
+        if (success) {
+            response.sendRedirect("index.jsp"); // Redirect to task list after update
+        } else {
+            request.setAttribute("errorMessage", "Failed to update task.");
+            request.getRequestDispatcher(Pages.UPDATE_TASK).forward(request, response);
         }
     }
 

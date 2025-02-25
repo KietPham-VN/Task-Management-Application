@@ -10,12 +10,16 @@ public class Queries {
     public static final String CREATE_PROJECT
             = "INSERT INTO dbo.Projects (name, description, createdBy) "
             + "VALUES (?, ?, ?) ";
-    public static final String UPDATE_PROJECT
-            = "UPDATE dbo.Projects"
-            + "SET name = ?, description = ?"
-            + "WHERE name = ?";
     public static final String CREATE_TASK
             = "INSERT INTO dbo.Tasks (projectId, name, description, assignedTo, status, priority, dueDate) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    
+    public static final String UPDATE_TASK
+            = "UPDATE dbo.Tasks "
+            + " SET projectId = ?, name = ?, description = ?, assignedTo = ?, status = ?, priority = ?, dueDate = ?"
+            + " WHERE id = ?";
+    
+    public static final String GET_TASK_BY_ID
+            = "SELECT * FROM dbo.Task WHERE id = ?";
 
     public static final String GET_USER_BY_NAME
             = "SELECT [id], [name], [email], [role] "

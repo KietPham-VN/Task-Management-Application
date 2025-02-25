@@ -13,6 +13,12 @@ public class Project {
     public Project() {
     }
 
+    public Project(int projectId, String name, String description) {
+        this.projectId = projectId;
+        this.name = name;
+        this.description = description;
+    }
+
     public Project(String name, String description, int createBy) {
         this.name = name;
         this.description = description;

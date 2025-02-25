@@ -54,7 +54,7 @@
                                     </select>
                                     <input type="submit" value="Add new member" class="btn btn-primary">
                                 </form>
-                                <a href="${pageContext.request.contextPath}/project-manager/project-detail/add-task?projectId=${param.id}">
+                                <a href="${pageContext.request.contextPath}/project-manager/project-detail/createTask?projectId=${param.id}">
                                     <button class="btn btn-primary">Add task</button>
                                 </a>
                             </div>
@@ -65,7 +65,7 @@
                                     <div class="card-header d-flex justify-content-between">
                                         <b>${task.getName()}</b>
                                         <div>
-                                            <a href="${pageContext.request.contextPath}/project-manager/project-detail/edit-task?projectId=${param.id}">
+                                            <a href="${pageContext.request.contextPath}/project-manager/project-detail/editTask?projectId=${param.id}&taskId=${task.getId()}">
                                                 <button class="btn btn-primary">Edit</button>
                                             </a>
                                             <form class="d-inline" method="POST" action="${pageContext.request.contextPath}/project-manager/project-detail/delete-task">

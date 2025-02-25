@@ -5,9 +5,12 @@ import dao.interfaces.IProjectDAO;
 import dto.ProjectDTO;
 import entities.Project;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import services.interfaces.IProjectServices;
 
 public class ProjectServices implements IProjectServices {
+    private final ProjectDAO projectDao = new ProjectDAO();
 
     @Override
     public boolean createProject(String name, String description, int userId) {
@@ -24,4 +27,21 @@ public class ProjectServices implements IProjectServices {
         IProjectDAO projectDAO = new ProjectDAO();
         return projectDAO.getProjectsByUser(userId);
     }
+
+//    public boolean updateProject(int projectId, String name, String description) {
+//        try {
+//            Project project = projectDao.getProjectById(projectId);
+//            if (project == null) {
+//                return false; // Project not found
+//            }
+//            
+//            project.setName(name);
+//            project.setDescription(description);
+//            
+//            return projectDao.update(project);
+//        } catch (ClassNotFoundException ex) {
+//            Logger.getLogger(ProjectServices.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//    }
+    
 }
