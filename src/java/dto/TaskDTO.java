@@ -1,9 +1,9 @@
 package dto;
 
 import java.sql.Date;
-import java.sql.Timestamp;
 
 public class TaskDTO {
+    private int id;
     private int projectId;
     private String name;
     private String description;
@@ -15,7 +15,17 @@ public class TaskDTO {
     public TaskDTO() {
     }
 
-    public TaskDTO(int projectId, String name, String description, int assignedTo, String status, String priority, Date dueDate) {
+    public TaskDTO(String name, String description, int assignedTo, String status, String priority, Date dueDate) {
+        this.name = name;
+        this.description = description;
+        this.assignedTo = assignedTo;
+        this.status = status;
+        this.priority = priority;
+        this.dueDate = dueDate;
+    }
+
+    public TaskDTO(int id, int projectId, String name, String description, int assignedTo, String status, String priority, Date dueDate) {
+        this.id = id;
         this.projectId = projectId;
         this.name = name;
         this.description = description;
@@ -25,6 +35,27 @@ public class TaskDTO {
         this.dueDate = dueDate;
     }
 
+
+    public TaskDTO(int projectId, String name, String description, int assignedTo, String status, String priority, Date dueDate) {
+        this.projectId = projectId;
+        this.name = name;
+        this.description = description;
+        this.assignedTo = assignedTo;
+        this.status = status;
+        this.priority = priority;
+        this.dueDate = dueDate;
+    }
+    
+    
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
     public int getProjectId() {
         return projectId;
     }

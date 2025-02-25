@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public interface IProjectDAO
 {
     boolean add(ProjectDTO projectDto);
-    boolean update(ProjectDTO projectDto);
+  //  boolean update(ProjectDTO projectDto);
 
     ArrayList<Project> getProjectsByUser(int UserId);
     Project getProjectById(int projectId);

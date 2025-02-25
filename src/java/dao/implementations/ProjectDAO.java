@@ -44,25 +44,25 @@ public class ProjectDAO implements IProjectDAO {
         return sucess;
     }
 
-    @Override
-    public boolean update(ProjectDTO project) {
-        boolean success = false;
-        String query = Queries.UPDATE_PROJECT;
-        try {
-            ps = conn.prepareStatement(query);
-            ps.setString(1, project.getName());
-            ps.setString(2, project.getDescription());
-            ps.setInt(3, project.getId());
-            int isOk = ps.executeUpdate();
-            if (isOk > 0) {
-                success = true;
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(ProjectDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        return success;
-    }
+//    @Override
+//    public boolean update(ProjectDTO project) {
+//        boolean success = false;
+//        String query = Queries.UPDATE_PROJECT;
+//        try {
+//            ps = conn.prepareStatement(query);
+//            ps.setString(1, project.getName());
+//            ps.setString(2, project.getDescription());
+//            ps.setInt(3, project.getId());
+//            int isOk = ps.executeUpdate();
+//            if (isOk > 0) {
+//                success = true;
+//            }
+//        } catch (SQLException ex) {
+//            Logger.getLogger(ProjectDAO.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//
+//        return success;
+//    }
     
     public Project getProjectByName(String name) throws Exception
     {

@@ -28,16 +28,16 @@
 
             <label class="form-label">Status</label>
             <select class="form-select" name='status' required>
-                <option>Pending</option>
-                <option>In progress</option>
-                <option>Done</option>
+                <option value="PENDING">Pending</option>
+                <option value="IN_PROGRESS">In progress</option>
+                <option value="COMPLETED">Done</option>
             </select>
 
             <label class="form-label">Priority</label>
             <select class="form-select" name='priority' required>
-                <option>Low</option>
-                <option>Medium</option>
-                <option>High</option>
+                <option value="LOW">Low</option>
+                <option value="MEDIUM">Medium</option>
+                <option value="HIGH">High</option>
             </select><br>
 
             <label class="form-label">Due Date</label>
