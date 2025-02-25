@@ -1,21 +1,17 @@
-# Sử dụng OpenJDK 8 để chạy ứng dụng
+# Sử dụng OpenJDK 8 làm base image
 FROM openjdk:8-jdk-alpine
 
-# Đặt thư mục làm thư mục làm việc trong container
+# Cài đặt Maven trong container để build ứng dụng
+RUN apk add --no-cache maven
+
+# Đặt thư mục làm việc trong container
 WORKDIR /app
 
-# Sao chép file JAR của ứng dụng vào container
-COPY dist/TaskManagementApp.jar /app/app.jar
+# Sao chép toàn bộ source code vào container
+COPY . /app
 
-# Cấu hình biến môi trường (dùng khi chạy với docker-compose)
-ENV DB_HOST=db
-ENV DB_PORT=1433
-ENV DB_NAME=task_management
-ENV DB_USER=sa
-ENV DB_PASSWORD=12345
+# Chạy Maven để build ứng dụng
+RUN mvn clean package
 
-# Mở cổng 8080 nếu ứng dụng có giao diện web
-EXPOSE 8080
-
-# Chạy ứng dụng
-CMD ["java", "-jar", "/app/app.jar"]
+# Chạy ứng dụng từ file .jar đã build
+CMD ["java", "-jar", "/app/target/TaskManagementApp.jar"]
