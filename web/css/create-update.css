@@ -1,0 +1,39 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Feb 26, 2025, 12:30:07 AM
+    Author     : Hoang Tran
+*/
+
+body {
+    background: linear-gradient(to right, #f5a261, #e57373, #e26fa4, #c77bbf);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 20px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.btn-gradient {
+    display: inline-block;
+    background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    text-decoration: none;
+    font-size: 14px;
+    border-radius: 5px;
+    transition: 0.3s;
+    cursor: pointer;
+}
