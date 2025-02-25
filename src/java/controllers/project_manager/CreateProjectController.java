@@ -55,16 +55,16 @@ public class CreateProjectController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             HttpSession session = request.getSession(false); // Do not create a new session
-            if (session == null || session.getAttribute("userId") == null) {
+            if (session == null) {
                 request.setAttribute("error", "User not logged in.");
                 request.getRequestDispatcher(Pages.LOGIN).forward(request, response);
                 return;
             }
             
-            if (session.getAttribute("role") == null || !session.getAttribute("role").equals("Project Manager"))  {
-                response.sendRedirect(Pages.LOGIN);
-                return;
-            }
+//            if (session.getAttribute("role") == null || !session.getAttribute("role").equals("Project Manager"))  {
+//                response.sendRedirect(Pages.LOGIN);
+//                return;
+//            }
 
             // Get the user from session
             int userId = (int) session.getAttribute("userId");

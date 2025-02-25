@@ -5,8 +5,8 @@
     <table>
         <thead>
             <tr>
-                <th style="width: 80%;">Tên Dự án</th>
-                <th class="action-column">Hành Động</th>
+                <th style="width: 80%;">Project name</th>
+                <th class="action-column">Action</th>
             </tr>
         </thead>
         <tbody>

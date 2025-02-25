@@ -37,7 +37,7 @@
                         <select class="form-select" id="status" name="status">
                             <option value="PENDING">To Do</option>
                             <option value="IN_PROGRESS">In Progress</option>
-                            <option value="COMPLETED"}>Done</option>
+                            <option value="COMPLETED">Done</option>
                         </select>
                     </div>
 
