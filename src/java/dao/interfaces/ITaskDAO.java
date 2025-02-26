@@ -22,4 +22,5 @@ public interface ITaskDAO
     int getProjectIdByTaskId(int taskId);
     
     TaskDTO getTaskById(int taskId);
+    
 }

@@ -14,4 +14,5 @@ public interface ITaskServices
     boolean updateTaskStatus(Tasks task);
     int getProjectIdByTaskId(int taskId);
     TaskDTO getTaskById(int taskId);
+    ArrayList<Tasks> getTasksByUserInPoject(int userId, int projectId);
 }

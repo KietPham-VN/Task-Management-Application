@@ -48,6 +48,20 @@ public class TaskServices implements ITaskServices
     }
 
     @Override
+    public ArrayList<Tasks> getTasksByUserInPoject(int userId, int projectId)
+    {
+        TaskDAO taskDAO = new TaskDAO();
+        ArrayList<Tasks> tasks = taskDAO.getTasksByProjectId(projectId, "");
+        ArrayList<Tasks> result = new ArrayList<>();
+        tasks.stream().filter((task) -> (task.getAssidnedTo() == userId)).forEachOrdered((task) ->
+        {
+            result.add(task);
+        });
+        return result;
+
+    }
+
+    @Override
     public ArrayList<Tasks> getTasksByProjectIdWithMembers(int projectId, String name, String sortBy)
     {
         TaskDAO taskDAO = new TaskDAO();
@@ -91,14 +105,16 @@ public class TaskServices implements ITaskServices
         ITaskDAO taskDAO = new TaskDAO();
         return taskDAO.updateStatus(task.getId(), task.getStatus().getValue());
     }
-    
-    public int getProjectIdByTaskId(int taskId) {
+
+    public int getProjectIdByTaskId(int taskId)
+    {
         ITaskDAO taskDAO = new TaskDAO();
         return taskDAO.getProjectIdByTaskId(taskId);
     }
 
     @Override
-    public TaskDTO getTaskById(int taskId) {
+    public TaskDTO getTaskById(int taskId)
+    {
         ITaskDAO taskDAO = new TaskDAO();
         return taskDAO.getTaskById(taskId);
     }
