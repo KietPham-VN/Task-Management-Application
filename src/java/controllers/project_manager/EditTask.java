@@ -51,7 +51,6 @@ public class EditTask extends HttpServlet {
             throws ServletException, IOException {
         String taskIdString = request.getParameter("taskId");
         String projectIdString = request.getParameter("projectId");
-        
         try{
             Integer taskId = Integer.parseInt(taskIdString);
             Integer projectId = Integer.parseInt(projectIdString);
