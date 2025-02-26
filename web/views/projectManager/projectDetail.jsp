@@ -45,15 +45,18 @@
                                         <p>${user.getName()}</p>
                                     </c:forEach>
                                 </div>
-                                <form method="POST" action="${pageContext.request.contextPath}/project-manager/project-detail/add-user">
-                                    <input type="hidden" value="${param.id}" name="projectId" id="projectId">
-                                    <select name="userId" id="userId">
-                                        <c:forEach var="user" items="${requestScope['available-users']}">
-                                            <option value="${user.getId()}">${user.getName()}</option>
-                                        </c:forEach>
-                                    </select>
-                                    <input type="submit" value="Add new member" class="btn btn-primary">
-                                </form>
+                                <c:if test="${not empty requestScope['available-users']}">
+                                    <form method="POST" action="${pageContext.request.contextPath}/project-manager/project-detail/add-user">
+                                        <input type="hidden" value="${param.id}" name="projectId" id="projectId">
+                                        <select name="userId" id="userId">
+                                            <c:forEach var="user" items="${requestScope['available-users']}">
+                                                <option value="${user.getId()}">${user.getName()}</option>
+                                            </c:forEach>
+                                        </select>
+                                        <input type="submit" value="Add new member" class="btn btn-primary">
+                                    </form>
+                                </c:if>
+                                
                                 <a href="${pageContext.request.contextPath}/project-manager/project-detail/createTask?projectId=${param.id}">
                                     <button class="btn btn-primary my-2">Add task</button>
                                 </a>
