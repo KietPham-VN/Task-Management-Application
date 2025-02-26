@@ -10,7 +10,7 @@
     </head>
     <body>
 
-        <form method="POST" class="position-absolute top-0 start-0 m-3" action="${pageContext.request.contextPath}/LogoutController">
+        <form method="POST" class="position-absolute top-0 end-0 m-3" action="${pageContext.request.contextPath}/LogoutController">
             <input  type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-danger" value="Logout">
         </form>
 
