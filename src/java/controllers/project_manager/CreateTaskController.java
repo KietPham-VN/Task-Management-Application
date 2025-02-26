@@ -96,7 +96,8 @@ public class CreateTaskController extends HttpServlet {
             }
 
             int projectId =Integer.parseInt(request.getParameter("projectId"));
-            int assignedTo = (int) session.getAttribute("userId");
+            String memberIdString = request.getParameter("member");
+            int assignedTo = Integer.parseInt(memberIdString);
             String name = request.getParameter("name");
             String description = request.getParameter("desc");
             String status = request.getParameter("status");
