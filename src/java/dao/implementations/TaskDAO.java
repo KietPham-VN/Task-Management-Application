@@ -136,17 +136,17 @@ public class TaskDAO implements ITaskDAO {
 
     @Override
     public ArrayList<Tasks> getTasksByProjectIdWithMembers(int projectId, String name) {
-        String query = Queries.GET_TASKS_BY_PROJECT;
+        String query = Queries.GET_TASK_WITH_ASSIGN_USER;
         if (!name.isEmpty()) {
-            query += " AND name LIKE ?";
+            query += " AND t.name LIKE ?";
         }
         ArrayList<Tasks> tasks = new ArrayList<>();
         try {
             conn = DBUtils.getConnection();
-            ps = conn.prepareCall(Queries.GET_TASK_WITH_ASSIGN_USER);
+            ps = conn.prepareCall(query);
             ps.setInt(1, projectId);
             if (!name.isEmpty()) {
-                ps.setString(2, name);
+                ps.setString(2, "%"+name+"%");
             }
             rs = ps.executeQuery();
             while (rs.next()) {
