@@ -8,6 +8,7 @@ package controllers.project_manager;
 import common.constants.Pages;
 import dao.implementations.TaskDAO;
 import dto.TaskDTO;
+import entities.AuthenticatedUser;
 import entities.Project;
 import entities.User;
 import java.io.IOException;
@@ -50,6 +51,8 @@ public class CreateTaskController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        AuthenticatedUser user = (AuthenticatedUser) session.getAttribute("authenticated-user");
         String projectIdString = request.getParameter("projectId");
         
         try{
@@ -57,6 +60,12 @@ public class CreateTaskController extends HttpServlet {
             ProjectServices projectService = new ProjectServices();
             
             Project project = projectService.getProjectById(projectId);
+            
+            if(project.getCreateBy()!=user.getId()) {
+                response.sendRedirect(request.getContextPath());
+                return;
+            }
+            
             ArrayList<User> teamMembers = projectService.getUserInProject(projectId);
             request.setAttribute("project",project);
             request.setAttribute("teamMembers",teamMembers);
