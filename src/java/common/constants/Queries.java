@@ -49,9 +49,7 @@ public class Queries {
 
     // get project whose user evolve 
     public static final String GET_PROJECTS_BY_USER
-            = "SELECT * "
-            + "FROM [Projects] "
-            + "WHERE [createdBy] = ?";
+            = "SELECT p.id, p.name, p.description, p.createdBy, p.createdAt FROM Projects p JOIN ProjectMembers pm ON p.id = pm.projectId WHERE pm.userId = ?;";
 
     public static final String REGISTER
             = "INSERT INTO Users(name,email,passwordHash,role,salt) "
@@ -83,4 +81,9 @@ public class Queries {
 
     public static final String GET_USER_IN_PROJECT = "SELECT u.* FROM Users u "
                         + "WHERE u.id IN (SELECT pm.userId FROM ProjectMembers pm WHERE pm.projectId = ?)";
+    
+    public static final String GET_PROJECT_ID_BY_TASK_ID 
+            = "SELECT projectId "
+            + "FROM Tasks "
+            + "WHERE id = ?";
 }

@@ -9,28 +9,40 @@ package common.enums;
  * @author NGHIA
  */
 // TaskStatus.java
-public enum TaskStatus {
+public enum TaskStatus
+{
     PENDING(1),
     IN_PROGRESS(2),
     COMPLETED(3);
 
     private final int value;
 
-    TaskStatus(int value) {
+    TaskStatus(int value)
+    {
         this.value = value;
     }
 
-    public int getValue() {
+    public int getValue()
+    {
         return value;
     }
 
-    public static TaskStatus fromValue(int value) {
-        for (TaskStatus status : TaskStatus.values()) {
-            if (status.value == value) {
+    public static TaskStatus fromValue(int value)
+    {
+        for (TaskStatus status : TaskStatus.values())
+        {
+            if (status.value == value)
+            {
                 return status;
             }
         }
         throw new IllegalArgumentException("Invalid status value: " + value);
     }
-}
 
+    @Override
+    public String toString()
+    {
+        return this.name(); // Trả về dạng String của Enum
+    }
+
+}

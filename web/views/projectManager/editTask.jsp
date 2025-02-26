@@ -7,11 +7,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
         <title>Edit Task</title>
+        <link href="${pageContext.request.contextPath}/css/create-update.css" rel="stylesheet" type="text/css"/>
     </head>
-    <body>
-        <div class="container my-4">
+    <body class="container">
+        <div class="card">
             <h2 class="mb-4">Edit Task</h2>
-
             <div>
                 <form action="${pageContext.request.contextPath}/project-manager/project-detail/editTask" method="post">
                     <input type="hidden" name="taskId" value="${param.taskId}">
@@ -37,7 +37,7 @@
                         <select class="form-select" id="status" name="status">
                             <option value="PENDING">To Do</option>
                             <option value="IN_PROGRESS">In Progress</option>
-                            <option value="COMPLETED"}>Done</option>
+                            <option value="COMPLETED">Done</option>
                         </select>
                     </div>
 
@@ -56,8 +56,8 @@
                     </div>
 
                     <div class="d-flex justify-content-between">
-                        <button type="submit" class="btn btn-primary">Update Task</button>
-                        <a href="${pageContext.request.contextPath}/project-manager/project-detail?id=${task.projectId}" class="btn btn-secondary">Cancel</a>
+                        <button type="submit" class="btn btn-gradient">Update Task</button>
+                        <a href="${pageContext.request.contextPath}/project-manager/project-detail?id=${param.projectId}" class="btn btn-secondary">Cancel</a>
                     </div>
                 </form>
             </div>

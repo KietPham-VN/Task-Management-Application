@@ -23,10 +23,12 @@ public class ProjectDAO implements IProjectDAO {
     ResultSet rs = null;
 
     @Override
-    public boolean add(ProjectDTO projectDto) {
+    public boolean add(ProjectDTO projectDto)
+    {
         boolean sucess = false;
         String query = Queries.CREATE_PROJECT;
-        try {
+        try
+        {
             conn = DBUtils.getConnection();
             ps = conn.prepareStatement(query);
             ps.setString(1, projectDto.getName());
@@ -71,7 +73,8 @@ public class ProjectDAO implements IProjectDAO {
         conn = DBUtils.getConnection();
         ps = conn.prepareStatement(query);
         rs = ps.executeQuery();
-        while (rs.next()) {
+        while (rs.next())
+        {
             project = new Project();
             project.setProjectId(rs.getInt("id"));
             project.setName(rs.getString("name"));
@@ -109,96 +112,112 @@ public class ProjectDAO implements IProjectDAO {
     }
 
     @Override
-    public Project getProjectById(int projectId) {
+    public Project getProjectById(int projectId)
+    {
         Project project = null;
-        try(Connection conn = DBUtils.getConnection()){
+        try (Connection conn = DBUtils.getConnection())
+        {
             PreparedStatement ps = conn.prepareStatement(Queries.GET_PROJECT_BY_ID);
             ps.setInt(1, projectId);
             ResultSet rs = ps.executeQuery();
-            while(rs.next()){
-                project = new Project(rs.getInt("id"),rs.getString("name"),rs.getString("description"),rs.getInt("createdBy"),rs.getTimestamp("createdAt"));
+            while (rs.next())
+            {
+                project = new Project(rs.getInt("id"), rs.getString("name"), rs.getString("description"), rs.getInt("createdBy"), rs.getTimestamp("createdAt"));
             }
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ProjectDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
+        } catch (ClassNotFoundException | SQLException ex)
+        {
             Logger.getLogger(ProjectDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return project;
     }
-    
+
     @Override
-    public boolean addUserToProject(int projectId, int userId) {
+    public boolean addUserToProject(int projectId, int userId)
+    {
         boolean status = false;
-        
-        try {
+
+        try
+        {
             conn = DBUtils.getConnection();
             ps = conn.prepareStatement(Queries.ADD_USER_TO_PROJECT);
             ps.setInt(1, projectId);
             ps.setInt(2, userId);
-            status = ps.executeUpdate()>0;
+            status = ps.executeUpdate() > 0;
             conn.close();
-        } catch (ClassNotFoundException ex) {
+        } catch (ClassNotFoundException ex)
+        {
             Logger.getLogger(TaskDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
+        } catch (SQLException ex)
+        {
             Logger.getLogger(TaskDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         return status;
     }
 
     @Override
-    public ArrayList<User> getUserNotInProject(int projectId) {
+    public ArrayList<User> getUserNotInProject(int projectId)
+    {
         ArrayList<User> users = new ArrayList<>();
-        
-        try {
+
+        try
+        {
             conn = DBUtils.getConnection();
             ps = conn.prepareStatement(Queries.GET_USER_NOT_IN_PROJECT);
-            ps.setInt(1,projectId);
+            ps.setInt(1, projectId);
             rs = ps.executeQuery();
-            
-            while(rs.next()){
+
+            while (rs.next())
+            {
                 User user = new User();
                 user.setId(rs.getInt("id"));
                 user.setName(rs.getString("name"));
                 user.setEmail(rs.getString("email"));
                 users.add(user);
             }
-                    
+
             conn.close();
-        } catch (ClassNotFoundException ex) {
+        } catch (ClassNotFoundException ex)
+        {
             Logger.getLogger(ProjectDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
+        } catch (SQLException ex)
+        {
             Logger.getLogger(ProjectDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return users;
     }
 
     @Override
-    public ArrayList<User> getUserInProject(int projectId) {
+    public ArrayList<User> getUserInProject(int projectId)
+    {
         ArrayList<User> users = new ArrayList<>();
-        
-        try {
+
+        try
+        {
             conn = DBUtils.getConnection();
             ps = conn.prepareStatement(Queries.GET_USER_IN_PROJECT);
-            ps.setInt(1,projectId);
+            ps.setInt(1, projectId);
             rs = ps.executeQuery();
-            
-            while(rs.next()){
+
+            while (rs.next())
+            {
                 User user = new User();
                 user.setId(rs.getInt("id"));
                 user.setName(rs.getString("name"));
                 user.setEmail(rs.getString("email"));
                 users.add(user);
             }
-                    
+
             conn.close();
-        } catch (ClassNotFoundException ex) {
+        } catch (ClassNotFoundException ex)
+        {
             Logger.getLogger(ProjectDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
+        } catch (SQLException ex)
+        {
             Logger.getLogger(ProjectDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         return users;
     }
-    
+
 }

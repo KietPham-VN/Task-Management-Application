@@ -71,7 +71,9 @@ public class ProjectManagerTaskDetail extends HttpServlet {
             ArrayList<Tasks> tasks = taskService.getTasksByProjectIdWithMembers(projectId, searchName, sortBy);
             ArrayList<User> availableUsers = projectDAO.getUserNotInProject(projectId);
             ArrayList<User> teamMembers = projectDAO.getUserInProject(projectId);
-            
+            for (User teamMember : availableUsers) {
+                System.out.println(teamMember.getName());
+            }
             request.setAttribute("task-list", tasks);
             request.setAttribute("project", project);
             request.setAttribute("member-list", teamMembers);
