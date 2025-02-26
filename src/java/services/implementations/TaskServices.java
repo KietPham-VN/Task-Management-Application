@@ -51,9 +51,9 @@ public class TaskServices implements ITaskServices
     public ArrayList<Tasks> getTasksByUserInPoject(int userId, int projectId)
     {
         TaskDAO taskDAO = new TaskDAO();
-        ArrayList<Tasks> tasks = taskDAO.getTasksByProjectId(projectId, "");
+        ArrayList<Tasks> tasks = taskDAO.getTasksByProjectIdWithMembers(projectId, "");
         ArrayList<Tasks> result = new ArrayList<>();
-        tasks.stream().filter((task) -> (task.getAssidnedTo() == userId)).forEachOrdered((task) ->
+        tasks.stream().filter((task) -> (task.getAssignedToUser().getId() == userId)).forEachOrdered((task) ->
         {
             result.add(task);
         });
