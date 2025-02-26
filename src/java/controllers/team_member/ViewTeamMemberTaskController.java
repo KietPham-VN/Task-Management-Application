@@ -1,11 +1,9 @@
 package controllers.team_member;
 
 import common.constants.Pages;
-import dao.implementations.ProjectDAO;
 import entities.AuthenticatedUser;
 import entities.Project;
 import entities.Tasks;
-import entities.User;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
@@ -14,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 import services.implementations.ProjectServices;
 import services.implementations.TaskServices;
 import services.interfaces.IProjectServices;
@@ -37,18 +36,22 @@ public class ViewTeamMemberTaskController extends HttpServlet
 
         try
         {
-            int projectId = Integer.parseInt(request.getParameter("id"));
-            
-            ITaskServices taskService = new TaskServices();
-            IProjectServices projectServices = new ProjectServices();
-            Project project = projectServices.getProjectById(projectId);
-            ArrayList<Tasks> tasks = taskService.getTasksByProjectId(projectId, "", "");
-            request.setAttribute("project", project);
-            request.setAttribute("task-list", tasks);
-            request.getRequestDispatcher(Pages.TEAM_MEMBER_TASK_DETAILS).forward(request, response);
+            HttpSession session = request.getSession(false);
+            if (session != null && session.getAttribute("authenticated-user") != null)
+            {
+                AuthenticatedUser authedUser = (AuthenticatedUser) session.getAttribute("authenticated-user");
+                int projectId = Integer.parseInt(request.getParameter("id"));
+                ITaskServices taskService = new TaskServices();
+                IProjectServices projectServices = new ProjectServices();
+                Project project = projectServices.getProjectById(projectId);
+                ArrayList<Tasks> tasks = taskService.getTasksByUserInPoject(authedUser.getId(), projectId);
+                request.setAttribute("project", project);
+                request.setAttribute("task-list", tasks);
+                request.getRequestDispatcher(Pages.TEAM_MEMBER_TASK_DETAILS).forward(request, response);
+            }
         } catch (NumberFormatException e)
         {
-            
+
         }
 
     }
