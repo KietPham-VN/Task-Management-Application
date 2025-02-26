@@ -203,4 +203,32 @@ public class ProjectDAO implements IProjectDAO {
         return users;
     }
 
+    @Override
+    public ArrayList<Project> getProjectUserIsIn(int userId) {
+        ArrayList<Project> projects = new ArrayList<>();
+
+        try (Connection connection = DBUtils.getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement(Queries.GET_PROJECT_USER_IS_IN)) {
+            preparedStatement.setInt(1, userId);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery())
+            {
+                while (resultSet.next())
+                {
+                    int projectId = resultSet.getInt("id");
+                    String name = resultSet.getString("name");
+                    String description = resultSet.getString("description");
+                    int createdBy = resultSet.getInt("createdBy");
+                    Timestamp createdAt = resultSet.getTimestamp("createdAt");
+                    projects.add(new Project(projectId, name, description, createdBy, createdAt));
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, "SQL Error", ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ProjectDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return projects;
+    }
+
 }

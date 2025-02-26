@@ -91,4 +91,6 @@ public class Queries {
             + "FROM Tasks "
             + "WHERE id = ?";
     
+    public static final String GET_PROJECT_USER_IS_IN ="SELECT p.* FROM Projects p WHERE p.id IN (SELECT pm.projectId FROM ProjectMembers pm WHERE pm.userId = ?)";
+    
 }

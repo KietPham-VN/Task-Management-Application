@@ -46,4 +46,10 @@ public class ProjectServices implements IProjectServices {
         IProjectDAO projectDAO = new ProjectDAO();
         return projectDAO.getUserNotInProject(projectId);    
     }
+
+    @Override
+    public ArrayList<Project> getProjectsUserIsIn(int userId) {
+        IProjectDAO projectDAO = new ProjectDAO();
+        return projectDAO.getProjectUserIsIn(userId);    
+    }
 }
