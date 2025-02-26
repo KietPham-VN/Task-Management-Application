@@ -124,10 +124,7 @@ public class ProjectDAO implements IProjectDAO {
             ps.setInt(2, userId);
             status = ps.executeUpdate() > 0;
             conn.close();
-        } catch (ClassNotFoundException ex)
-        {
-            Logger.getLogger(TaskDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex)
+        } catch (ClassNotFoundException | SQLException ex)
         {
             Logger.getLogger(TaskDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -157,10 +154,7 @@ public class ProjectDAO implements IProjectDAO {
             }
 
             conn.close();
-        } catch (ClassNotFoundException ex)
-        {
-            Logger.getLogger(ProjectDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex)
+        } catch (ClassNotFoundException | SQLException ex)
         {
             Logger.getLogger(ProjectDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -190,10 +184,7 @@ public class ProjectDAO implements IProjectDAO {
             }
 
             conn.close();
-        } catch (ClassNotFoundException ex)
-        {
-            Logger.getLogger(ProjectDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex)
+        } catch (ClassNotFoundException | SQLException ex)
         {
             Logger.getLogger(ProjectDAO.class.getName()).log(Level.SEVERE, null, ex);
         }

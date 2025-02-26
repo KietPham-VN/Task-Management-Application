@@ -45,7 +45,7 @@ public class TaskDAO implements ITaskDAO {
                 success = true;
                 System.out.println("chac add dc");
             }
-        } catch (Exception e)
+        } catch (ClassNotFoundException | SQLException e)
         {
             System.out.println("Failed added to database" + e);
         }
@@ -71,7 +71,7 @@ public class TaskDAO implements ITaskDAO {
             if (exe > 0) {
                 success = true;
             }
-        } catch (Exception e) {
+        } catch (ClassNotFoundException | SQLException e) {
             System.out.println("Failed update database" + e);
         }
         return success;
@@ -89,10 +89,7 @@ public class TaskDAO implements ITaskDAO {
             status = ps.executeUpdate() > 0;
             status = ps.executeUpdate() > 0;
             conn.close();
-        } catch (ClassNotFoundException ex)
-        {
-            Logger.getLogger(TaskDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex)
+        } catch (ClassNotFoundException | SQLException ex)
         {
             Logger.getLogger(TaskDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
