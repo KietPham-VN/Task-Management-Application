@@ -42,7 +42,7 @@ public enum TaskStatus
     @Override
     public String toString()
     {
-        return this.name(); // Trả về dạng String của Enum
+        return this.name();
     }
 
 }
