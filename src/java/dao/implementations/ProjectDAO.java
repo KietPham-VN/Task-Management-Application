@@ -46,26 +46,6 @@ public class ProjectDAO implements IProjectDAO {
         return sucess;
     }
 
-//    @Override
-//    public boolean update(ProjectDTO project) {
-//        boolean success = false;
-//        String query = Queries.UPDATE_PROJECT;
-//        try {
-//            ps = conn.prepareStatement(query);
-//            ps.setString(1, project.getName());
-//            ps.setString(2, project.getDescription());
-//            ps.setInt(3, project.getId());
-//            int isOk = ps.executeUpdate();
-//            if (isOk > 0) {
-//                success = true;
-//            }
-//        } catch (SQLException ex) {
-//            Logger.getLogger(ProjectDAO.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//
-//        return success;
-//    }
-    
     public Project getProjectByName(String name) throws Exception
     {
         Project project = null;
@@ -205,6 +185,7 @@ public class ProjectDAO implements IProjectDAO {
                 user.setId(rs.getInt("id"));
                 user.setName(rs.getString("name"));
                 user.setEmail(rs.getString("email"));
+                user.setTeamMemberId(rs.getInt("teamMemberId"));
                 users.add(user);
             }
 
@@ -218,6 +199,34 @@ public class ProjectDAO implements IProjectDAO {
         }
 
         return users;
+    }
+
+    @Override
+    public ArrayList<Project> getProjectUserIsIn(int userId) {
+        ArrayList<Project> projects = new ArrayList<>();
+
+        try (Connection connection = DBUtils.getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement(Queries.GET_PROJECT_USER_IS_IN)) {
+            preparedStatement.setInt(1, userId);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery())
+            {
+                while (resultSet.next())
+                {
+                    int projectId = resultSet.getInt("id");
+                    String name = resultSet.getString("name");
+                    String description = resultSet.getString("description");
+                    int createdBy = resultSet.getInt("createdBy");
+                    Timestamp createdAt = resultSet.getTimestamp("createdAt");
+                    projects.add(new Project(projectId, name, description, createdBy, createdAt));
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, "SQL Error", ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ProjectDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return projects;
     }
 
 }

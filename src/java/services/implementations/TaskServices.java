@@ -2,6 +2,7 @@ package services.implementations;
 
 import dao.implementations.TaskDAO;
 import dao.interfaces.ITaskDAO;
+import dto.TaskDTO;
 import entities.Tasks;
 import entities.User;
 import java.util.ArrayList;
@@ -94,6 +95,12 @@ public class TaskServices implements ITaskServices
     public int getProjectIdByTaskId(int taskId) {
         ITaskDAO taskDAO = new TaskDAO();
         return taskDAO.getProjectIdByTaskId(taskId);
+    }
+
+    @Override
+    public TaskDTO getTaskById(int taskId) {
+        ITaskDAO taskDAO = new TaskDAO();
+        return taskDAO.getTaskById(taskId);
     }
 
 }

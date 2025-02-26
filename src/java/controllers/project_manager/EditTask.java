@@ -8,13 +8,18 @@ package controllers.project_manager;
 import common.constants.Pages;
 import dao.implementations.TaskDAO;
 import dto.TaskDTO;
+import entities.Project;
+import entities.User;
 import java.io.IOException;
 import java.sql.Date;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import services.implementations.ProjectServices;
+import services.implementations.TaskServices;
 
 /**
  *
@@ -44,6 +49,28 @@ public class EditTask extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String taskIdString = request.getParameter("taskId");
+        String projectIdString = request.getParameter("projectId");
+        
+        try{
+            Integer taskId = Integer.parseInt(taskIdString);
+            Integer projectId = Integer.parseInt(projectIdString);
+            
+            TaskServices taskService = new TaskServices();
+            ProjectServices projectService = new ProjectServices();
+            
+            ArrayList<User> teamMembers = projectService.getUserInProject(projectId);
+            Project project = projectService.getProjectById(projectId);
+            TaskDTO task = taskService.getTaskById(taskId);
+            
+            request.setAttribute("task", task);
+            request.setAttribute("project",project);
+            request.setAttribute("teamMembers",teamMembers);
+        }
+        catch(NumberFormatException ex){
+            System.out.println(ex);
+        }
+        
         request.getRequestDispatcher(Pages.UPDATE_TASK).forward(request, response);
     }
 
@@ -73,10 +100,10 @@ public class EditTask extends HttpServlet {
         boolean success = taskDAO.update(task);
 
         if (success) {
-            response.sendRedirect("index.jsp"); // Redirect to task list after update
+            response.sendRedirect(request.getContextPath()+"/project-manager/project-detail?id="+projectId); // Redirect to task list after update
         } else {
             request.setAttribute("errorMessage", "Failed to update task.");
-            request.getRequestDispatcher(Pages.UPDATE_TASK).forward(request, response);
+            response.sendRedirect(request.getHeader("Referer"));
         }
     }
 

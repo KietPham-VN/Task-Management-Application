@@ -4,6 +4,7 @@ import dao.implementations.ProjectDAO;
 import dao.interfaces.IProjectDAO;
 import dto.ProjectDTO;
 import entities.Project;
+import entities.User;
 import java.util.ArrayList;
 import services.interfaces.IProjectServices;
 
@@ -26,21 +27,6 @@ public class ProjectServices implements IProjectServices {
         return projectDAO.getProjectsByUser(userId);
     }
 
-//    public boolean updateProject(int projectId, String name, String description) {
-//        try {
-//            Project project = projectDao.getProjectById(projectId);
-//            if (project == null) {
-//                return false; // Project not found
-//            }
-//            
-//            project.setName(name);
-//            project.setDescription(description);
-//            
-//            return projectDao.update(project);
-//        } catch (ClassNotFoundException ex) {
-//            Logger.getLogger(ProjectServices.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//    }
 
     @Override
     public Project getProjectById(int projectId)
@@ -49,4 +35,22 @@ public class ProjectServices implements IProjectServices {
         return projectDAO.getProjectById(projectId);
     }
     
+
+    @Override
+    public ArrayList<User> getUserInProject(int projectId) {
+        IProjectDAO projectDAO = new ProjectDAO();
+        return projectDAO.getUserInProject(projectId);
+    }
+
+    @Override
+    public ArrayList<User> getUserNotInProject(int projectId) {
+        IProjectDAO projectDAO = new ProjectDAO();
+        return projectDAO.getUserNotInProject(projectId);    
+    }
+
+    @Override
+    public ArrayList<Project> getProjectsUserIsIn(int userId) {
+        IProjectDAO projectDAO = new ProjectDAO();
+        return projectDAO.getProjectUserIsIn(userId);    
+    }
 }

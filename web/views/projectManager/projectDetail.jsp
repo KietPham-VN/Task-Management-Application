@@ -9,10 +9,9 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
     </head>
     <body>
-        <form method="POST" class="position-absolute top-0 end-0 m-3" action="${pageContext.request.contextPath}/MainController">
-            <div class="d-flex align-items-center justify-content-center">
-                <input  type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-danger" value="Logout">
-            </div>
+
+        <form method="POST" class="position-absolute top-0 start-0 m-3" action="${pageContext.request.contextPath}/LogoutController">
+            <input  type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-danger" value="Logout">
         </form>
 
         <div class="container mt-4 text-start ">
@@ -34,17 +33,21 @@
                                         <p>${user.getName()}</p>
                                     </c:forEach>
                                 </div>
-                                <form method="POST" action="${pageContext.request.contextPath}/project-manager/project-detail/add-user">
-                                    <input type="hidden" value="${param.id}" name="projectId" id="projectId">
-                                    <select name="userId" id="userId" style="min-width: 150px; min-height: 35px;">
-                                        <c:forEach var="user" items="${requestScope['available-users']}">
-                                            <option value="${user.getId()}">${user.getName()}</option>
-                                        </c:forEach>
-                                    </select>
-                                    <input type="submit" value="Add new member" class="btn btn-primary">
-                                </form>
+
+                                <c:if test="${not empty requestScope['available-users']}">
+                                    <form method="POST" action="${pageContext.request.contextPath}/project-manager/project-detail/add-user">
+                                        <input type="hidden" value="${param.id}" name="projectId" id="projectId">
+                                        <select name="userId" id="userId" style="min-width: 150px; min-height: 35px;">
+                                            <c:forEach var="user" items="${requestScope['available-users']}">
+                                                <option value="${user.getId()}">${user.getName()}</option>
+                                            </c:forEach>
+                                        </select>
+                                        <input type="submit" value="Add new member" class="btn btn-primary">
+                                    </form>
+                                </c:if>
+                                
                                 <a href="${pageContext.request.contextPath}/project-manager/project-detail/createTask?projectId=${param.id}">
-                                    <button class="btn btn-primary">Add task</button>
+                                    <button class="btn btn-primary my-2">Add task</button>
                                 </a>
                             </div>
                         </div>

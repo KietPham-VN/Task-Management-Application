@@ -8,14 +8,18 @@ package controllers.project_manager;
 import common.constants.Pages;
 import dao.implementations.TaskDAO;
 import dto.TaskDTO;
+import entities.Project;
+import entities.User;
 import java.io.IOException;
 import java.sql.Date;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import services.implementations.ProjectServices;
 
 /**
  *
@@ -46,6 +50,20 @@ public class CreateTaskController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String projectIdString = request.getParameter("projectId");
+        
+        try{
+            Integer projectId = Integer.parseInt(projectIdString);
+            ProjectServices projectService = new ProjectServices();
+            
+            Project project = projectService.getProjectById(projectId);
+            ArrayList<User> teamMembers = projectService.getUserInProject(projectId);
+            request.setAttribute("project",project);
+            request.setAttribute("teamMembers",teamMembers);
+        }
+        catch(NumberFormatException ex){
+            System.out.println(ex);
+        }
         request.getRequestDispatcher(Pages.CREATE_TASK).forward(request, response);
     }
 
@@ -79,15 +97,15 @@ public class CreateTaskController extends HttpServlet {
             boolean success = taskDAO.add(new TaskDTO(projectId, name, 
                     description, assignedTo, status, priority,dueDate));
             if (success) {
-                response.sendRedirect(Pages.PROJECT_MANAGER_DASH_BOARD);
+                response.sendRedirect(request.getContextPath()+"/project-manager/project-detail?id="+projectId);
             } else {
                 request.setAttribute("Error", "Failed");
-                request.getRequestDispatcher(Pages.CREATE_TASK).forward(request, response);
+                response.sendRedirect(request.getHeader("Referer"));
             }
             
         } catch (Exception e) {
             System.out.println("Cannot add task" + e);
-            request.getRequestDispatcher(Pages.CREATE_TASK).forward(request, response);
+            response.sendRedirect(request.getHeader("Referer"));
         }
     }
 

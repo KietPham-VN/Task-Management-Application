@@ -6,7 +6,6 @@
 package controllers.project_manager;
 
 import common.constants.Pages;
-import dao.implementations.ProjectDAO;
 import entities.Project;
 import entities.Tasks;
 import entities.User;
@@ -17,6 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import services.implementations.ProjectServices;
 import services.implementations.TaskServices;
 
 /**
@@ -58,7 +58,7 @@ public class ProjectManagerTaskDetail extends HttpServlet {
         String sortBy =  (request.getParameter("sortBy")!=null)?request.getParameter("sortBy"):"";
         
         TaskServices taskService = new TaskServices();
-        ProjectDAO projectDAO = new ProjectDAO();
+        ProjectServices projectService = new ProjectServices();
         try{
             projectId = Integer.parseInt(projectIdString);
         }
@@ -67,13 +67,10 @@ public class ProjectManagerTaskDetail extends HttpServlet {
         }
         
         if(projectId!=null) {
-            Project project = projectDAO.getProjectById(projectId);
+            Project project = projectService.getProjectById(projectId);
             ArrayList<Tasks> tasks = taskService.getTasksByProjectIdWithMembers(projectId, searchName, sortBy);
-            ArrayList<User> availableUsers = projectDAO.getUserNotInProject(projectId);
-            ArrayList<User> teamMembers = projectDAO.getUserInProject(projectId);
-            for (User teamMember : availableUsers) {
-                System.out.println(teamMember.getName());
-            }
+            ArrayList<User> availableUsers = projectService.getUserNotInProject(projectId);
+            ArrayList<User> teamMembers = projectService.getUserInProject(projectId);
             request.setAttribute("task-list", tasks);
             request.setAttribute("project", project);
             request.setAttribute("member-list", teamMembers);

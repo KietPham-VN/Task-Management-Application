@@ -16,8 +16,8 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class TaskDAO implements ITaskDAO
-{
+
+public class TaskDAO implements ITaskDAO {
 
     Connection conn = null;
     PreparedStatement ps = null;
@@ -102,26 +102,22 @@ public class TaskDAO implements ITaskDAO
     }
 
     @Override
-    public ArrayList<Tasks> getTasksByProjectId(int projectId, String name)
-    {
+
+    public ArrayList<Tasks> getTasksByProjectId(int projectId, String name) {
         String query = Queries.GET_TASKS_BY_PROJECT;
-        if (!name.isEmpty())
-        {
+        if (!name.isEmpty()) {
             query += " AND name LIKE ?";
         }
         ArrayList<Tasks> tasks = new ArrayList<>();
-        try
-        {
+        try {
             conn = DBUtils.getConnection();
             ps = conn.prepareCall(Queries.GET_TASKS_BY_PROJECT);
             ps.setInt(1, projectId);
-            if (!name.isEmpty())
-            {
+            if (!name.isEmpty()) {
                 ps.setString(2, name);
             }
             rs = ps.executeQuery();
-            while (rs.next())
-            {
+            while (rs.next()) {
                 Tasks task = new Tasks(rs.getInt("id"), rs.getInt("projectId"),
                         rs.getString("name"), rs.getString("description"),
                         rs.getInt("assignedTo"), rs.getInt("status"),
@@ -130,8 +126,8 @@ public class TaskDAO implements ITaskDAO
                 tasks.add(task);
             }
             conn.close();
-        } catch (ClassNotFoundException | SQLException e)
-        {
+
+        } catch (ClassNotFoundException | SQLException e) {
             System.out.println(e.getMessage());
             System.out.println("Failed get tasks from database");
         }
@@ -139,26 +135,21 @@ public class TaskDAO implements ITaskDAO
     }
 
     @Override
-    public ArrayList<Tasks> getTasksByProjectIdWithMembers(int projectId, String name)
-    {
+    public ArrayList<Tasks> getTasksByProjectIdWithMembers(int projectId, String name) {
         String query = Queries.GET_TASKS_BY_PROJECT;
-        if (!name.isEmpty())
-        {
+        if (!name.isEmpty()) {
             query += " AND name LIKE ?";
         }
         ArrayList<Tasks> tasks = new ArrayList<>();
-        try
-        {
+        try {
             conn = DBUtils.getConnection();
             ps = conn.prepareCall(Queries.GET_TASK_WITH_ASSIGN_USER);
             ps.setInt(1, projectId);
-            if (!name.isEmpty())
-            {
+            if (!name.isEmpty()) {
                 ps.setString(2, name);
             }
             rs = ps.executeQuery();
-            while (rs.next())
-            {
+            while (rs.next()) {
                 Tasks task = new Tasks(rs.getInt("id"), rs.getInt("projectId"),
                         rs.getString("name"), rs.getString("description"),
                         rs.getInt("assignedTo"), rs.getInt("status"),
@@ -175,8 +166,8 @@ public class TaskDAO implements ITaskDAO
                 tasks.add(task);
             }
             conn.close();
-        } catch (ClassNotFoundException | SQLException e)
-        {
+
+        } catch (ClassNotFoundException | SQLException e) {
             System.out.println(e.getMessage());
             System.out.println("Failed get tasks from database");
         }
@@ -228,12 +219,14 @@ public class TaskDAO implements ITaskDAO
         }
         return projectId;
     }
+
     public TaskDTO getTaskById(int taskId) {
         TaskDTO task = null;
         String query = Queries.GET_TASK_BY_ID;
         try {
             conn = DBUtils.getConnection();
             ps = conn.prepareStatement(query);
+            ps.setInt(1, taskId);
             rs = ps.executeQuery();
             if (rs.next()) {
                 task = new TaskDTO();

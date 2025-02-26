@@ -19,7 +19,7 @@ public class Queries {
             + " WHERE id = ?";
     
     public static final String GET_TASK_BY_ID
-            = "SELECT * FROM dbo.Task WHERE id = ?";
+            = "SELECT * FROM dbo.Tasks WHERE id = ?";
 
     public static final String GET_USER_BY_NAME
             = "SELECT [id], [name], [email], [role] "
@@ -79,11 +79,16 @@ public class Queries {
     public static final String GET_USER_NOT_IN_PROJECT = "SELECT u.* FROM Users u " +
                        "WHERE u.id NOT IN (SELECT pm.userId FROM ProjectMembers pm WHERE pm.projectId = ?)";
 
-    public static final String GET_USER_IN_PROJECT = "SELECT u.* FROM Users u "
-                        + "WHERE u.id IN (SELECT pm.userId FROM ProjectMembers pm WHERE pm.projectId = ?)";
+    public static final String GET_USER_IN_PROJECT = "SELECT u.*, pm.id AS teamMemberId" +
+            " FROM Users u" +
+            " JOIN ProjectMembers pm ON u.id = pm.userId" +
+            " WHERE pm.projectId = ?";
     
     public static final String GET_PROJECT_ID_BY_TASK_ID 
             = "SELECT projectId "
             + "FROM Tasks "
             + "WHERE id = ?";
+    
+    public static final String GET_PROJECT_USER_IS_IN ="SELECT p.* FROM Projects p WHERE p.id IN (SELECT pm.projectId FROM ProjectMembers pm WHERE pm.userId = ?)";
+    
 }

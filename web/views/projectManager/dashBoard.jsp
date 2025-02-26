@@ -29,7 +29,9 @@
 
                 <h2>Project list</h2>
             </div>
-            <button class="btn btn-gradient m-2" id="createprjbutton" onclick="location.href = 'CreateProject'">+ Create</button>
+            <a href="project-manager/create-project">
+                <button class="btn btn-gradient m-2" id="createprjbutton">+ Create</button>
+            </a>
             <c:choose>
                 <c:when test="${empty requestScope['project-list']}">
                     <p class="no-projects">Project not found</p>
@@ -40,6 +42,7 @@
                     </jsp:include>
                 </c:otherwise>
             </c:choose>
+
         </div>
     </body>
 </html>

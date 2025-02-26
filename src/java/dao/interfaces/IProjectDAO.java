@@ -15,4 +15,5 @@ public interface IProjectDAO
     boolean addUserToProject(int projectId,int userId);
     ArrayList<User> getUserNotInProject(int projectId);
     ArrayList<User> getUserInProject(int projectId);
+    ArrayList<Project> getProjectUserIsIn(int userId);
 }

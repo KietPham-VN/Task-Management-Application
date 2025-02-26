@@ -36,7 +36,7 @@ public class ViewMemberProjectsController extends HttpServlet
         {
             AuthenticatedUser authedUser = (AuthenticatedUser) session.getAttribute("authenticated-user");
             IProjectServices projectServices = new ProjectServices();
-            ArrayList<Project> projects = projectServices.getProjectsByUser(authedUser.getId());
+            ArrayList<Project> projects = projectServices.getProjectsUserIsIn(authedUser.getId());
             request.setAttribute("project-list", projects);
             request.getRequestDispatcher(Pages.VIEWS_MEMBER_PROJECTS).forward(request, response);
         }

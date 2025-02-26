@@ -18,7 +18,7 @@
     <body class="container mt-4">
         <div class="card">
             <h1>Create new project</h1>
-            <form action="CreateProject" method="POST">
+            <form action="" method="POST">
                 <label class="form-label">Project name</label>
                 <input class="form-control" type='text' name='name' required/>
                 <label class="form-label">Description</label>

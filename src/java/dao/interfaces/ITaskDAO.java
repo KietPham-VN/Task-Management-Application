@@ -20,4 +20,6 @@ public interface ITaskDAO
     ArrayList<Tasks> getTasksByProjectIdWithMembers(int projectId, String name);
 
     int getProjectIdByTaskId(int taskId);
+    
+    TaskDTO getTaskById(int taskId);
 }

@@ -2,6 +2,7 @@ package controllers.project_manager;
 
 import common.constants.Pages;
 import common.enums.AccountRoles;
+import entities.AuthenticatedUser;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,7 +16,7 @@ import services.implementations.ProjectServices;
  *
  * @author anhki
  */
-@WebServlet(name = "CreateProjectController", urlPatterns = {"/CreateProject"})
+@WebServlet(name = "CreateProjectController", urlPatterns = {"/project-manager/create-project"})
 public class CreateProjectController extends HttpServlet {
 
     private final ProjectServices projectServices = new ProjectServices();
@@ -54,20 +55,12 @@ public class CreateProjectController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            HttpSession session = request.getSession(false); // Do not create a new session
-            if (session == null) {
-                request.setAttribute("error", "User not logged in.");
-                request.getRequestDispatcher(Pages.LOGIN).forward(request, response);
-                return;
-            }
-            
-//            if (session.getAttribute("role") == null || !session.getAttribute("role").equals("Project Manager"))  {
-//                response.sendRedirect(Pages.LOGIN);
-//                return;
-//            }
+
+            HttpSession session = request.getSession(false);
+            AuthenticatedUser user = (AuthenticatedUser)session.getAttribute("authenticated-user");
 
             // Get the user from session
-            int userId = (int) session.getAttribute("userId");
+            int userId = user.getId();
 
             // Get project details from request
             String projectName = request.getParameter("name");
@@ -85,14 +78,14 @@ public class CreateProjectController extends HttpServlet {
             boolean success = projectService.createProject(projectName, description, userId);
 
             if (success) {
-                response.sendRedirect("MainController?action=viewManagerProjects");
+                response.sendRedirect(request.getContextPath()+"/project-manager");
             } else {
                 request.setAttribute("error", "Failed to create project.");
-                request.getRequestDispatcher(Pages.CREATE_PROJECT).forward(request, response);
+                response.sendRedirect(request.getHeader("Referer"));
             }
         } catch (Exception e) {
             request.setAttribute("error", "An error occurred: " + e.getMessage());
-            request.getRequestDispatcher(Pages.CREATE_PROJECT).forward(request, response);
+            response.sendRedirect(request.getHeader("Referer"));
         }
     }
 
