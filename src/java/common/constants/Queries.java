@@ -39,8 +39,8 @@ public class Queries {
             + "WHERE email = ? AND passwordHash = ?";
     
     
-    public static final String GET_PROJECT_LIST = "SELECT id, name, description, createdBy, createdAt"
-            + "FROM Projects"
+    public static final String GET_PROJECT_LIST = "SELECT id, name, description, createdBy, createdAt "
+            + "FROM Projects "
             + "WHERE createdBy = ?";
     
     public static final String GET_TASK_LIST  = "SELECT [id], [name], [role], [createdAt] "

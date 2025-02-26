@@ -31,7 +31,7 @@ GO
 CREATE TABLE ProjectMembers (
     id INT IDENTITY(1,1) PRIMARY KEY,
     projectId INT REFERENCES Projects(id),
-    userId INT REFERENCES Users(id),
+    userId INT REFERENCES Users(id) ON DELETE SET NULL,
     UNIQUE (projectId, userId)
 );
 GO
@@ -81,18 +81,6 @@ CREATE TABLE TaskLabels (
 );
 GO
 
-CREATE FUNCTION dbo.fn_CountUniqueProjectMembers(@projectId INT)
-RETURNS INT
-AS
-BEGIN
-    DECLARE @memberCount INT;
-    SELECT @memberCount = COUNT(DISTINCT userId)
-    FROM ProjectMembers
-    WHERE projectId = @projectId;
-
-    RETURN @memberCount;
-END
-GO
 
 -- Insert sample data for Users
 INSERT INTO Users (name, email, passwordHash, salt, role) VALUES ('Alice', 'alice@example.com', '94c9eef0fe9b8abaa7d2d6ac16628b61e404d0afcd82de44f8c001bad499518e', '8d274fa624fb4827a4496154b2931bfd', 'Project Manager');
