@@ -13,7 +13,7 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
         <title>Create Project</title>
-        <link href="css/create-update.css" rel="stylesheet" type="text/css"/>
+        <link href="${pageContext.request.contextPath}/css/create-update.css" rel="stylesheet" type="text/css"/>
     </head>
     <body class="container mt-4">
         <div class="card">

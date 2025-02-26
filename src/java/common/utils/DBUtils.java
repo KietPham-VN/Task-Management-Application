@@ -13,7 +13,7 @@ public class DBUtils
 
     private static final Dotenv DOT_ENV
             = Dotenv.configure()
-                    .directory(Paths.get("C:\\Users\\NGHIA\\Project\\Java stuffs\\Task-Management-Application").toAbsolutePath().toString())
+                    .directory(Paths.get("D:\\F_CODE\\CrewBE\\BE3\\Task-Management-Application").toAbsolutePath().toString())
                     .filename(".env")
                     .load();
 
