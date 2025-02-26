@@ -6,6 +6,7 @@
 package controllers.project_manager;
 
 import common.constants.Pages;
+import entities.AuthenticatedUser;
 import entities.Project;
 import entities.Tasks;
 import entities.User;
@@ -16,6 +17,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import services.implementations.ProjectServices;
 import services.implementations.TaskServices;
 
@@ -52,6 +54,10 @@ public class ProjectManagerTaskDetail extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        AuthenticatedUser user = (AuthenticatedUser) session.getAttribute("authenticated-user");
+
+        
         String projectIdString =  request.getParameter("id");
         Integer projectId = null;
         String searchName =  (request.getParameter("searchName")!=null)?request.getParameter("searchName"):"";
@@ -68,6 +74,10 @@ public class ProjectManagerTaskDetail extends HttpServlet {
         
         if(projectId!=null) {
             Project project = projectService.getProjectById(projectId);
+            if(project.getCreateBy()!=user.getId()) {
+                response.sendRedirect(request.getContextPath());
+                return;
+            }
             ArrayList<Tasks> tasks = taskService.getTasksByProjectIdWithMembers(projectId, searchName, sortBy);
             ArrayList<User> availableUsers = projectService.getUserNotInProject(projectId);
             ArrayList<User> teamMembers = projectService.getUserInProject(projectId);

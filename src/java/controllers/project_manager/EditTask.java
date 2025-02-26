@@ -8,6 +8,7 @@ package controllers.project_manager;
 import common.constants.Pages;
 import dao.implementations.TaskDAO;
 import dto.TaskDTO;
+import entities.AuthenticatedUser;
 import entities.Project;
 import entities.User;
 import java.io.IOException;
@@ -18,6 +19,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import services.implementations.ProjectServices;
 import services.implementations.TaskServices;
 
@@ -49,6 +51,9 @@ public class EditTask extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        AuthenticatedUser user = (AuthenticatedUser) session.getAttribute("authenticated-user");
+        
         String taskIdString = request.getParameter("taskId");
         String projectIdString = request.getParameter("projectId");
         try{
@@ -58,8 +63,14 @@ public class EditTask extends HttpServlet {
             TaskServices taskService = new TaskServices();
             ProjectServices projectService = new ProjectServices();
             
-            ArrayList<User> teamMembers = projectService.getUserInProject(projectId);
             Project project = projectService.getProjectById(projectId);
+            
+            if(project.getCreateBy()!=user.getId()) {
+                response.sendRedirect(request.getContextPath());
+                return;
+            }
+            
+            ArrayList<User> teamMembers = projectService.getUserInProject(projectId);
             TaskDTO task = taskService.getTaskById(taskId);
             
             request.setAttribute("task", task);
