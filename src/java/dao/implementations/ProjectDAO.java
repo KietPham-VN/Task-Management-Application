@@ -68,7 +68,7 @@ public class ProjectDAO implements IProjectDAO {
         ArrayList<Project> projects = new ArrayList<>();
 
         try (Connection connection = DBUtils.getConnection();
-                PreparedStatement preparedStatement = connection.prepareStatement(Queries.GET_PROJECTS_BY_USER)) {
+                PreparedStatement preparedStatement = connection.prepareStatement(Queries.GET_PROJECT_LIST)) {
             preparedStatement.setInt(1, userId);
 
             try (ResultSet resultSet = preparedStatement.executeQuery())
